@@ -1,83 +1,254 @@
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+@font-face {
+	font-family: 'Roboto-Light';
+	src: local('?'), 
+	url('fonts/Roboto/Roboto-Light.ttf') format('truetype');
+	font-weight: light;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Roboto-Thin';
+	src: local('?'), 
+		url('fonts/Roboto/Roboto-Thin.ttf') format('truetype');
+	font-weight: thin;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Roboto-Regular';
+	src: local('?'), 
+		url('fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+	font-weight: thin;
+	font-style: normal;
 }
 
-body {
-  padding: 0;
+body{
+	font-size: 18px;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
+.robotoReg{
+
+	font-family: 'Roboto-Regular';
+}
+.robotoLight{
+
+	font-family: 'Roboto-Light';
+}
+.robotoThin{
+
+	font-family: 'Roboto-Thin';
 }
 
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
-}
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
-}
+.loadingText{
 
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
+  width: 100%;
   text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-}
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-}
-.marketing p + h4 {
-  margin-top: 28px;
+.extraLargeText{
+
+	font-size: 60px;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
+.xxlargeText {
+	font-size: 40px;
+}
 
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+.xlargeText {
+	font-size: 30px;
+}
+
+.medText{
+
+	font-size: 20px;
+}
+
+.smallText{
+
+	font-size: 15px;
+}
+
+.smallTextX{
+
+	font-size: 18px;
+}
+
+.header{
+	text-align: center;
+}
+
+.colorGrey {
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.colorBlack {
+	color: rgba(0,0,0,1);
+}
+
+.box{
+	position: relative;
+	top: 50px;
+	width: 60%;
+}
+
+.subButton{
+	position: relative;
+	left: 45%;
+}
+
+.searchBtn {
+	position: relative;
+	top: 20px;
+}
+
+.loginForm{
+	position: relative;
+	left: 20%;
+}
+
+.dropdownFix {
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.8);
+}
+
+/* label focus color */
+.input-field label {
+	color: rgba(0, 0, 0, 0.4) !important;
+	font-family: "Roboto-Light";
+}
+
+.input-field input[type=text]:focus,
+.input-field input[type=email]:focus,
+.input-field input[type=password]:focus,
+.input-field input[type=date]:focus,
+.input-field textarea:focus
+ {
+	border-bottom: 1px solid #1E88E5 !important;
+	box-shadow: 0 1px 0 0 #2E8DEF !important;
+	font-family: "Roboto-Regular";
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #1E88E5;
+    box-shadow: 0 1px 0 0 #1E88E5;
+}
+
+/* icon prefix focus color */
+.input-field .prefix.active {
+	color: #00897b !important;
+}
+
+/* label color */
+.input-field label {
+   color: rgba(0, 0, 0, 0.6);
+   font-family: "Roboto-Regular";
+}
+
+.clientBox{
+	background-color: rgba(0, 0, 0, 0.1);
+	position: relative;
+	top: 20px;
+	right: 10px;
+	padding: auto;
+}
+
+.nameStyle{
+	margin-left: 5px;
+	font-size: 20px;
+	color: #1E88E5 !important;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.btn-large{
+	position: relative;
+	top: 10px;
+	left: 18%;
+	width: 70%;
+}
+
+.resetSize {
+	margin: 0;
+	padding: 0;
+}
+
+.clientInfo tr td, .tableStyle a:link, .tableStyle a:visited{
+	color: rgba(0, 0, 0, 0.8);
+}
+
+.clientInfo tr:hover, .tableStyle a:hover {
+	background-color: #1E88E5 !important;
+	color: white;
+	cursor: pointer;
+}
+
+
+.clientInfo tr th {
+	background-color: rgba(255, 255, 255, 1);
+	color: rgba(0, 0, 0, 1);
+	font-size: 20px;
+}
+
+.clientBox{
+	background-color: rgba(0, 0, 0, 0.1);
+	position: relative;
+	top: 20px;
+	right: 10px;
+	padding: auto;
+}
+
+.nameStyle{
+	margin-left: 5px;
+	font-size: 20px;
+	color: #1E88E5 !important;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.btn-large{
+	position: relative;
+	top: 10px;
+	left: 18%;
+	width: 70%;
+}
+
+.resetSize {
+	margin: 0;
+	padding: 0;
+}
+
+.withMBox {
+	position: relative;
+	top: 10px;
+	left: 18%;
+}
+
+.withHHead {
+	text-decoration: underline;
+	color: #689f38 !important;
+}
+
+.saveMon {
+	text-decoration: underline;
+	color: #039be5 !important;
+}
+
+.sendMon{
+	text-decoration: underline;
+	color: #00897b !important;
+}
+
+.clientImg {
+	width: 100;
+	height: 30;
+	padding: 20px 20px 0 170px;
+}
+
+.summaryInfo {
+	padding: 0 10px 10px 10px;
+}
+
+.sumHead {
+	text-decoration: underline;
+	color: #1E88E5 !important;
+	text-align: center;
 }

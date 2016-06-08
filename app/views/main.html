@@ -1,23 +1,70 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
-</div>
+<div id="homeContent">
+      <div class="row container colorGrey">
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s10">
+                <i class="material-icons prefix colorGrey">search</i>
+                <input type="text" placeholder="Search Clients by id/#externalId/Name" name="clientSearch" class="validate" id="clientSearchId">
+              </div>
+              <div class="col s2">
+                <a class="btn waves-effect waves-light blue darken-3 searchBtn">Search</a>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <table class="responsive-table bordered tableStyle" style="overflow: auto;">
+              <thead>
+                <tr>
+                    <th data-field="id">ID</th>
+                    <th data-field="name">Name</th>
+                    <th data-field="externalId">External Id</th>
+                    <th data-field="office">Office</th>
+                    <th data-field="staff">Staff</th>
+                </tr>
+              </thead>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
+              <tbody class="clientInfo">
+                
+                <tr>
+                  <td><a ui-sref="clientPage({id: 1})" href="#/client/1">1</a></td>
+                  <td><a ui-sref="clientPage({id: 1})" href="#/client/1">Daniel Carlson</a></td>
+                  <td><a ui-sref="clientPage({id: 1})" href="#/client/1">123456789</a></td>
+                  <td><a ui-sref="clientPage({id: 1})" href="#/client/1">Head Office</a></td>
+                  <td><a ui-sref="clientPage({id: 1})" href="#/client/1">Mark Ryan</a></td>
+                </tr>
+                
+                <tr>
+                  <td><a ui-sref="clientPage({id: 2})" href="#/client/2">2</a></td>
+                  <td><a ui-sref="clientPage({id: 2})" href="#/client/2">Charlize Theron</a></td>
+                  <td><a ui-sref="clientPage({id: 2})" href="#/client/2">123456789</a></td>
+                  <td><a ui-sref="clientPage({id: 2})" href="#/client/2">Head Office</a></td>
+                  <td><a ui-sref="clientPage({id: 2})" href="#/client/2">Daniel Ryan</a></td>
+                </tr>
+                <tr>
+                   <td><a ui-sref="clientPage({id: 3})" href="#/client/3">3</a></td>
+                  <td><a ui-sref="clientPage({id: 3})" href="#/client/3">Jackson Marcus</a></td>
+                  <td><a ui-sref="clientPage({id: 3})" href="#/client/3">123456789</a></td>
+                  <td><a ui-sref="clientPage({id: 3})" href="#/client/3">Head Office</a></td>
+                  <td><a ui-sref="clientPage({id: 3})" href="#/client/3">Daniel Mikael</a></td>
+                </tr>
+                <tr>
+                   <td><a ui-sref="clientPage({id: 4})" href="#/client/4">4</a></td>
+                  <td><a ui-sref="clientPage({id: 4})" href="#/client/4">Liam Jackwell</a></td>
+                  <td><a ui-sref="clientPage({id: 4})" href="#/client/4">123456789</a></td>
+                  <td><a ui-sref="clientPage({id: 4})" href="#/client/4">Head Office</a></td>
+                  <td><a ui-sref="clientPage({id: 4})" href="#/client/4">Sophia Boseman</a></td>
+                </tr>
+                <tr>
+                   <td><a ui-sref="clientPage({id: 5})" href="#/client/5">5</a></td>
+                  <td><a ui-sref="clientPage({id: 5})" href="#/client/5">Marcus Brody</a></td>
+                  <td><a ui-sref="clientPage({id: 5})" href="#/client/5">123456789</a></td>
+                  <td><a ui-sref="clientPage({id: 5})" href="#/client/5">Head Office</a></td>
+                  <td><a ui-sref="clientPage({id: 5})" href="#/client/5">Chadwick Seth</a></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+      </div>
+  </div>
