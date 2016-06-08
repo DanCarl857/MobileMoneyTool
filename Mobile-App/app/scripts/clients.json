@@ -1,0 +1,39 @@
+{
+  "clients": [
+  			{
+  				"id": 1,
+  				"externalId": 12345678,
+  				"name": "Daniel Carlson",
+  				"office": "Head Office",
+  				"Staff": "Marcus Brody"
+  			},
+  			{
+  				"id": 2,
+  				"externalId": 23456789,
+  				"name": "Jack Ryan",
+  				"office": "Head Office",
+  				"Staff": "Marcus Jackson"
+  			},
+  			{
+  				"id": 3,
+  				"externalId": 34567890,
+  				"name": "Mark Ryan",
+  				"office": "Head Office",
+  				"Staff": "Daniel Jackson"
+  			},
+  			{
+  				"id": 4,
+  				"externalId": 56789345,
+  				"name": "Jack Johnson",
+  				"office": "Head Office",
+  				"Staff": "Ryan McFarley"
+  			},
+  			{
+  				"id": 5,
+  				"externalId": 1209487,
+  				"name": "Tamaria Mercy",
+  				"office": "Head Office",
+  				"Staff": "Jordi Rackson"
+  			}
+    ]
+}
