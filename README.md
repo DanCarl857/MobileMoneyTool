@@ -1,4 +1,4 @@
-# GSOC 2016 project
+# Mobile Money Application for the Mifos Platform
 
 ## Front end app
 
