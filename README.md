@@ -112,7 +112,7 @@ OR
 
 > This call is used to view the transaction history for a particular client
 
-* **URL**: `/transactionHist/:id`
+* **URL**: `/transaction/:id`
 
 * **Method**: *GET*
 
@@ -144,5 +144,5 @@ OR
   * **Code**: 401 UNAUTHORIZED
   * **Content**: { error: "You are not authorized to make this request" }
   
-* Sample Call: `/transactionHist/2`
+* Sample Call: `/transaction/2`
   
