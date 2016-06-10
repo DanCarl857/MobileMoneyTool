@@ -23,24 +23,21 @@
 
 > This call is used to initiate a withdrawal from the MFI's account into the client's account
 
-* URL
-  > /mm_withdrawal/:clientPhone/:amount
-* Method
-  > POST
+* URL: */mm_withdrawal/:clientPhone/:amount*
+* Method: *POST*
 * URL Params
   **Required:**
-  > clientPhone=[integer|bigint]
-  > amount=[integer|bigint]
-* Data Params
-  None
+  * clientPhone=[integer|bigint]
+  * amount=[integer|bigint]
+* Data Params: *None*
 * Success Response:
-  > **Code**: 200
-  > Content: { successMsg: "Withdrawal successfully completed"}
+  * **Code**: 200
+  * Content: { successMsg: "Withdrawal successfully completed"}
 * Error Response:
-  > **Code**: 404 NOT FOUND
-  > Content: { error: "Withdrawal unsuccessful"}
+  * **Code**: 404 NOT FOUND
+  * Content: { error: "Withdrawal unsuccessful"}
 OR
-  > **Code**: 401 UNAUTHORIZED
-  > Content: { error: "You are not authorized to make this request" }
+  * **Code**: 401 UNAUTHORIZED
+  * Content: { error: "You are not authorized to make this request" }
 * Sample Call:
   
