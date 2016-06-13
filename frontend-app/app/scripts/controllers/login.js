@@ -1,5 +1,5 @@
 angular.module('mobileMoneyApp')
-  .controller('userLoginCtrl', function ($scope, $state) {
+  .controller('userLoginCtrl', '$scope', '$state', 'loginService', function ($scope, $state, loginService) {
   	
     	$scope.navigateTo = function(view){
     		$state.transitionTo(view);
@@ -12,4 +12,13 @@ angular.module('mobileMoneyApp')
     	}
 
     	$scope.checkLogin();
+
+      loginService.loginUser("mifos", "password").then(
+        function(response){
+          console.log(response);
+        },
+        function(err){
+          console.log(err);
+        }
+      )
   });
