@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `mobile_money_application`
 --
+CREATE DATABASE IF NOT EXISTS `mobile_money_application`;
+USE `mobile_money_application`;
 
 -- --------------------------------------------------------
 
