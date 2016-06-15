@@ -24,7 +24,7 @@
 
 * **URL**: `/mm_withdrawal/:clientPhone/:amount`
 
-* **Method**: *POST*
+* **Method**: *GET*
 
 * **URL Params**:
   * **Required:**
@@ -44,7 +44,7 @@ OR
 
   * **Code**: 401 UNAUTHORIZED
   * **Content**: { error: "You are not authorized to make this request" }
-* Sample Call:
+* Sample Call: `/api/v1/withdrawals?phone=674356789&amount=5000`
   
 
 #### Save Money
@@ -53,7 +53,7 @@ OR
 
 * **URL**: `/mm_savings/:clientPhone/:amount`
 
-* **Method**: *POST*
+* **Method**: *GET*
 
 * **URL Params**:
   * **Required:**
@@ -74,7 +74,7 @@ OR
   * **Code**: 401 UNAUTHORIZED
   * **Content**: { error: "You are not authorized to make this request" }
   
-* Sample Call:
+* Sample Call: `/api/v1/withdrawals?phone=674356789&amount=5000`
   
 
 #### Send Money
@@ -83,7 +83,7 @@ OR
 
 * **URL**: `/mm_savings/:clientPhone/:recipientPhone/:amount`
 
-* **Method**: *POST*
+* **Method**: *GET*
 
 * **URL Params**:
   * **Required:**
