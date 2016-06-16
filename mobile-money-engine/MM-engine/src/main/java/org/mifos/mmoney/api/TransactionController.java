@@ -18,6 +18,10 @@ public class TransactionController {
 	private static BigInteger nextId;
 	private static Map<BigInteger, Transactions> transactionMap;
 	
+	/*
+	 * Save method - Helper Method
+	 * Method to save transactions into the database
+	 */
 	@SuppressWarnings("unused")
 	private static Transactions save(Transactions transactions){
 		if(transactionMap == null){
@@ -42,7 +46,7 @@ public class TransactionController {
 	
 	@SuppressWarnings("unused")
 	@RequestMapping(
-			value="/api/transactions",
+			value="/api/v1/transactions",
 			method=RequestMethod.GET,
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Collection<Transactions> > getTransactions(){

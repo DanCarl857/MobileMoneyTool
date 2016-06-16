@@ -2,7 +2,6 @@ package org.mifos.mmoney.models;
 
 import java.math.BigInteger;
 
-
 /**
  * 
  * @author dinesh
@@ -11,6 +10,7 @@ import java.math.BigInteger;
  * database.
  *
  */
+
 public class Transactions {
 		
 	private BigInteger id;
