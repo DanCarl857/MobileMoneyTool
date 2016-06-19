@@ -24,22 +24,42 @@ public class Transactions {
 	@Column(name="id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	// Constructors
+	public Transactions(){}
+	
+	// Column names in the database
 	@Column(name="staff")
 	private String staff;
+	
+	@Column(name="client_id")
+	private int client_id;
+	
 	@Column(name="office")
 	private String office;
+	
 	@Column(name="transaction_type")
 	private String type;
+	
 	@Column(name="amount")
-	private Long amount;
+	private int amount;
+	
 	@Column(name="recipient")
 	private String recipient;
+	
 	@Column(name="date")
 	private Date date;
+	
 	
 	// Getters and setters for the above variables
 	public int getId() {
 		return this.id;
+	}
+	public int getClient_id() {
+		return this.client_id;
+	}
+	public void setClient_id(int clientId) {
+		this.client_id = clientId;
 	}
 	public String getStaff() {
 		return this.staff;
@@ -59,10 +79,10 @@ public class Transactions {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Long getAmount() {
+	public int getAmount() {
 		return this.amount;
 	}
-	public void setAmount(Long amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 	public String getRecipient() {
@@ -75,8 +95,7 @@ public class Transactions {
 		return this.date;
 	}
 	// set the Date as the current time and date
-	public void setDate() {
-		Date date = new Date();
+	public void setDate(Date date) {
 		this.date = date;
 	}
 }
