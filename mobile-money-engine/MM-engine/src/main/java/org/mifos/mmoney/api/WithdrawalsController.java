@@ -32,6 +32,7 @@ public class WithdrawalsController {
 		
 		/*
 		 * uri: URL for withdrawing money in the mobile money API
+		 * 
 		 */
 		final String uri = "http://gturnquist-quoters.cfapps.io/api/random";
 		
@@ -42,6 +43,7 @@ public class WithdrawalsController {
 		Withdrawals result = restTemplate.getForObject(uri, Withdrawals.class);
 		
 		if(result.getType().equalsIgnoreCase("success")){
+			// save to the database here.
 			return new ResponseEntity<String>(result.getType(), HttpStatus.OK);
 		}
 		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);

@@ -1,8 +1,7 @@
 package org.mifos.mmoney;
 
-import org.springframework.boot.SpringApplication;
 import org.mifos.mmoney.configurations.transactionConfig;
-import org.mifos.mmoney.dao.ITransactionDao;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -14,9 +13,6 @@ public class MmEngineApplication {
 		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
 		ctx.register(transactionConfig.class);
 		ctx.refresh();
-		ITransactionDao test = ctx.getBean(ITransactionDao.class);
-		test.saveTransaction();
-		System.out.println("Inserted into database");
 		SpringApplication.run(MmEngineApplication.class, args);
 	}
 }

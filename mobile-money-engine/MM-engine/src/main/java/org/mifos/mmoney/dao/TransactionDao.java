@@ -7,14 +7,15 @@ import org.springframework.orm.hibernate4.HibernateTemplate;
 public class TransactionDao implements ITransactionDao {
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
-	public void saveTransaction(){
+	@Override
+	public void saveTransaction(String staff, long amount, String office, String recipient, String type){
 		Transactions transaction = new Transactions();
-		transaction.setAmount((long) 5000);
+		transaction.setAmount(amount);
 		transaction.setDate();
-		transaction.setStaff("null");
-		transaction.setOffice("Head Office");
-		transaction.setRecipient("null");
-		transaction.setType("savings");
+		transaction.setStaff(staff);
+		transaction.setOffice(office);
+		transaction.setRecipient(recipient);
+		transaction.setType(type);
 		hibernateTemplate.save(transaction);
 	}
 }

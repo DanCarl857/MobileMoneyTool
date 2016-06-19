@@ -15,11 +15,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /*
  * Class to handle SessionFactory configurations
- * for the transactions history database
+ * for the transactions history database for hibernate
  */
 @Configuration
 @EnableTransactionManagement
 public class transactionConfig {
+	/*
+	 * Bean definitions
+	 */
 	@Bean
 	public ITransactionDao transactionDao(){
 		return new TransactionDao();
@@ -27,15 +30,21 @@ public class transactionConfig {
 	@Bean
 	public HibernateTemplate hibernateTemplate(){
 		HibernateTemplate hibernateTemplate = new HibernateTemplate(sessionFactory());
+		/*
+		 * Without doing this, bean will be in READ-ONLY MODE and will give exceptions 
+		 * in TransactionDao.java
+		 */
 		hibernateTemplate.setCheckWriteOperations(false);
 		return hibernateTemplate;
 	}
+	
 	@Bean
 	public SessionFactory sessionFactory() {
 		return new LocalSessionFactoryBuilder(getDataSource())
 		   .addAnnotatedClasses(Transactions.class)
 		   .buildSessionFactory();
 	}
+	
 	@Bean 
 	public DataSource getDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
@@ -46,6 +55,7 @@ public class transactionConfig {
 		
 		return dataSource;
 	}
+	
 	@Bean
 	public HibernateTransactionManager transactionMan(){
 		return new HibernateTransactionManager(sessionFactory());
