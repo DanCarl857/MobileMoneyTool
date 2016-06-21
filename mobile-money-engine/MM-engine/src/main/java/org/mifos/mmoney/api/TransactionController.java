@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +52,19 @@ public class TransactionController {
 		results = transDao.findAll();
 		
 		return new ResponseEntity<Iterable<Transactions>>(results, HttpStatus.OK);
+	}
+	
+	@SuppressWarnings("unused")
+	@RequestMapping(value="/api/v1/transactions/{clientId}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public
+	@ResponseBody
+	ResponseEntity<Transactions> getTransPerClient(@PathVariable long clientId){
+		Transactions results;
+		
+		// Get all transactions from the database for a particular client.
+		results = transDao.findOne(clientId);
+		
+		return new ResponseEntity<Transactions>(results, HttpStatus.OK);
 	}
 	
 	@Autowired

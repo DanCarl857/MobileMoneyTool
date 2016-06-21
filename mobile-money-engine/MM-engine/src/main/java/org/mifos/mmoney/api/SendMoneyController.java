@@ -57,11 +57,11 @@ public class SendMoneyController {
 		// Making sure values are saved in the database.
 		try{
 			transDao.save(trans);
-			return new ResponseEntity<String>("Money transfer success", HttpStatus.OK);
 		} catch(Exception ex){
 			System.out.println("Saving to database error in money transaction: " + ex.getMessage());
+			return new ResponseEntity<String>("Money transfer failure", HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<String>("Money transfer failure", HttpStatus.NOT_FOUND);
+		return new ResponseEntity<String>("Money transfer success", HttpStatus.OK);
 	}
 	
 	// Data repository.
