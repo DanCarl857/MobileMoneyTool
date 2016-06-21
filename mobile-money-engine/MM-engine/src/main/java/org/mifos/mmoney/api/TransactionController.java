@@ -1,7 +1,5 @@
 package org.mifos.mmoney.api;
 
-import java.util.Date;
-
 import org.mifos.mmoney.dao.TransactionDao;
 import org.mifos.mmoney.models.Transactions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,35 +8,51 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TransactionController {
 	
+	/*
+	 * This end point is to avoid sending too much data for each transaction
+	 * So each time a staff member logs in, their default data is automatically 
+	 * sent to the mobile money engine
+	 */
 	@SuppressWarnings("unused")
 	@RequestMapping(value="/api/v1/create", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public
 	@ResponseBody
-	ResponseEntity<String> saveTransaction(){
-		try{
-			Transactions trans = new Transactions();
-			trans.setAmount(5000);
-			trans.setClient_id(123456);
-			trans.setDate(new Date());
-			trans.setOffice("Head Office");
-			trans.setRecipient("Marcus Brody");
-			trans.setStaff("Daniel Carlson");
-			trans.setType("Savings");
-			
-			transDao.save(trans);
-		}catch(Exception ex){
-			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-		}
-		return new ResponseEntity<String>(HttpStatus.OK);
+	ResponseEntity<String> saveTransaction(
+			@RequestParam(value="staff", required=true)String staff,
+			@RequestParam(value="office", required=true)String office
+			){
+		Transactions trans = new Transactions();
 		
+		// Set staff and office values
+		trans.setStaff(staff);
+		trans.setOffice(office);
+		
+		return new ResponseEntity<String>("Success", HttpStatus.OK);
+	}
+	
+	/*
+	 * This end point enables us to get all the transactions in the database
+	 */
+	@SuppressWarnings("unused")
+	@RequestMapping(value="/api/v1/transactions", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	public
+	@ResponseBody
+	ResponseEntity<Iterable<Transactions>> getTransactions(){
+		Iterable<Transactions> results;
+		
+		// Get all transactions from the database.
+		results = transDao.findAll();
+		
+		return new ResponseEntity<Iterable<Transactions>>(results, HttpStatus.OK);
 	}
 	
 	@Autowired
-	private TransactionDao transDao;
+	TransactionDao transDao;
 }

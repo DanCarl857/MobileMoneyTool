@@ -30,13 +30,13 @@ public class Transactions {
 	
 	// Column names in the database
 	@Column(name="staff")
-	private String staff;
+	private static String staff;
 	
 	@Column(name="client_id")
 	private int client_id;
 	
 	@Column(name="office")
-	private String office;
+	private static String office;
 	
 	@Column(name="transaction_type")
 	private String type;
@@ -62,16 +62,16 @@ public class Transactions {
 		this.client_id = clientId;
 	}
 	public String getStaff() {
-		return this.staff;
+		return Transactions.staff;
 	}
 	public void setStaff(String staff) {
-		this.staff = staff;
+		Transactions.staff = staff;
 	}
 	public String getOffice() {
-		return this.office;
+		return Transactions.office;
 	}
 	public void setOffice(String office) {
-		this.office = office;
+		Transactions.office = office;
 	}
 	public String getType() {
 		return this.type;

@@ -1,8 +1,11 @@
 package org.mifos.mmoney.api;
 
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
-import org.mifos.mmoney.models.Savings;
+import java.util.Date;
+
+import org.mifos.mmoney.dao.TransactionDao;
+import org.mifos.mmoney.models.Transactions;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +23,8 @@ public class SavingsController {
 	@ResponseBody
 	ResponseEntity<String> saveMoney(
 			@RequestParam(value="phone", required=true)long phoneNumber,
-			@RequestParam(value="amount", required=true) long amount){
-		System.out.println("Phone number: " + phoneNumber);
-		System.out.println("Amount: " + amount);
+			@RequestParam(value="amount", required=true) long amount,
+			@RequestParam(value="clientId", required=true)int clientID){
 		
 		/*
 		 * uri: URL saving money in the mobile money API
@@ -30,15 +32,29 @@ public class SavingsController {
 		 */
 		final String uri = "http://gturnquist-quoters.cfapps.io/api/random";
 		
-		/*
-		 * We now make a request to the Mobile money API
-		 */
-		RestTemplate restTemplate = new RestTemplate();
-		Savings result = restTemplate.getForObject(uri, Savings.class);
+		Transactions trans = new Transactions();
 		
-		if(result.getType().equalsIgnoreCase("success")){
-			return new ResponseEntity<String>(result.getType(), HttpStatus.OK);
+		trans.setAmount((int) amount);
+		trans.setClient_id(clientID);
+		trans.setDate(new Date());
+		trans.setType("Savings");
+		trans.setOffice(trans.getOffice());
+		trans.setStaff(trans.getStaff());
+		trans.setRecipient("null");
+		
+		/*
+		 * TODO: We now make a request to the Mobile money API
+		 */
+		// Making sure values are saved in the database.
+		try{
+			transDao.save(trans);
+			return new ResponseEntity<String>("Savings success", HttpStatus.OK);
+		} catch(Exception ex){
+			System.out.println("Saving to database error in savings: " + ex.getMessage());
 		}
-		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+		return new ResponseEntity<String>("Savings failure", HttpStatus.OK);
 	}
+	
+	@Autowired
+	private TransactionDao transDao;
 }
