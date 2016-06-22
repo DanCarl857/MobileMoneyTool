@@ -2,7 +2,7 @@
 /*global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('mainCtrl', function ($scope, dataService) {
+  .controller('mainCtrl', function ($scope, dataService, loginService) {
 
   		$(document).ready(function(){
   			$(".dropdown-button").dropdown();
@@ -23,4 +23,13 @@ angular.module('mobileMoneyApp')
       };
 
       $scope.getClients();
+
+      $scope.testAuth = function(){
+          loginService.getBasicKey("mifos", "password");
+            
+          //loginService.setAuthorization();
+          loginService.test();
+      };
+
+      $scope.testAuth();
   });

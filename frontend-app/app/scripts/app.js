@@ -2,7 +2,15 @@
 
 angular
   .module('mobileMoneyApp', ['ngAnimate','ngCookies','ngResource','ngRoute','ngSanitize', 'ui.router'])
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    
+    $httpProvider.defaults.useXDomain = true;
+    $httpProvider.defaults.withCredentials = true;
+    delete $httpProvider.defaults.headers.common["X-Requested-With"];
+    $httpProvider.defaults.headers.common["Accept"] = "application/json";
+    $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
+    $httpProvider.defaults.headers['Access-Control-Allow-Credentials'] = 'true';
+
     $stateProvider
       .state('login', {
         url: '/login',
@@ -50,7 +58,7 @@ angular
         url: '/configurations',
         templateUrl: 'views/configurations.html',
         controller: 'configCtrl'
-      })
+      });
 
       $urlRouterProvider.otherwise('/login');
   });

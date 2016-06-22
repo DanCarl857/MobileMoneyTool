@@ -1,3 +1,4 @@
+'use strict';
 angular.module('mobileMoneyApp')
   .controller('userLoginCtrl', ['$scope', '$state', function ($scope, $state, loginService) {
   	
@@ -9,7 +10,7 @@ angular.module('mobileMoneyApp')
 
     	$scope.checkLogin = function(){
     		return false;
-    	}
+    	};
 
     	$scope.checkLogin();
   }]);
