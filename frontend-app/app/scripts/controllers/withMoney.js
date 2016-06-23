@@ -2,10 +2,18 @@
 /*global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('withMoneyCtrl', function () {
+  .controller('withMoneyCtrl', ['$scope', function ($scope) {
 
   		$('.datepicker').pickadate({
         	selectMonths: true,
         	selectYears: 20
       	});
-  });
+
+      	$scope.amount = 0;
+      	$scope.date = new Date();
+
+      	// function to handle requests to the mobile money engine
+      	$scope.withMoneyRequest = function(){
+
+      	}
+  }]);
