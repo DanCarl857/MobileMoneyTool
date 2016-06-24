@@ -4,10 +4,6 @@
 angular.module('mobileMoneyApp')
   .controller('mainCtrl', function ($scope, dataService, loginService) {
 
-  		$(document).ready(function(){
-  			$(".dropdown-button").dropdown();
-  		});
-
       $scope.clients; 
       $scope.status = null;
 
@@ -31,5 +27,6 @@ angular.module('mobileMoneyApp')
           loginService.test();
       };
 
+      console.log("Testing now: ");
       $scope.testAuth();
   });

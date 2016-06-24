@@ -4,11 +4,7 @@
 angular.module('mobileMoneyApp')
   .controller('withMoneyCtrl', ['$scope', function ($scope) {
 
-  		$('.datepicker').pickadate({
-        	selectMonths: true,
-        	selectYears: 20
-      	});
-
+  		  $scope.submitted = true;
       	$scope.amount = 0;
       	$scope.date = new Date();
 

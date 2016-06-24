@@ -5,11 +5,12 @@ angular
   .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
     
     $httpProvider.defaults.useXDomain = true;
-    $httpProvider.defaults.withCredentials = true;
+    $httpProvider.defaults.withCredentials = false;
     delete $httpProvider.defaults.headers.common["X-Requested-With"];
     $httpProvider.defaults.headers.common["Accept"] = "application/json";
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
-    $httpProvider.defaults.headers['Access-Control-Allow-Credentials'] = 'true';
+    $httpProvider.defaults.headers['Access-Control-Allow-Credentials'] = true;
+    $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = true;
 
     $stateProvider
       .state('login', {

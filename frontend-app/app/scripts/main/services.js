@@ -10,16 +10,16 @@ angular.module('mobileMoneyApp')
     }
   }])
   .service('loginService', ['$http', function($http){
-  		var headers = {
-  			'Access-Control-Allow-Origin': '*',
-  			'Access-Control-Allow-Methods': 'POST< GET, OPTIONS, PUT',
+  		/*var headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
   			'Content-Type': 'application/json',
   			'Accept': 'application/json'
-  		};
+  		};*/
 
   		// variables
   		var baseURL = "/fineract-provider/api/v1";
-  		var tBaseUrl = '/demo.openmf.org';
+  		var tBaseUrl = 'https://localhost:8443/fineract-provider/api/v1';
   		var basicAuthKey = "";
 
   		// function to get the basic token for HTTP authentication
@@ -29,7 +29,7 @@ angular.module('mobileMoneyApp')
   			var data = "";
   			$http({
   				method: "POST",
-  				headers: headers,
+  				//headers: headers,
   				url: uri,
   				data: data})
   				.success(function(data, status){
@@ -54,7 +54,7 @@ angular.module('mobileMoneyApp')
   		}
 
   		this.test = function(){
-	  		$http.get("https://demo.openmf.org/api/v1/clients")
+	  		$http.get("https://localhost:8443/fineract-provider/api/v1/clients")
 	  			.success(function(response){
 
 	  				console.log("Success: " + response);

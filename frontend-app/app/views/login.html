@@ -19,18 +19,21 @@
           </div>
         </div>
         <div class="row loginForm">
-          <form class="col s10">
+          <form class="col s10" name="loginForm" ng-submit="submitForm(loginForm.$valid)" novalidate>
             <div class="input-field col s5">
               <i class="material-icons prefix colorBlack">perm_identity</i>
-              <input placeholder="username" id="username" type="text" class="validate">
+              <input placeholder="username" id="username" name="username" type="text" class="validate">
+              <p ng-show="loginForm.username.$invalid && !loginForm.username.$pristine && submitted">Your username is required</p>
             </div>
             <div class="input-field col s5">
               <i class="material-icons prefix colorBlack">vpn_key</i>
-              <input placeholder="password" id="password" type="password" class="validate">
+              <input placeholder="password" id="password" name="password" type="password" class="validate">
+              <p ng-show="loginForm.password.$invalid && !loginForm.password.$pristine && submitted">Your password is required</p>
             </div>
           </form>
         </div>
         <div class="row">
+          <p class="errorMsg" ng-show="!loginSuccessful && submitted">Username or Password incorrect</p>
           <a class="btn waves-effect waves-light green subButton" ng-click="navigateTo('home')">Sign In</a>
         </div>
       </div>

@@ -1,7 +1,11 @@
 'use strict';
 angular.module('mobileMoneyApp')
   .controller('userLoginCtrl', ['$scope', '$state', function ($scope, $state, loginService) {
-  	
+  	   
+       // variable to verify if the form has been submitted
+      $scope.submitted = true;
+      $scope.loginSuccessful = true;
+
     	$scope.navigateTo = function(view){
     		$state.transitionTo(view);
     	};

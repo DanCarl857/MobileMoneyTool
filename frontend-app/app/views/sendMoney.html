@@ -5,7 +5,7 @@
             <span class="medText" style="font-size: 50px">Carlson, Daniel</span>&nbsp;&nbsp;<span class="nameStyle robotoLight">Client#: 1234567</span> &nbsp;&nbsp;<span style="font-size: 20px;">|</span>&nbsp;&nbsp;<span class="nameStyle robotoLight">Assigned Staff: Marcus Brody</span>
           </div>
           <div class="row withMBox">
-            <form class="col s8">
+            <form class="col s9" name="sendForm" ng-submit="submitForm(sendForm.$valid)" novalidate>
               <div class="row" style="text-align: center;">
                 <span class="xlargeText robotoLight sendMon">Send Money through MM Account</span>
               </div>
@@ -15,29 +15,25 @@
               <div class="row">
                 <div class="input-field">
                   <i class="material-icons prefix">attach_money</i>
-                  <input id="icon_prefix" type="number" class="validate">
+                  <input id="icon_prefix" name="amount" type="number" class="validate">
+                  <p class="genErrMsg" ng-show="sendForm.amount.$invalid && !sendForm.amount.$pristine && submitted">An amount is required</p>
                   <label for="icon_prefix">Enter Amount</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field">
                   <i class="material-icons prefix">perm_identity</i>
-                  <input id="icon_to" type="text" class="validate">
+                  <input id="icon_to" type="text" name="rec_name" class="validate">
+                  <p class="genErrMsg" ng-show="sendForm.rec_name.$invalid && !sendForm.rec_name.$pristine && submitted">A name is required</p>
                   <label for="icon_to">To</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field">
                   <i class="material-icons prefix">call</i>
-                  <input id="icon_recp" type="number" class="validate">
+                  <input id="icon_recp" name="phone_num" type="number" class="validate">
+                  <p class="genErrMsg" ng-show="sendForm.phone_num.$invalid && !sendForm.phone_num.$pristine && submitted">Recipient's phone number is required</p>
                   <label for="icon_recp">Recipient's Number</label>
-                </div>
-              </div>
-              <div class="row">
-                <div class="input-field">
-                  <i class="material-icons prefix">lock_outline</i>
-                  <input id="icon_pin" type="password" class="validate">
-                  <label for="icon_pin">Enter PIN</label>
                 </div>
               </div>
               <br>
@@ -48,7 +44,7 @@
             </form>
           </div>
         </div>
-        <div class="col s4 resetSize">
+        <div class="col s3 resetSize">
           <div class="clientBox">
             <div class="row clientImg">
               <span><img src="images/client-image-placeholder.png"></span>
@@ -60,7 +56,7 @@
               <span>Staff Member: Jack Ryan</span><br><br>
               <span>Gender: Male</span><br><br>
               <span>Client Type: Footballer</span><br><br>
-              <span>Client Classification: Gold</span><br><br>
+              <span>Client Classification: Gold</span>
             </div>
           </div>
       </div>
