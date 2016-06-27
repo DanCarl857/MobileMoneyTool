@@ -265,3 +265,12 @@ body{
 	color: red;
 	font-weight: bold;
 }
+
+.configBox {
+	width: 80%;
+}
+
+.configBox #apis{
+	position: relative;
+	top: 10px;
+}

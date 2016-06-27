@@ -1,4 +1,5 @@
 'use strict';
+/* global $ */
 
 angular.module('mobileMoneyApp')
   .run(function($rootScope, $location){
