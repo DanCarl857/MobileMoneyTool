@@ -10,7 +10,8 @@ angular
     $httpProvider.defaults.headers.common["Accept"] = "application/json";
     $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
     $httpProvider.defaults.headers['Access-Control-Allow-Credentials'] = true;
-    $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = true;
+    //$httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = 'Origin', 'Content-Type', 'X-Auth-Token';
+    $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = "https://localhost:9001";
 
     $stateProvider
       .state('login', {

@@ -10,13 +10,6 @@ angular.module('mobileMoneyApp')
     }
   }])
   .service('loginService', ['$http', function($http){
-  		/*var headers = {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT',
-  			'Content-Type': 'application/json',
-  			'Accept': 'application/json'
-  		};*/
-
   		// variables
   		var baseURL = "/fineract-provider/api/v1";
   		var tBaseUrl = 'https://localhost:8443/fineract-provider/api/v1';
@@ -24,22 +17,22 @@ angular.module('mobileMoneyApp')
 
   		// function to get the basic token for HTTP authentication
   		this.getBasicKey = function(username, password){
-  			var uri = tBaseUrl + "/authentication?username=" + username + "&password=" + password;
+        username = "mifos";
+        password = "password";
+  			var uri = "https://localhost:8443/fineract-provider/api/authentication?username=" + username + "&password=" + password;
   			var config = { headers: {'Content-Type': 'application/json; charset=utf-8'} };
-  			var data = "";
   			$http({
   				method: "POST",
-  				//headers: headers,
-  				url: uri,
-  				data: data})
+          url: uri
+        })
   				.success(function(data, status){
-  					basicAuthKey = data.base64EncodedAuthenticationKey;
-  					console.log(basicAuthKey);
+  					basicAuthKey = data.access_token;
+  					console.log("Basic key: " + basicAuthKey);
   					$http.defaults.headers.common.Authorization = "Basic " + basicAuthKey;
   					return basicAuthKey;
   				})
   				.error(function(data, status){
-  					console.log("Getting basic auth key failed");
+  					console.log("Getting basic auth key failed " + data);
   				});
   		}
 

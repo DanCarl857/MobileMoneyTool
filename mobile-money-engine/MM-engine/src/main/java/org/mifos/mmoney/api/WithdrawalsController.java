@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +25,7 @@ public class WithdrawalsController {
 	 */
 
 	@SuppressWarnings("unused")
+	@CrossOrigin
 	@RequestMapping(value="/api/v1/withdrawals", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public
 	@ResponseBody
@@ -65,9 +67,9 @@ public class WithdrawalsController {
 			System.out.println("Saving to database error in withdrawals: " + ex.getMessage());
 			return new ResponseEntity<String>("Withdrawals failure", HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<String>("Withdrawals success", HttpStatus.OK);
+		return new ResponseEntity<String>("\"Withdrawals success\"", HttpStatus.OK);
 	}
-	
+
 	// Data repository.
 	@Autowired
 	private TransactionDao transDao;

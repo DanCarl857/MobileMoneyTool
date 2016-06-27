@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SavingsController {
 
 	@SuppressWarnings("unused")
+	@CrossOrigin
 	@RequestMapping(value="/api/v1/savings", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public 
 	@ResponseBody
@@ -48,7 +50,7 @@ public class SavingsController {
 		// Making sure values are saved in the database.
 		try{
 			transDao.save(trans);
-			return new ResponseEntity<String>("Savings success", HttpStatus.OK);
+			return new ResponseEntity<String>("\"Savings success\"", HttpStatus.OK);
 		} catch(Exception ex){
 			System.out.println("Saving to database error in savings: " + ex.getMessage());
 		}

@@ -15,15 +15,15 @@
               <div class="row">
                 <div class="input-field">
                   <i class="material-icons prefix">attach_money</i>
-                  <input name="amount" id="icon_prefix" type="number" class="validate">
-                  <p class="genErrMsg" ng-show="withForm.amount.$invalid && !withForm.amount.$pristine && submitted">An amount is required</p>
+                  <input name="amount" id="icon_prefix" ng-model="amount" type="number" class="validate">
+                 <p class="genErrMsg" ng-show="withForm.amount.$invalid && !withForm.amount.$pristine && submitted">An amount is required</p> 
                   <label for="icon_prefix">Enter Amount</label>
                 </div>
               </div>
               <br><br>
               <div class="row">
-                  <a class="btn waves-effect waves-light red darken-1 left">Cancel<i class="material-icons right">clear</i></a>
-                  <a class="btn waves-effect waves-light light-green darken-2 right">Submit<i class="material-icons right">send</i></a>
+                  <a class="btn waves-effect waves-light red darken-1 left" href="/home">Cancel<i class="material-icons right">clear</i></a>
+                  <a class="btn waves-effect waves-light light-green darken-2 right" ng-click="withMoneyRequest()">Submit<i class="material-icons right">send</i></a>
               </div>
             </form>
           </div>
@@ -45,4 +45,17 @@
           </div>
         </div>
       </div>
+      <!-- modal -->
+      <div id="modalWith" class="modal" style="z-index: 5000;">
+          <div class="modal-content">
+          <h4 class="robotoLight colorGrey">Processing transaction ...</h4>
+          <div class="progress green accent-1">
+          <div class="indeterminate green accent-3"></div>
+          </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+      </div>
   </div>
+
+  
