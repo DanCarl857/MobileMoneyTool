@@ -22,7 +22,7 @@
 
 > This call is used to initiate a withdrawal from the MFI's account into the client's account
 
-* **URL**: `/mm_withdrawal/:clientPhone/:amount`
+* **URL**: `/api/v1/mm_withdrawal/:clientPhone/:amount`
 
 * **Method**: *GET*
 
@@ -51,7 +51,7 @@ OR
 
 > This call is used to initiate a savings deposit into a client's MFI account from their Mobile Money account
 
-* **URL**: `/mm_savings/:clientPhone/:amount`
+* **URL**: `/api/v1/mm_savings/:clientPhone/:amount`
 
 * **Method**: *GET*
 
@@ -81,7 +81,7 @@ OR
 
 > This call is used to initiate a money transfer transaction from the client's MFI account to the Recipient's Mobile Money account
 
-* **URL**: `/mm_savings/:clientPhone/:recipientPhone/:amount`
+* **URL**: `/api/v1/mm_savings/:clientPhone/:recipientPhone/:amount`
 
 * **Method**: *GET*
 
@@ -112,7 +112,7 @@ OR
 
 > This call is used to view the transaction history for a particular client
 
-* **URL**: `/transaction/:id`
+* **URL**: `/api/v1/transaction/:id`
 
 * **Method**: *GET*
 
@@ -145,4 +145,34 @@ OR
   * **Content**: { error: "You are not authorized to make this request" }
   
 * Sample Call: `/transaction/2`
+
+#### Configurations
+
+> This call is used to set the configurations needed for the API to be used with the application
+
+* **URL**: `/api/v1/configurations`
+
+* **Method**: *GET*
+
+* **URL Params**:
+  * **Required:**
+  * id=[integer]
+ 
+* **Data Params**: 
+    { }
+      
+* **Success Response**:
+  * **Code**: 200
+  * **Content**: { successMsg: "Configurations successfully set"}
+  
+* **Error Response**:
+  * **Code**: 404 NOT FOUND
+  * **Content**: { error: "Failure to set configurations"}
+  
+OR
+
+  * **Code**: 401 UNAUTHORIZED
+  * **Content**: { error: "You are not authorized to make this request" }
+  
+* Sample Call: `/api/v1/configurations`
   
