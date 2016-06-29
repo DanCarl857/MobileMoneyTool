@@ -1,6 +1,5 @@
 package org.mifos.mmoney.dao;
 
-import java.util.Set;
 
 import org.mifos.mmoney.models.Transactions;
 import org.springframework.data.jpa.repository.Query;

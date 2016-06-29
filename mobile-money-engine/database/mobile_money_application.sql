@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 10, 2016 at 03:22 PM
+-- Generation Time: Jun 29, 2016 at 09:19 PM
 -- Server version: 5.6.28-log
 -- PHP Version: 5.6.11
 
@@ -19,8 +19,24 @@ SET time_zone = "+00:00";
 --
 -- Database: `mobile_money_application`
 --
+
+-- --------------------------------------------------------
+
+/* Create database and select it */
 CREATE DATABASE IF NOT EXISTS `mobile_money_application`;
 USE `mobile_money_application`;
+
+--
+-- Table structure for table `configurations`
+--
+
+CREATE TABLE IF NOT EXISTS `configurations` (
+  `id` int(11) NOT NULL,
+  `Region` varchar(255) DEFAULT 'West Africa',
+  `Country` varchar(255) NOT NULL DEFAULT 'Cameroon',
+  `Parameters` varchar(255) NOT NULL,
+  `Domain` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -30,7 +46,8 @@ USE `mobile_money_application`;
 
 CREATE TABLE IF NOT EXISTS `transaction_history` (
   `id` int(11) NOT NULL,
-  `staff` varchar(255) NOT NULL,
+  `client_id` bigint(20) DEFAULT NULL,
+  `staff` varchar(255) DEFAULT 'Head Office',
   `office` varchar(255) NOT NULL DEFAULT 'Head Office',
   `transaction_type` varchar(255) NOT NULL,
   `amount` bigint(20) NOT NULL,
@@ -43,6 +60,12 @@ CREATE TABLE IF NOT EXISTS `transaction_history` (
 --
 
 --
+-- Indexes for table `configurations`
+--
+ALTER TABLE `configurations`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `transaction_history`
 --
 ALTER TABLE `transaction_history`
@@ -52,6 +75,11 @@ ALTER TABLE `transaction_history`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `configurations`
+--
+ALTER TABLE `configurations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `transaction_history`
 --
