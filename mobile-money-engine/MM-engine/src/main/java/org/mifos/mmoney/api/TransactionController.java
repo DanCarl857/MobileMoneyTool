@@ -22,7 +22,6 @@ public class TransactionController {
 	 * So each time a staff member logs in, their default data is automatically 
 	 * sent to the mobile money engine
 	 */
-	@SuppressWarnings("unused")
 	@RequestMapping(value="/api/v1/create", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public
 	@ResponseBody
@@ -42,7 +41,6 @@ public class TransactionController {
 	/*
 	 * This end point enables us to get all the transactions in the database
 	 */
-	@SuppressWarnings("unused")
 	@RequestMapping(value="/api/v1/transactions", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public
 	@ResponseBody
@@ -55,7 +53,6 @@ public class TransactionController {
 		return new ResponseEntity<Iterable<Transactions>>(results, HttpStatus.OK);
 	}
 	
-	@SuppressWarnings("unused")
 	@CrossOrigin
 	@RequestMapping(value="/api/v1/transactions/{clientId}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public

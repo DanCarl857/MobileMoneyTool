@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ConfigurationsController {
 	
-	@SuppressWarnings("unused")
 	@CrossOrigin
 	@RequestMapping(value="/api/v1/Configurations", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public

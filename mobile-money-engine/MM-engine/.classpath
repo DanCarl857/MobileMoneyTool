@@ -1,9 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry kind="src" path="src/main/resources"/>
-	<classpathentry kind="src" path="src/test/java"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry exported="true" kind="con" path="org.springsource.ide.eclipse.gradle.classpathcontainer"/>
+	<classpathentry kind="src" path="src/main/java">
+		<attributes>
+			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src/main/resources">
+		<attributes>
+			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src/test/java">
+		<attributes>
+			<attribute name="FROM_GRADLE_MODEL" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/mysql-connector-java-5.1.39-bin.jar"/>
+	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-aop-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-aop-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-aop-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-aspects-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-aspects-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-aspects-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-beans-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-beans-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-beans-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-context-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-context-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-context-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-context-support-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-context-support-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-context-support-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-core-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-core-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-core-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-expression-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-expression-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-expression-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-instrument-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-instrument-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-instrument-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-instrument-tomcat-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-instrument-tomcat-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-instrument-tomcat-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-jdbc-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-jdbc-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-jdbc-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-jms-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-jms-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-jms-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-messaging-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-messaging-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-messaging-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-orm-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-orm-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-orm-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-oxm-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-oxm-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-oxm-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-test-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-test-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-test-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-tx-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-tx-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-tx-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-web-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-web-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-web-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-webmvc-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-webmvc-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-webmvc-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-webmvc-portlet-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-webmvc-portlet-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-webmvc-portlet-4.2.5.RELEASE.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-websocket-4.2.5.RELEASE-javadoc.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-websocket-4.2.5.RELEASE-sources.jar"/>
+	<classpathentry kind="lib" path="/Users/danielcarlson/Documents/dev/utilities/spring-framework-4.2.5.RELEASE/libs/spring-websocket-4.2.5.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

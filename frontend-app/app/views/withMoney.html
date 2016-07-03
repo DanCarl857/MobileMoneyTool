@@ -15,9 +15,16 @@
               <div class="row">
                 <div class="input-field">
                   <i class="material-icons prefix">attach_money</i>
-                  <input name="amount" id="icon_prefix" ng-model="amount" type="number" class="validate">
+                  <input name="amount" id="icon_prefix" ng-model="amount" type="number">
                  <p class="genErrMsg" ng-show="withForm.amount.$invalid && !withForm.amount.$pristine && submitted">An amount is required</p> 
                   <label for="icon_prefix">Enter Amount</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field">
+                  <i class="material-icons prefix">phone</i>
+                  <input type="number" id="phoneNumber">
+                  <label for="icon_prefix">Phone Number</label>
                 </div>
               </div>
               <br><br>
