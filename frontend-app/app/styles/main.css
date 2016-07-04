@@ -274,3 +274,12 @@ body{
 	position: relative;
 	top: 10px;
 }
+
+.bottomLine {
+	border-bottom: 1px black dotted;
+}
+
+.leftLine {
+	border-left: 5px blue solid;
+	padding: 5px;
+}
