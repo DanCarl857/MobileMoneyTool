@@ -37,21 +37,20 @@
 			<div class="row" id="apis">
 				<form class="center-align">
 					<div class="left">
-						<input type="radio" name="apiConfig" ng-model="apiConfig" ng-value="true" value="rest" id="rest">
+						<input type="radio" name="apiConfig" value="1" ng-model="radioBoxSelection" id="rest">
 						<label for="rest">REST Configurations</label>
 					</div class="right">
 					<div>
-						<input type="radio" name="apiConfig" ng-model="apiConfig" ng-value="false" value="soap" id="soap">
+						<input type="radio" name="apiConfig" value="2" ng-model="radioBoxSelection" id="soap">
 						<label for="soap">SOAP Configurations</label>
 					</div>
 				</form>
 			</div>
 			<br>
-			<div class="row" id="REST">
+			<div class="row" id="REST" ng-show="radioBoxSelection == 1">
 				<!-- Domain -->
 				<div class="row">
 					<span style="position: relative;float: left" class="leftLine">Domains:&nbsp;<i class="material-icons tiny tooltipped" data-position="top" data-delay="10" data-tooltip="Domain names for you mobile money API">help</i> </span>
-					<span style="font-style: italic;" class="colorGrey robotoThin">Actual URL calls used to make requests to the Mobile Money API</span>
 				</div>
 				<div class="row">
 					<ul class="collapsible popout" data-collapsible="accordion">
@@ -130,7 +129,6 @@
 				<!-- Others -->
 				<div class="row">
 					<span style="position: relative;float: left" class="leftLine">Other Settings:&nbsp;<i class="material-icons tiny tooltipped" data-position="top" data-delay="10" data-tooltip="Other settings needed by your mobile money API">help</i> </span>
-					<span style="font-style: italic;" class="colorGrey robotoThin">These are extra values needed by the Mobile Money API</span>
 					<span class="right"><a class="btn-floating waves-effect waves-light blue tooltipped" data-position="top" data-delay="10" data-tooltip="Add other settings needed by Mobile money API"><i class="material-icons right" >add</i></a></span>
 				</div>
 				<div class="row">
@@ -149,7 +147,6 @@
 				<!-- Parameters -->
 				<div class="row">
 					<span style="position: relative;float: left" class="leftLine">Parameters:&nbsp;<i class="material-icons tiny tooltipped" data-position="top" data-delay="10" data-tooltip="Parameters needed for your mobile money API">help</i> </span>
-					<span style="font-style: italic;" class="colorGrey robotoThin">These are used to collect values needed by the API</span>
 				</div>
 				<div class="row">
 					<ul class="collapsible popout" data-collapsible="accordion">
@@ -159,7 +156,8 @@
 							<div class="collapsible-body">
 								<div class="row topify">
 									<div class="col s9 left">
-										<span style="color: rgba(0, 0, 0, 0.5);">/Domain/savings?phoneNumber="674377956"&amount=5000&clientId="12345678</span>
+										<span style="color: rgba(0, 0, 0, 0.5);">/Domain/savings?phoneNumber="674377956"&amount=
+										5000&clientId="12345678</span>
 									</div>
 									<div class="col s3 right">
 										<a class="btn-floating waves-effect waves-light blue" href=""><i class="material-icons right">add</i></a>
@@ -323,7 +321,7 @@
 	    			</div>
   				</div>
 			</div>
-			<div class="row" id="SOAP">
+			<div class="row" id="SOAP" ng-show="radioBoxSelection == 2">
 				<span>SOAP configurations will go here</span>
 			</div>
 		</div>

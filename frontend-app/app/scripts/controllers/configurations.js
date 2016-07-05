@@ -4,6 +4,8 @@
 angular.module('mobileMoneyApp')
   .controller('configCtrl', ['$scope', '$window', function ($scope, $window) {
     // variables
+    $scope.hide;
+
     // TODO: get these from the database
     $scope.accountId = "4123456";
     $scope.savingsURL = "http://api.furthermarket.com/FM/MTN/MoMo/requestpayment";
@@ -29,6 +31,12 @@ angular.module('mobileMoneyApp')
         $('.tooltipped').tooltip({delay: 50});
   	 	});
   	 });  
+     $scope.showElement = function(val){
+        if(val == 't'){
+          $scope.hide = true;
+        } else
+          $scope.hide = false;
+     }
      $scope.goBack = function(){
         window.history.back();
      }

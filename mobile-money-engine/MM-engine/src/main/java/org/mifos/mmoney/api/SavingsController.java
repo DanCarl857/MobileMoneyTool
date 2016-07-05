@@ -71,7 +71,7 @@ public class SavingsController {
 		} catch(Exception ex){
 			System.out.println("Saving to database error in savings: " + ex.getMessage());
 		}
-		return new ResponseEntity<String>("\"Savings failur\"", HttpStatus.OK);
+		return new ResponseEntity<String>("\"Savings failure\"", HttpStatus.OK);
 	}
 	
 	@Autowired
