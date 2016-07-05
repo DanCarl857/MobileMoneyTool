@@ -297,9 +297,31 @@
 					</ul>
 				</div>
 				<div class="row">
-					<a class="btn waves-effect waves-light blue"><i class="material-icons left">build</i>Update Settings</a>
-					<a class="btn waves-effect waves-light green" ng-click="goBack()"><i class="material-icons right">clear</i>Cancel</a>
+					<button class="btn waves-effect waves-light blue modal-trigger" data-target="updateModal"><i class="material-icons left">build</i>Update Settings</button>
+					<button class="btn waves-effect waves-light green modal-trigger" data-target="cancelModal"><i class="material-icons right">clear</i>Cancel</button>
 				</div>
+
+				<!-- Modal code -->
+  				<div id="updateModal" class="modal">
+	    			<div class="modal-content">
+	      				<h4>Confirmation</h4>
+	      				<p>Changing the settings here could cause the application not to work correctly.<br> Are you sure you want to update the settings?</p>
+	    			</div>
+	    			<div class="modal-footer">
+	      				<a ng-click="deny()" class="btn left modal-action modal-close waves-effect waves-light red">Cancel Update</a>
+	      				<a href="#!" class="btn right modal-action modal-close waves-effect waves-light blue">Update</a>
+	    			</div>
+  				</div>
+  				<div id="cancelModal" class="modal">
+	    			<div class="modal-content">
+	      				<h4>Confirm cancelation</h4>
+	      				<p>Agreeing discards all your changes<br>Are you sure you want to discard your changes?</p>
+	    			</div>
+	    			<div class="modal-footer">
+	      				<a class="btn left modal-action modal-close waves-effect waves-light red">Disagree</a>
+	      				<a ng-click="goBack()" class="btn right modal-action modal-close waves-effect waves-light blue">Agree</a>
+	    			</div>
+  				</div>
 			</div>
 			<div class="row" id="SOAP">
 				<span>SOAP configurations will go here</span>

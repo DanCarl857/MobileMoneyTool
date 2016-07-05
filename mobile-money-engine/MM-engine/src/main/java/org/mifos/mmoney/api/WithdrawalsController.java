@@ -46,8 +46,7 @@ public class WithdrawalsController {
 		
 		/*
 		 * We now make a request to the Mobile money API
-		 * TODO: make request generic
-		 * 	get needed information from UI
+		 * TODO: make request to Mobile Money API
 		 */
 		
 		// Map to hold the parameters to be made with mobile money request
@@ -55,11 +54,11 @@ public class WithdrawalsController {
 				
 		// set parameter values
 		params.put("accountID", "4123456"); // accountID here is the clients
-		params.put("phoneNumber", Long.toString(phoneNumber)); // phone number here is the MFI's own
+		params.put("phoneNumber", Long.toString(phoneNumber)); // phone number here is the MFI's account
 		params.put("amount", Long.toString(amount));
 				
 		RestTemplate restTemplate = new RestTemplate();
-		// make request
+		// make request and get result
 		String result = restTemplate.getForObject(uri, String.class);
 		
 		Transactions trans = new Transactions();

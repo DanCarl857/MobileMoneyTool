@@ -2,7 +2,7 @@
 /* global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('configCtrl', ['$scope', function ($scope) {
+  .controller('configCtrl', ['$scope', '$window', function ($scope, $window) {
     // variables
     // TODO: get these from the database
     $scope.accountId = "4123456";
@@ -20,15 +20,19 @@ angular.module('mobileMoneyApp')
   	 	// activate select form fields on UI
   	 	$(document).ready(function(){
   	 		$('select').material_select();
+        $('.modal-trigger').leanModal({
+          dismissible: false,
+          opacity: .8,
+          out_duration: 5
+        });
+
         $('.tooltipped').tooltip({delay: 50});
   	 	});
   	 });  
-
-
      $scope.goBack = function(){
-        console.log("Testing");
         window.history.back();
      }
-
-     console.log("we rock");
+     $scope.deny = function(){
+        $window.location.reload();
+     }
   }]);
