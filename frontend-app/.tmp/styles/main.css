@@ -280,6 +280,11 @@ body{
 }
 
 .leftLine {
-	border-left: 5px blue solid;
+	border-left: 5px #2196f3 solid;
 	padding: 5px;
+}
+
+.topify{
+	position: relative;
+	top: 5px;
 }

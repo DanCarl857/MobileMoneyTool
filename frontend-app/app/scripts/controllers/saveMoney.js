@@ -8,8 +8,12 @@ angular.module('mobileMoneyApp')
 	      	$scope.makeRequest();
       	};
 
+        $scope.goBack = function(){
+          window.history.back();
+        };
+
       	$scope.makeRequest = function(){
-      		var sReqUrl = "http://localhost:8090/api/v1/savings?phone=674377956&amount=5000&clientId=1234567";
+      		var sReqUrl = "http://localhost:9876/api/v1/savings?phone=674377956&amount=5000&clientId=1234567";
       		$http({
       			method: "GET",
       			url: sReqUrl

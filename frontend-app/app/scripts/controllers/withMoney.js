@@ -12,6 +12,10 @@ angular.module('mobileMoneyApp')
 	      	$scope.makeRequest();
       	};
 
+        $scope.goBack = function(){
+          window.history.back();
+        };
+
       	// function to make a check
       	$scope.check = function(){
       		if($scope.amount === undefined){
@@ -21,7 +25,7 @@ angular.module('mobileMoneyApp')
 
       	// function to actually make request
       	$scope.makeRequest = function(){
-      		var wReqUrl = "http://localhost:8090/api/v1/withdrawals?phone=674377956&amount=5000&clientId=1234567";
+      		var wReqUrl = "http://localhost:9876/api/v1/withdrawals?phone=674377956&amount=5000&clientId=1234567";
       		$http({
       			method: "GET",
       			url: wReqUrl

@@ -35,20 +35,22 @@
 			</div>
 			<br>
 			<div class="row" id="apis">
-				<div class="col s6">
-					<input type="radio" name="restConfig" id="rest">
-					<label for="rest">REST Configurations</label>
-				</div>
-				<div class="col s6">
-					<input type="radio" name="soapConfig" id="soap">
-					<label for="soap">SOAP Configurations</label>
-				</div>
+				<form class="center-align">
+					<div class="left">
+						<input type="radio" name="apiConfig" ng-model="apiConfig" ng-value="true" value="rest" id="rest">
+						<label for="rest">REST Configurations</label>
+					</div class="right">
+					<div>
+						<input type="radio" name="apiConfig" ng-model="apiConfig" ng-value="false" value="soap" id="soap">
+						<label for="soap">SOAP Configurations</label>
+					</div>
+				</form>
 			</div>
 			<br>
 			<div class="row" id="REST">
 				<!-- Domain -->
 				<div class="row">
-					<span style="position: relative;float: left" class="leftLine">Domains: </span>
+					<span style="position: relative;float: left" class="leftLine">Domains:&nbsp;<i class="material-icons tiny tooltipped" data-position="top" data-delay="10" data-tooltip="Domain names for you mobile money API">help</i> </span>
 					<span style="font-style: italic;" class="colorGrey robotoThin">Actual URL calls used to make requests to the Mobile Money API</span>
 				</div>
 				<div class="row">
@@ -62,11 +64,11 @@
 									<div class="col s10">
 										<div class="input-field">
                   							<i class="material-icons prefix">vpn_lock</i>
-                  							<input name="savingsUrl" id="icon_prefix" type="text" value="http://api.furthermarket.com/FM/MTN/MoMo/requestpayment" disabled>
+                  							<input name="savingsUrl" id="icon_prefix" type="text" value="{{savingsURL}}" ng-disabled="saveBtn" ng-init="saveBtn=true">
                 						</div>
 									</div>
 									<div class="col s2">
-										<a class="btn waves-effect waves-light blue" href=""><i class="material-icons right">create</i></a>
+										<a class="btn waves-effect waves-light blue tooltipped" data-position="top" data-delay="10" data-tooltip="Edit URL used for savings in API" ng-click="saveBtn=false"><i class="material-icons right">create</i></a>
 									</div>
 								</div>
 							</div>
@@ -79,11 +81,11 @@
 									<div class="col s10">
 										<div class="input-field">
                   							<i class="material-icons prefix">vpn_lock</i>
-                  							<input name="savingsUrl" id="icon_prefix" type="text" value="http://api.furthermarket.com/FM/MTN/MoMo/requestpayment" disabled>
+                  							<input name="withUrl" id="icon_prefix" type="text" value="{{withURL}}" ng-disabled="withBtn" ng-init="withBtn=true">
                 						</div>
 									</div>
 									<div class="col s2">
-										<a class="btn waves-effect waves-light blue" href=""><i class="material-icons right">create</i></a>
+										<a class="btn waves-effect waves-light blue tooltipped" data-position="top"data-delay="10" data-tooltip="Edit URL used for withdrawals in API" ng-click="withBtn=false"><i class="material-icons right">create</i></a>
 									</div>
 								</div>
 							</div>
@@ -96,11 +98,11 @@
 									<div class="col s10">
 										<div class="input-field">
                   							<i class="material-icons prefix">vpn_lock</i>
-                  							<input name="savingsUrl" id="icon_prefix" type="text" value="http://api.furthermarket.com/FM/MTN/MoMo/placepayment" disabled>
+                  							<input name="sendUrl" id="icon_prefix" type="text" value="{{sendURL}}" ng-disabled="sendBtn" ng-init="sendBtn=true">
                 						</div>
 									</div>
 									<div class="col s2">
-										<a class="btn waves-effect waves-light blue" href=""><i class="material-icons right">create</i></a>
+										<a class="btn waves-effect waves-light blue tooltipped" data-position="top" data-delay="10" data-tooltip="Edit URL used for sending money in API" ng-click="sendBtn=false"><i class="material-icons right">create</i></a>
 									</div>
 								</div>
 							</div>
@@ -113,11 +115,11 @@
 									<div class="col s10">
 										<div class="input-field">
                   							<i class="material-icons prefix">vpn_lock</i>
-                  							<input name="savingsUrl" id="icon_prefix" type="text" value="http://api.furthermarket.com/FM/MTN/MoMo/checkpayment" disabled>
+                  							<input name="otherUrls" id="icon_prefix" type="text" value="{{otherURL}}" ng-disabled="otherBtn" ng-init="otherBtn=true">
                 						</div>
 									</div>
 									<div class="col s2">
-										<a class="btn waves-effect waves-light blue" href=""><i class="material-icons right">create</i></a>
+										<a class="btn waves-effect waves-light blue" ng-click="otherBtn=false"><i class="material-icons right">create</i></a>
 									</div>
 								</div>
 							</div>
@@ -127,27 +129,26 @@
 
 				<!-- Others -->
 				<div class="row">
-					<span style="position: relative;float: left" class="leftLine">Other Settings: </span>
+					<span style="position: relative;float: left" class="leftLine">Other Settings:&nbsp;<i class="material-icons tiny tooltipped" data-position="top" data-delay="10" data-tooltip="Other settings needed by your mobile money API">help</i> </span>
 					<span style="font-style: italic;" class="colorGrey robotoThin">These are extra values needed by the Mobile Money API</span>
-					<span class="right"><a class="btn-floating waves-effect waves-light blue" href=""><i class="material-icons right">add</i></a></span>
+					<span class="right"><a class="btn-floating waves-effect waves-light blue tooltipped" data-position="top" data-delay="10" data-tooltip="Add other settings needed by Mobile money API"><i class="material-icons right" >add</i></a></span>
 				</div>
 				<div class="row">
 					<div class="col s4">
-						<span class="colorGrey">Mobile money account ID: &nbsp;<span style="font-style: italic">4123678</span></span>
+						<span>Mobile money account ID:</span>&nbsp;<span class="colorGrey" style="font-style: italic">{{accountId}}</span>
 					</div>
 					<div class="input-field col s5">
-						<input type="text" name="url" id="url" disabled>
-						<label for="url">New ID</label>
+						<input type="text" name="url" id="url" ng-model="accountId" ng-disabled="button" ng-init="button=true">
 					</div>
 					<div class="col s3">
-						<a class="btn waves-effect waves-light blue" href=""><i class="material-icons right">create</i></a>
-						<a class="btn waves-effect waves-light green" href=""><i class="material-icons right">clear</i></a>
+						<a class="btn waves-effect waves-light blue tooltipped" ng-click="button=false" data-position="top" data-delay="10" data-tooltip="Edit Mobile money Account Id"><i class="material-icons right">create</i></a>
+						<a class="btn waves-effect waves-light red tooltipped" data-position="top" data-delay="10" data-tooltip="Delete this setting"><i class="material-icons right">clear</i></a>
 					</div>
 				</div>
 
 				<!-- Parameters -->
 				<div class="row">
-					<span style="position: relative;float: left" class="leftLine">Parameters: </span>
+					<span style="position: relative;float: left" class="leftLine">Parameters:&nbsp;<i class="material-icons tiny tooltipped" data-position="top" data-delay="10" data-tooltip="Parameters needed for your mobile money API">help</i> </span>
 					<span style="font-style: italic;" class="colorGrey robotoThin">These are used to collect values needed by the API</span>
 				</div>
 				<div class="row">
@@ -156,8 +157,13 @@
 							<div class="collapsible-header"><i class="material-icons left">payment</i><span style="positon: relative; float: left">Savings</span>
 							</div>
 							<div class="collapsible-body">
-								<div class="row">
-									<span style="color: rgba(0, 0, 0, 0.5);">/Domain/savings?phoneNumber="674377956"&amount=5000&clientId="12345678</span>
+								<div class="row topify">
+									<div class="col s9 left">
+										<span style="color: rgba(0, 0, 0, 0.5);">/Domain/savings?phoneNumber="674377956"&amount=5000&clientId="12345678</span>
+									</div>
+									<div class="col s3 right">
+										<a class="btn-floating waves-effect waves-light blue" href=""><i class="material-icons right">add</i></a>
+									</div>
 								</div>
 								<div class="row">
 									<div class="col s1">
@@ -170,7 +176,7 @@
                 						</div>
 									</div>
 									<div class="col s2">
-										<a class="btn waves-effect waves-light green" href=""><i class="material-icons right">clear</i></a>
+										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
 									</div>
 								</div>
 								<div class="row">
@@ -184,19 +190,21 @@
                 						</div>
 									</div>
 									<div class="col s2">
-										<a class="btn waves-effect waves-light green" href=""><i class="material-icons right">clear</i></a>
+										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
 									</div>
-								</div>
-								<div class="row">
-									<a class="btn waves-effect waves-light green" href=""><i class="material-icons left">build</i>Test Call</a>
 								</div>
 							</div>
 						</li>
 						<li>
 							<div class="collapsible-header"><i class="material-icons left">eject</i><span style="positon: relative; float: left">Withdrawals</span></div>
 							<div class="collapsible-body">
-								<div class="row">
-									<span style="color: rgba(0, 0, 0, 0.5);">/Domain/withdrawals?phoneNumber="674377956"&amount=5000&clientId="12345678"</span>
+								<div class="row topify">
+									<div class="col s9 left">
+										<span style="color: rgba(0, 0, 0, 0.5);">/Domain/withdrawals?phoneNumber="674377956"&amount=5000&clientId="12345678"</span>
+									</div>
+									<div class="col s3 right">
+										<a class="btn-floating waves-effect waves-light blue" href=""><i class="material-icons right">add</i></a>
+									</div>
 								</div>
 								<div class="row">
 									<div class="col s1">
@@ -209,7 +217,7 @@
                 						</div>
 									</div>
 									<div class="col s2">
-										<a class="btn waves-effect waves-light green" href=""><i class="material-icons right">clear</i></a>
+										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
 									</div>
 								</div>
 								<div class="row">
@@ -223,11 +231,8 @@
                 						</div>
 									</div>
 									<div class="col s2">
-										<a class="btn waves-effect waves-light green" href=""><i class="material-icons right">clear</i></a>
+										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
 									</div>
-								</div>
-								<div class="row">
-									<a class="btn waves-effect waves-light green" href=""><i class="material-icons left">build</i>Test Call</a>
 								</div>
 							</div>
 						</li>
@@ -237,8 +242,13 @@
 								<span style="positon: relative; float: left">Send Money</span>
 							</div>
 							<div class="collapsible-body">
-								<div class="row">
-									<span style="color: rgba(0, 0, 0, 0.5);">/Domain/send?phoneNumber="674377956"&amount=5000&recipient="Daniel Carlson"&clientId="12345678"</span>
+								<div class="row topify">
+									<div class="col s10">
+										<span style="color: rgba(0, 0, 0, 0.5);">/Domain/send?phoneNumber="674377956"&amount=5000&recipient="Daniel Carlson"&clientId="12345678"</span>
+									</div>
+									<div class="col s2">
+										<a class="btn-floating waves-effect waves-light blue" href=""><i class="material-icons right">add</i></a>
+									</div>
 								</div>
 								<div class="row">
 									<div class="col s1">
@@ -251,7 +261,7 @@
                 						</div>
 									</div>
 									<div class="col s2">
-										<a class="btn waves-effect waves-light green" href=""><i class="material-icons right">clear</i></a>
+										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
 									</div>
 								</div>
 								<div class="row">
@@ -265,7 +275,7 @@
                 						</div>
 									</div>
 									<div class="col s2">
-										<a class="btn waves-effect waves-light green" href=""><i class="material-icons right">clear</i></a>
+										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
 									</div>
 								</div>
 								<div class="row">
@@ -279,11 +289,8 @@
                 						</div>
 									</div>
 									<div class="col s2">
-										<a class="btn waves-effect waves-light green" href=""><i class="material-icons right">clear</i></a>
+										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
 									</div>
-								</div>
-								<div class="row">
-									<a class="btn waves-effect waves-light green" href=""><i class="material-icons left">build</i>Test Call</a>
 								</div>
 							</div>
 						</li>
@@ -291,11 +298,11 @@
 				</div>
 				<div class="row">
 					<a class="btn waves-effect waves-light blue"><i class="material-icons left">build</i>Update Settings</a>
-					<a class="btn waves-effect waves-light green"><i class="material-icons right" href="/main">clear</i>Cancel</a>
+					<a class="btn waves-effect waves-light green" ng-click="goBack()"><i class="material-icons right">clear</i>Cancel</a>
 				</div>
 			</div>
 			<div class="row" id="SOAP">
-
+				<span>SOAP configurations will go here</span>
 			</div>
 		</div>
 	</center>

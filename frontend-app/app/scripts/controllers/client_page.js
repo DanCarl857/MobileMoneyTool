@@ -1,4 +1,6 @@
 angular.module('mobileMoneyApp')
-  .controller('clientCtrl', function () {
-    
-  });
+  .controller('clientCtrl', ['$scope', function ($scope) {
+    $scope.goBack = function(){
+    	window.history.back();
+    }
+  }]);
