@@ -13,7 +13,7 @@ angular.module('mobileMoneyApp')
         };
 
       	$scope.makeRequest = function(){
-      		var sReqUrl = "http://localhost:9876/api/v1/savings?phone=674377956&amount=5000&clientId=1234567";
+      		var sReqUrl = "http://localhost:8090/api/v1/savings?phone=674377956&amount=5000&clientId=1234567";
       		$http({
       			method: "GET",
       			url: sReqUrl
@@ -23,7 +23,7 @@ angular.module('mobileMoneyApp')
       			console.log("data: " + $scope.data);
       		})
       		.error(function(data){
-      			console.log("Error with withdrawals" + data);
+      			console.log("Error with withdrawals " + data);
       		});
       	}
   }]);

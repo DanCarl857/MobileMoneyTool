@@ -41,32 +41,29 @@ public class WithdrawalsController {
 		 * uri: URL for withdrawing money in the mobile money API
 		 * 
 		 */
+		/*int accountID = 12345678;
 		final String uri = "http://api.furthermarket.com/FM/MTN/MoMo/requestpayment"
 				+ "?MyaccountID={accountID}&CustomerPhonenumber={phoneNumber}&Amount={amount}";
 		
-		/*
+		
 		 * We now make a request to the Mobile money API
 		 * TODO: make request to Mobile Money API
-		 */
+		 
 		
 		// Map to hold the parameters to be made with mobile money request
 		Map<String, String> params = new HashMap<>();
 				
 		// set parameter values
-		params.put("accountID", "4123456"); // accountID here is the clients
+		params.put("accountID", Long.toString(accountID)); // accountID here is the clients
 		params.put("phoneNumber", Long.toString(phoneNumber)); // phone number here is the MFI's account
 		params.put("amount", Long.toString(amount));
 				
 		RestTemplate restTemplate = new RestTemplate();
 		// make request and get result
-		String result = restTemplate.getForObject(uri, String.class);
+		String result = restTemplate.getForObject(uri, String.class);*/
 		
 		Transactions trans = new Transactions();
 		
-		trans.setStaff("Withdrawals");
-		
-		System.out.println("Office: "+trans.getOffice());
-		System.out.println("Staff: "+trans.getStaff());
 			
 		trans.setAmount((int) amount);
 		trans.setClient_id(clientID);

@@ -16,7 +16,7 @@ angular.module('mobileMoneyApp')
 
       	// function to actually make request
       	$scope.makeRequest = function(){
-      		var wReqUrl = "http://localhost:9876/api/v1/send?phone=674377956&amount=5000&recipient=%22Joe%22&clientId=1234567";
+      		var wReqUrl = "http://localhost:8090/api/v1/send?phone=674377956&amount=5000&recipient=%22Joe%22&clientId=1234567";
       		$http({
       			method: "GET",
       			url: wReqUrl

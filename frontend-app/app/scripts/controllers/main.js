@@ -2,7 +2,7 @@
 /*global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('mainCtrl', function ($scope, dataService, loginService) {
+  .controller('mainCtrl', function ($scope, dataService) {
 
       $scope.clients; 
       $scope.status = null;
@@ -21,10 +21,10 @@ angular.module('mobileMoneyApp')
       $scope.getClients();
 
       $scope.testAuth = function(){
-          loginService.getBasicKey("mifos", "password");
+          //loginService.getBasicKey("mifos", "password");
             
           //loginService.setAuthorization();
-          loginService.test();
+          //loginService.test();
       };
 
       console.log("Testing now: ");
