@@ -3,27 +3,39 @@
 
 angular.module('mobileMoneyApp')
   .controller('saveMoneyCtrl', ['$scope', '$http', function ($scope, $http) {
-  		// function to handle requests to the mobile money engine
-      	$scope.saveMoney = function(){
-	      	$scope.makeRequest();
+  		
+      $scope.submitted = true;
+      var baseUrl = "http://localhost:8090/api/v1/savings";
+
+      // function to submit form
+      $scope.submitSaveForm = function(){
+        console.log("1");
+        if($scope.saveForm.$valid){
+          console.log("2");
+          $scope.submitted = false;
+          $scope.saveMoneyRequest(1234567);
+        }
+      };
+
+      $scope.amount = '';
+      $scope.phoneNumber = '';
+
+      // function to handle requests to the mobile money engine
+      	$scope.saveMoneyRequest = function(clientId){
+	      	var srequestUrl = baseUrl + "?phone"+ $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId="+ clientId;
+          console.log(requestUrl);
+          $http({
+            method: "GET",
+            url: srequestUrl
+          }).success(function(data){
+            $scope.data = data;
+            console.log("data: " + $scope.data);
+          }).error(function(data){
+            console.log("Error with saving money: "+ data);
+          })
       	};
 
         $scope.goBack = function(){
           window.history.back();
         };
-
-      	$scope.makeRequest = function(){
-      		var sReqUrl = "http://localhost:8090/api/v1/savings?phone=674377956&amount=5000&clientId=1234567";
-      		$http({
-      			method: "GET",
-      			url: sReqUrl
-      		})
-      		.success(function(data){
-      			$scope.data = data;
-      			console.log("data: " + $scope.data);
-      		})
-      		.error(function(data){
-      			console.log("Error with withdrawals " + data);
-      		});
-      	}
   }]);

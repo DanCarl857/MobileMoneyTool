@@ -258,7 +258,8 @@ body{
 	left: 40%;
 	color: red;
 	font-weight: bold;
-	width: 45%;
+	font-size: 12px;
+	width: 50%;
 }
 
 .genErrMsg {

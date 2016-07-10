@@ -4,38 +4,38 @@
 angular.module('mobileMoneyApp')
   .controller('withMoneyCtrl', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
 
-  		$scope.submitted = true;
-      	$scope.date = new Date();
+        $scope.submitted = true;
+        var baseUrl = "http://localhost:8090/api/v1/withdrawals";
+
+        // function to submit the form after all form validation
+        $scope.submitForm = function(){
+          // Check to make sure the form is completely valid
+          if($scope.withForm.$valid){
+            $scope.submitted = false;
+            $scope.withMoneyRequest(12345678);
+          }
+        };
+        
+        $scope.amount = '';
+        $scope.phoneNumber = '';
 
       	// function to handle requests to the mobile money engine
       	$scope.withMoneyRequest = function(clientId){
-	      	$scope.makeRequest();
+	      	var requestUrl = baseUrl + "?phone=" + $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId=" + clientId;
+          console.log(requestUrl);
+          $http({
+            method: "GET",
+            url: requestUrl
+          }).success(function(data){
+            $scope.data = data;
+            console.log("data: " + $scope.data);
+          }).error(function(data){
+            console.log("Error with withdrawals: " + data);
+          });
       	};
 
+        // function to go back to source page
         $scope.goBack = function(){
           window.history.back();
         };
-
-      	// function to make a check
-      	$scope.check = function(){
-      		if($scope.amount === undefined){
-      			return true;
-      		}
-      	}
-
-      	// function to actually make request
-      	$scope.makeRequest = function(){
-      		var wReqUrl = "http://localhost:8090/api/v1/withdrawals?phone=674377956&amount=5000&clientId=1234567";
-      		$http({
-      			method: "GET",
-      			url: wReqUrl
-      		})
-      		.success(function(data){
-      			$scope.data = data;
-      			console.log("data: " + $scope.data);
-      		})
-      		.error(function(data){
-      			console.log("Error with withdrawals" + data);
-      		});
-      	};
   }]);

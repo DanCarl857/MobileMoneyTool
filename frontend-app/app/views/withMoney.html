@@ -2,7 +2,7 @@
       <div class="row">
         <div class="col s9">
          <div class="row">
-            <span class="medText" style="font-size: 50px">Carlson, Daniel</span>&nbsp;&nbsp;<span class="nameStyle robotoLight">Client#: 1234567</span> &nbsp;&nbsp;<span style="font-size: 20px;">|</span>&nbsp;&nbsp;<span class="nameStyle robotoLight">Assigned Staff: Marcus Brody</span>
+            <span class="medText" style="font-size: 40px">Carlson, Daniel</span>&nbsp;&nbsp;<span class="nameStyle robotoLight">Client#: 1234567</span> &nbsp;&nbsp;<span style="font-size: 12px;">|</span>&nbsp;&nbsp;<span class="nameStyle robotoLight">Assigned Staff: Marcus Brody</span>
           </div>
           <div class="row withMBox">
             <form class="col s8" name="withForm" ng-submit="submitForm(withForm.$valid)" novalidate>
@@ -13,24 +13,26 @@
                 <span class="xxlargeText robotoThin">Current Balance: 65000</span>
               </div>
               <div class="row">
-                <div class="input-field">
+                <div class="input-field" ng-class="{'has-error': withForm.amount.$invalid && !withForm.amount.$pristine }">
                   <i class="material-icons prefix">attach_money</i>
-                  <input name="amount" id="icon_prefix" ng-model="amount" type="number">
-                 <p class="genErrMsg" ng-show="withForm.amount.$invalid && !withForm.amount.$pristine && submitted">An amount is required</p> 
+                  <input name="amount" id="icon_prefix" ng-model="amount" type="number" ng-minlength="3" required>
                   <label for="icon_prefix">Enter Amount</label>
+                  <p ng-show="(withForm.amount.$invalid && !withForm.amount.$pristine) && submitted" class="errorMsg">Amount is required.</p>
                 </div>
               </div>
               <div class="row">
-                <div class="input-field">
+                <div class="input-field" ng-class="{ 'has-error': withForm.phone.$invalid && !withForm.phone.$pristine }">
                   <i class="material-icons prefix">phone</i>
-                  <input type="number" id="phoneNumber">
+                  <input name="phone" type="number" id="phoneNumber" ng-model="phoneNumber" ng-minlength="8" required>
                   <label for="icon_prefix">Phone Number</label>
+                  <p ng-show="withForm.phone.$error.minlength && submitted" class="errorMsg">Phone number is too short.</p>
+                  <p ng-show="(withForm.phone.$invalid && !withForm.phone.$pristine) && submitted" class="errorMsg">Phone number is required.</p>
                 </div>
               </div>
               <br><br>
               <div class="row">
                   <a class="btn waves-effect waves-light red darken-1 left" ng-click="goBack()">Cancel<i class="material-icons right">clear</i></a>
-                  <a class="btn waves-effect waves-light light-green darken-2 right" ng-click="withMoneyRequest()">Submit<i class="material-icons right">send</i></a>
+                  <button class="btn waves-effect waves-light light-green darken-2 right">Submit<i class="material-icons right">send</i></button>
               </div>
             </form>
           </div>
@@ -51,17 +53,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <!-- modal -->
-      <div id="modalWith" class="modal" style="z-index: 5000;">
-          <div class="modal-content">
-          <h4 class="robotoLight colorGrey">Processing transaction ...</h4>
-          <div class="progress green accent-1">
-          <div class="indeterminate green accent-3"></div>
-          </div>
-          </div>
-          <div class="modal-footer">
-          </div>
       </div>
   </div>
 

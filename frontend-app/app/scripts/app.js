@@ -4,6 +4,12 @@ angular
   .module('mobileMoneyApp', ['ngAnimate','ngCookies','ngResource','ngRoute','ngSanitize', 'ui.router'])
   .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
+    // Set headers and enable CORS
+    $httpProvider.defaults.headers.common['Fineract-Platform-TenantId'];
+    $httpProvider.defaults.useXDomain = true;
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
+
     $stateProvider
       .state('login', {
         url: '/login',
