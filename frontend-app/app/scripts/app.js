@@ -5,10 +5,11 @@ angular
   .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
     // Set headers and enable CORS
-    $httpProvider.defaults.headers.common['Fineract-Platform-TenantId'];
+    $httpProvider.defaults.headers.common['X-Mifos-Platform-TenantId'] = 'default';
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.defaults.headers.common['Content-Type'] = 'application/json; charset=utf-8';
+    $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
     $stateProvider
       .state('login', {

@@ -6,6 +6,9 @@ angular.module('mobileMoneyApp')
       $scope.submitted = true;
       $scope.loginSuccessful = true;
 
+      $scope.username = '';
+      $scope.password = '';
+
     	$scope.navigateTo = function(view){
     		$state.transitionTo(view);
     	};
