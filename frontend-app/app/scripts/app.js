@@ -58,6 +58,12 @@ angular
         url: '/configurations',
         templateUrl: 'views/configurations.html',
         controller: 'configCtrl'
+      })
+
+      .state('loans', {
+        url: '/loans/:id',
+        templateUrl: 'views/loanRepayment.html',
+        contorller: 'loanCtrl'
       });
 
       $urlRouterProvider.otherwise('/login');
