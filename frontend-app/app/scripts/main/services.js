@@ -11,8 +11,7 @@ angular.module('mobileMoneyApp')
   }])
   .service('AuthenticationService', ['$http', '$timeout', function($http, $timeout){
   		var service = {};
-  		var baseApiUrl = "https://demo.openmf.org";
-  		var prodApiUrl = "/fineract-provider/api/";
+  		var baseApiUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
   		var endUrl = "tenantIdentifier=default";
   		var basicAuthKey;
 
@@ -37,12 +36,12 @@ angular.module('mobileMoneyApp')
   		};
 
   		service.SetBasicAuthKey = function(username, password){
+  			// did this because the request seems to expect json input
   			var loginCreds = {};
   			loginCreds.username = username;
   			loginCreds.password = password;
-  			console.log(loginCreds.username);
-  			console.log(loginCreds.password);
-  			var authKeyRequest = "https://localhost:8443" + prodApiUrl + "authentication?username="+ loginCreds.username + "&password=" + loginCreds.password + "&"+endUrl;
+  			
+  			var authKeyRequest = baseApiUrl + "authentication?username="+ loginCreds.username + "&password=" + loginCreds.password + "&"+endUrl;
   			console.log(authKeyRequest);
   			$http({
   				method: 'POST',
@@ -52,9 +51,8 @@ angular.module('mobileMoneyApp')
   				contentType: "application/json; charset=utf-8"
   			})
   			.success(function(data){
-  				// basicAuthKey = data.base64EncodedAuthenticationKey;
-  				// console.log("Basic auth key: " + basicAuthKey);
-  				console.log("Basic auth key: " + data);
+  				basicAuthKey = data.base64EncodedAuthenticationKey;
+  				return basicAuthKey;
   			})
   			.error(function(data){
   				console.log("Error with getting basic authentication key");
