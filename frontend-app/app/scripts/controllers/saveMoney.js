@@ -22,8 +22,9 @@ angular.module('mobileMoneyApp')
 
       // function to handle requests to the mobile money engine
       	$scope.saveMoneyRequest = function(clientId){
-	      	var srequestUrl = baseUrl + "?phone"+ $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId="+ clientId;
-          console.log(requestUrl);
+          $scope.accountId = "4904123";
+	      	var srequestUrl = baseUrl + "?phone="+ $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId="+ clientId + "&accountId=" + $scope.accountId;
+          console.log(srequestUrl);
           $http({
             method: "GET",
             url: srequestUrl

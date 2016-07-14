@@ -1,8 +1,7 @@
 package org.mifos.mmoney.api;
 
+import java.net.URISyntaxException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.mifos.mmoney.dao.TransactionDao;
 import org.mifos.mmoney.models.Transactions;
@@ -16,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+
+import utilities.HttpRequest;
 
 @RestController
 public class WithdrawalsController {
@@ -35,52 +35,46 @@ public class WithdrawalsController {
 	ResponseEntity<String> withdrawMoney(
 			@RequestParam(value="phone", required=true)long phoneNumber,
 			@RequestParam(value="amount", required=true) long amount,
-			@RequestParam(value="clientId", required=true)int clientID){
+			@RequestParam(value="clientId", required=true)int clientID,
+			@RequestParam(value="accountId", required=true)int accountID) throws URISyntaxException{
 		
 		/*
 		 * uri: URL for withdrawing money in the mobile money API
 		 * 
 		 */
-		/*int accountID = 12345678;
-		final String uri = "http://api.furthermarket.com/FM/MTN/MoMo/requestpayment"
-				+ "?MyaccountID={accountID}&CustomerPhonenumber={phoneNumber}&Amount={amount}";
+		// build uri from string and parameters
+		final String url = "http://api/furthermarket.com/FM/MTN/MoMo/Placepayment?MyaccountID"+accountID
+				+"&CustomerPhonenumber=237" + phoneNumber + "&Amount=" + amount + "&ItemDesignation=%22trans%22&ItemDescription=%22%22";
 		
-		
-		 * We now make a request to the Mobile money API
-		 * TODO: make request to Mobile Money API
-		 
-		
-		// Map to hold the parameters to be made with mobile money request
-		Map<String, String> params = new HashMap<>();
-				
-		// set parameter values
-		params.put("accountID", Long.toString(accountID)); // accountID here is the clients
-		params.put("phoneNumber", Long.toString(phoneNumber)); // phone number here is the MFI's account
-		params.put("amount", Long.toString(amount));
-				
-		RestTemplate restTemplate = new RestTemplate();
-		// make request and get result
-		String result = restTemplate.getForObject(uri, String.class);*/
-		
-		Transactions trans = new Transactions();
-		
-			
-		trans.setAmount((int) amount);
-		trans.setClient_id(clientID);
-		trans.setDate(new Date());
-		trans.setType("Withdrawal");
-		trans.setOffice(trans.getOffice());
-		trans.setStaff(trans.getStaff());
-		trans.setRecipient("null");
-			
-		// Making sure values are saved in the database.
 		try{
-			transDao.save(trans);
+			String response = HttpRequest.get(url).body();
+			System.out.println("result: " + response);
+			
+			/*
+			 * Since transaction was successfully  carried out save it to the database
+			 */
+			Transactions trans = new Transactions();
+
+			trans.setAmount((int) amount);
+			trans.setClient_id(clientID);
+			trans.setDate(new Date());
+			trans.setType("Withdrawal");
+			trans.setOffice(trans.getOffice());
+			trans.setStaff(trans.getStaff());
+			trans.setRecipient("null");
+				
+			// Making sure values are saved in the database.
+			try{
+				transDao.save(trans);
+			} catch(Exception ex){
+				System.out.println("Saving to database error in withdrawals: " + ex.getMessage());
+				return new ResponseEntity<String>("\"Error saving to database in withdrawals\"", HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			return new ResponseEntity<String>("\"Withdrawals success\"", HttpStatus.OK);
 		} catch(Exception ex){
-			System.out.println("Saving to database error in withdrawals: " + ex.getMessage());
-			return new ResponseEntity<String>("\"Withdrawals failure\"", HttpStatus.NOT_FOUND);
+			System.out.println("Error making request to Mobile money api.\nErrorMessage: " + ex.getMessage());
+			return new ResponseEntity<String>("\"Withdrawals failure\"", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<String>("\"Withdrawals success\"", HttpStatus.OK);
 	}
 
 	// Data repository.

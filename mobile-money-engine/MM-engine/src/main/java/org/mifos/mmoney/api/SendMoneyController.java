@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import utilities.HttpRequest;
+
 @RestController
 public class SendMoneyController {
 	
@@ -33,37 +35,46 @@ public class SendMoneyController {
 			@RequestParam(value="phone", required=true)long phoneNumber,
 			@RequestParam(value="amount", required=true) long amount,
 			@RequestParam(value="recipient", required=true)String recipient,
-			@RequestParam(value="clientId", required=true)int clientID){
-		
-		/*
-		 * uri: URL for withdrawing money in the mobile money API
-		 * 
-		 */
-		final String uri = "http://gturnquist-quoters.cfapps.io/api/random";
+			@RequestParam(value="clientId", required=true)int clientID,
+			@RequestParam(value="accountId", required=true)int accountID){
 		
 		/*
 		 * We now make a request to the Mobile money API
 		 * TODO: make request to Mobile Money API
 		 */
+		final String url = "http://api/furthermarket.com/FM/MTN/MoMo/Requestpayment?MyaccountID"+accountID
+				+"&CustomerPhonenumber=237" + phoneNumber + "&Amount=" + amount + "&ItemDesignation=%22trans%22&ItemDescription=%22%22";
 		
-		Transactions trans = new Transactions();
-			
-		trans.setAmount((int) amount);
-		trans.setClient_id(clientID);
-		trans.setDate(new Date());
-		trans.setType("Money transfer");
-		trans.setOffice(trans.getOffice());
-		trans.setStaff(trans.getStaff());
-		trans.setRecipient(recipient);
-			
-		// Making sure values are saved in the database.
+		
 		try{
-			transDao.save(trans);
+			String response = HttpRequest.get(url).body();
+			System.out.println("result: " + response);
+			
+			/*
+			 * Since transaction was successfully  carried out save it to the database
+			 */
+			Transactions trans = new Transactions();
+
+			trans.setAmount((int) amount);
+			trans.setClient_id(clientID);
+			trans.setDate(new Date());
+			trans.setType("Money Transfer");
+			trans.setOffice(trans.getOffice());
+			trans.setStaff(trans.getStaff());
+			trans.setRecipient(recipient);
+				
+			// Making sure values are saved in the database.
+			try{
+				transDao.save(trans);
+			} catch(Exception ex){
+				System.out.println("Saving to database error in sending money: " + ex.getMessage());
+				return new ResponseEntity<String>("\"Error saving to database in sending money\"", HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			return new ResponseEntity<String>("\"Savings success\"", HttpStatus.OK);
 		} catch(Exception ex){
-			System.out.println("Saving to database error in money transaction: " + ex.getMessage());
-			return new ResponseEntity<String>("\"Money transfer failure\"", HttpStatus.NOT_FOUND);
+			System.out.println("Error making request to Mobile money api.\nErrorMessage: " + ex.getMessage());
+			return new ResponseEntity<String>("\"Send money failure\"", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<String>("\"Money transfer success\"", HttpStatus.OK);
 	}
 	
 	// Data repository.

@@ -4,6 +4,11 @@
 angular.module('mobileMoneyApp')
   .controller('withMoneyCtrl', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
 
+      // show modal when client submits form
+      $(document).ready(function(){
+        $('.modal-trigger').leanModal();
+      });
+
         $scope.submitted = true;
         var baseUrl = "http://localhost:8090/api/v1/withdrawals";
 
@@ -21,14 +26,16 @@ angular.module('mobileMoneyApp')
 
       	// function to handle requests to the mobile money engine
       	$scope.withMoneyRequest = function(clientId){
-	      	var requestUrl = baseUrl + "?phone=" + $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId=" + clientId;
+          $scope.accountId = "4904123";
+	      	var requestUrl = baseUrl + "?phone=" + $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId=" + clientId + "&accountId=" + $scope.accountId;
           console.log(requestUrl);
           $http({
             method: "GET",
             url: requestUrl
           }).success(function(data){
             $scope.data = data;
-            console.log("data: " + $scope.data);
+            $('#withModal').closeModal();
+            console.log("Success with withdrawals: " + $scope.data);
           }).error(function(data){
             console.log("Error with withdrawals: " + data);
           });
