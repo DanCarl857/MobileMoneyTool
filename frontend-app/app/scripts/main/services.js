@@ -52,6 +52,7 @@ angular.module('mobileMoneyApp')
   			})
   			.success(function(data){
   				basicAuthKey = data.base64EncodedAuthenticationKey;
+  				console.log(basicAuthKey);
   				return basicAuthKey;
   			})
   			.error(function(data){

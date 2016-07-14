@@ -1,3 +1,64 @@
-<div>
-	
-</div>
+<div class="robotoReg" id="clientPageId">
+      <div class="row">
+        <div class="col s9">
+         <div class="row">
+            <span class="medText" style="font-size: 40px">Carlson, Daniel</span>&nbsp;&nbsp;<span class="nameStyle robotoLight">Client#: 1234567</span> &nbsp;&nbsp;<span style="font-size: 12px;">|</span>&nbsp;&nbsp;<span class="nameStyle robotoLight">Assigned Staff: Marcus Brody</span>
+          </div>
+          <div class="row withMBox">
+            <form class="col s8" name="loanForm" ng-submit="submitForm(loanForm.$valid)" novalidate>
+              <div class="row" style="text-align: center;">
+                <span class="xlargeText robotoLight withHHead" style="color: #ffa726 !important;">Repay Loans using MM Account</span>
+              </div>
+              <div class="row">
+              	<div class="col s6">
+                	<span class="largeText robotoReg">Current Balance: 65000</span>
+                </div>
+                <div class="col s6">
+                	<span class="largeText robotoReg" style="color: red">Current loans: 5000</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field" ng-class="{'has-error': loanForm.amount.$invalid && !loanForm.amount.$pristine }">
+                  <i class="material-icons prefix">attach_money</i>
+                  <input name="amount" id="icon_prefix" ng-model="amount" type="number" ng-minlength="3" required>
+                  <label for="icon_prefix">Enter Amount</label>
+                  <p ng-show="(loanForm.amount.$invalid && !loanForm.amount.$pristine) && submitted" class="errorMsg">Amount is required.</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field" ng-class="{ 'has-error': loanForm.phone.$invalid && !loanForm.phone.$pristine }">
+                  <i class="material-icons prefix">phone</i>
+                  <input name="phone" type="number" id="phoneNumber" ng-model="phoneNumber" ng-minlength="8" required>
+                  <label for="icon_prefix">Phone Number</label>
+                  <p ng-show="loanForm.phone.$error.minlength && submitted" class="errorMsg">Phone number is too short.</p>
+                  <p ng-show="(loanForm.phone.$invalid && !loanForm.phone.$pristine) && submitted" class="errorMsg">Phone number is required.</p>
+                </div>
+              </div>
+              <br><br>
+              <div class="row">
+                  <a class="btn waves-effect waves-light black left" ng-click="goBack()">Cancel<i class="material-icons right">clear</i></a>
+                  <button class="btn waves-effect waves-light orange lighten-1 right">Submit<i class="material-icons right">send</i></button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col s3 resetSize">
+          <div class="clientBox">
+            <div class="row clientImg">
+              <span><img src="images/client-image-placeholder.png"></span>
+            </div>
+            <div class="row summaryInfo">
+              <div class="sumHead" style="text-align: center;">Client information</div><br>
+              <span>Activation Date: 27th May 2016</span><br><br>
+              <span>Current Account Balance: 65000</span><br><br>
+              <span>Staff Member: Jack Ryan</span><br><br>
+              <span>Gender: Male</span><br><br>
+              <span>Client Type: Footballer</span><br><br>
+              <span>Client Classification: Gold</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  
