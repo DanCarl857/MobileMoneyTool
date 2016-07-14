@@ -2,13 +2,13 @@
 /*global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('mainCtrl', ['$scope', 'dataService', 'AuthenticationService', function ($scope, dataService, AuthenticationService) {
+  .controller('mainCtrl', ['$scope', 'dataService', 'AuthenticationService', '$rootScope', function ($scope, dataService, AuthenticationService) {
 
       $scope.clients; 
       $scope.status = null;
       var basicKey = '';
 
-      basicKey = AuthenticationService.SetBasicAuthKey('mifos', 'password');
+      // basicKey = AuthenticationService.SetBasicAuthKey('mifos', 'password');
       console.log("Basic Key: " + basicKey);
 
       $scope.getClients = function(){
@@ -23,14 +23,4 @@ angular.module('mobileMoneyApp')
       };
 
       $scope.getClients();
-
-      $scope.testAuth = function(){
-          //loginService.getBasicKey("mifos", "password");
-            
-          //loginService.setAuthorization();
-          //loginService.test();
-      };
-
-      console.log("Testing now: ");
-      $scope.testAuth();
   }]);
