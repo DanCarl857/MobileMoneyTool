@@ -4,23 +4,7 @@
 angular.module('mobileMoneyApp')
   .controller('mainCtrl', ['$rootScope', '$http', '$scope', 'dataService', function ($scope, $http, dataService) {
 
-      $scope.clients = [];
       $scope.totalClients = 0;
-      $scope.status = null;
-      var basicKey = '';
-
-      /*$scope.getClients = function(){
-        dataService.getAllClients()
-          .then(function(response){
-            console.log(response.data);
-            $scope.clients = response.data;
-          }, function(error){
-            $scope.status = "Unable to load client data: " + error.message;
-            console.log($scope.status);
-          })
-      };
-
-      $scope.getClients();*/
 
       var service = {};
       var baseApiUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
@@ -55,11 +39,8 @@ angular.module('mobileMoneyApp')
               .success(function(data){
                 $scope.data = data.pageItems;
                 $scope.totalClients = data.totalFilteredRecords;
-
-                var keys = [];
-                for(var i = 0; i < $scope.totalClients; i++){
+                for(var i = 0; i < 5; i++){
                   var obj = $scope.data[i];
-                  keys.push(obj);
                   for(var key in obj){
                     var name = obj["displayName"];
                     var id = obj["id"];

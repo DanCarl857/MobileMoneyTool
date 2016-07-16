@@ -2,6 +2,8 @@ package org.mifos.mmoney.api;
 
 import java.net.URISyntaxException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.mifos.mmoney.dao.TransactionDao;
 import org.mifos.mmoney.models.Transactions;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import utilities.HttpRequest;
 
@@ -43,11 +46,21 @@ public class WithdrawalsController {
 		 * 
 		 */
 		// build uri from string and parameters
-		final String url = "http://api/furthermarket.com/FM/MTN/MoMo/Placepayment?MyaccountID"+accountID
-				+"&CustomerPhonenumber=237" + phoneNumber + "&Amount=" + amount + "&ItemDesignation=%22trans%22&ItemDescription=%22%22";
+		final String url = "http://api.furthermarket.com/FM/MTN/MoMo/Placepayment?MyaccountID={accountNo}&CustomerPhonenumber=237{phone}&Amount={amount}&ItemDesignation=%22trans%22&ItemDescription=%22%22";
 		
+		Map<String, String> params = new HashMap<String, String>();
+		
+		params.put("accountNo", String.valueOf(accountID));
+		params.put("phone", String.valueOf(phoneNumber));
+		params.put("amount", String.valueOf(amount));
+		 
+	    RestTemplate restTemplate = new RestTemplate();
+	    String response = restTemplate.getForObject(url, String.class, params);
+	    System.out.println("result: " + response);
+		
+	    
 		try{
-			String response = HttpRequest.get(url).body();
+			// String response1 = HttpRequest.get(url).body();
 			System.out.println("result: " + response);
 			
 			/*
