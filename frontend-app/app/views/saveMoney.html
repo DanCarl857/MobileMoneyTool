@@ -15,7 +15,7 @@
               <div class="row">
                 <div class="input-field" ng-class="{'has-error': saveForm.amount.$invalid && !saveForm.amount.$pristine }">
                   <i class="material-icons prefix">attach_money</i>
-                  <input name="amount" id="icon_prefix" type="number" ng-model="amount" ng-minlength="3" required>
+                  <input name="amount" id="icon_prefix" type="number" ng-model="amount" ng-minlength="1" required>
                   <label for="icon_prefix">Enter Amount</label>
                    <p ng-show="(saveForm.amount.$invalid && !saveForm.amount.$pristine) && submitted" class="errorMsg">Amount is required.</p>
                 </div>
@@ -37,6 +37,17 @@
             </form>
           </div>
         </div>
+        <!-- Modal Structure -->
+          <div id="sendMoneyModal" class="modal">
+              <div class="modal-content">
+                <h3 class="robotoThin">Please wait....Processing request</h3>
+              </div>
+              <div class="modal-footer">
+                <div class="progress">
+                  <div class="indeterminate"></div>
+                </div>
+              </div>
+          </div>
         <div class="col s3 resetSize">
           <div class="clientBox">
             <div class="row clientImg">

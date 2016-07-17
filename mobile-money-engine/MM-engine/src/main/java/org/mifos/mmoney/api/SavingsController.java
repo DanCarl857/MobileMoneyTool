@@ -1,10 +1,11 @@
 package org.mifos.mmoney.api;
 
 import org.springframework.web.bind.annotation.RestController;
-
-import utilities.HttpRequest;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.mifos.mmoney.dao.TransactionDao;
 import org.mifos.mmoney.models.Transactions;
@@ -37,13 +38,18 @@ public class SavingsController {
 		 * uri: URL saving money in the mobile money API
 		 * TODO: make this generic. So this can be changed from front end application
 		 */
-		final String url = "http://api/furthermarket.com/FM/MTN/MoMo/Requestpayment?MyaccountID"+accountID
-				+"&CustomerPhonenumber=237" + phoneNumber + "&Amount=" + amount + "&ItemDesignation=%22trans%22&ItemDescription=%22%22";
+		final String url = "http://api.furthermarket.com/FM/MTN/MoMo/Requestpayment?MyaccountID={accountNo}&CustomerPhonenumber=237{phone}&Amount={amount}&ItemDesignation=%22trans%22&ItemDescription=%22%22";
 		
+		Map<String, String> params = new HashMap<String, String>();
+		
+		params.put("accountNo", String.valueOf(accountID));
+		params.put("phone", String.valueOf(phoneNumber));
+		params.put("amount", String.valueOf(amount));
 		
 		try{
-			String response = HttpRequest.get(url).body();
-			System.out.println("result: " + response);
+			RestTemplate restTemplate = new RestTemplate();
+		    String response = restTemplate.getForObject(url, String.class, params);
+			System.out.println("Savings result: " + response);
 			
 			/*
 			 * Since transaction was successfully  carried out save it to the database

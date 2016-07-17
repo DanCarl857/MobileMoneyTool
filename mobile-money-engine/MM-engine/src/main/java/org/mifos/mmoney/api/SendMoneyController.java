@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import utilities.HttpRequest;
 
 @RestController
 public class SendMoneyController {
@@ -45,20 +44,17 @@ public class SendMoneyController {
 		 * We now make a request to the Mobile money API
 		 * TODO: make request to Mobile Money API
 		 */
-		final String url = "http://api.furthermarket.com/FM/MTN/MoMo/Requestpayment?MyaccountID="+accountID
-				+"&CustomerPhonenumber=237" + phoneNumber + "&Amount=" + amount + "&ItemDesignation=%22%22&ItemDescription=%22%22";
+		final String url = "http://api.furthermarket.com/FM/MTN/MoMo/Requestpayment?MyaccountID={accountNo}&CustomerPhonenumber=237{phone}&Amount={amount}&ItemDesignation=%22trans%22&ItemDescription=%22%22";
 		
-		final String uri = "http://api.furthermarket.com/FM/MTN/MoMo/Requestpayment?MyaccoundID=" + accountID
-				+ "&CustomerPhoneNumber=237" + phoneNumber + "&Amount=" + amount + "&ItemDesignation=%22%%22%&ItemDescription=%22%22";
-	     
-	    Map<String, String> params = new HashMap<String, String>();
-	    params.put("id", "1");
-	     
-	    RestTemplate restTemplate = new RestTemplate();
-	    String response = restTemplate.getForObject(url, String.class);
+		Map<String, String> params = new HashMap<String, String>();
+		
+		params.put("accountNo", String.valueOf(accountID));
+		params.put("phone", String.valueOf(phoneNumber));
+		params.put("amount", String.valueOf(amount));
 		
 		try{
-			String response1 = HttpRequest.get(url).body();
+			RestTemplate restTemplate = new RestTemplate();
+		    String response = restTemplate.getForObject(url, String.class, params);
 			System.out.println("result: " + response);
 			
 			/*

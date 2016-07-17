@@ -2,7 +2,12 @@
 /*global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('withMoneyCtrl', ['$scope', '$http', '$timeout', function ($scope, $http, $timeout) {
+  .controller('withMoneyCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', 
+    function ($scope, $http, $timeout, $stateParams, $state) {
+
+      // client's details
+      var clientId = $stateParams.id;
+      console.log(clientId);
 
       // show modal when client submits form
       $(document).ready(function(){
@@ -17,7 +22,7 @@ angular.module('mobileMoneyApp')
           // Check to make sure the form is completely valid
           if($scope.withForm.$valid){
             $scope.submitted = false;
-            $scope.withMoneyRequest(12345678);
+            $scope.withMoneyRequest(clientId);
           }
         };
         
@@ -26,6 +31,12 @@ angular.module('mobileMoneyApp')
 
       	// function to handle requests to the mobile money engine
       	$scope.withMoneyRequest = function(clientId){
+          // open the modal
+          $('#withModal').openModal({
+            dismissible: false,
+            opacity: '.5'
+          });
+
           $scope.accountId = "4904123";
 	      	var requestUrl = baseUrl + "?phone=" + $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId=" + clientId + "&accountId=" + $scope.accountId;
           console.log(requestUrl);
@@ -34,12 +45,24 @@ angular.module('mobileMoneyApp')
             url: requestUrl
           }).success(function(data){
             $scope.data = data;
-            $('#withModal').closeModal();
             console.log("Success with withdrawals: " + $scope.data);
+
+            // close the modal and clean up 
+            Materialize.toast('Transaction successful', 6000, 'rounded');
+            $scope.cleanUp();
           }).error(function(data){
-            console.log("Error with withdrawals: " + data);
+            // close the modal and clean up 
+            Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
+            $scope.cleanUp();
           });
       	};
+
+        // function to clean up
+        $scope.cleanUp = function(){
+          $('#withModal').closeModal();
+          $scope.amount = '';
+          $scope.phoneNumber = '';
+        };
 
         // function to go back to source page
         $scope.goBack = function(){

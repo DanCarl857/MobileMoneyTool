@@ -13,58 +13,48 @@
             </div>
           </form>
         </div>
-        <div class="row">
+        <div class="row col s12">
           <table class="responsive-table bordered tableStyle" style="overflow: auto;">
               <thead>
-                <tr>
-                    <th data-field="id">ID</th>
+                <tr class="graybg">
                     <th data-field="name">Name</th>
-                    <th data-field="externalId">External Id</th>
-                    <th data-field="office">Office</th>
-                    <th data-field="staff">Staff</th>
+                    <th data-field="clientno">Client #</th>
+                    <th data-field="externalId" class="table-width">External Id</th>
+                    <th data-field="status" class="table-width">Status</th>
+                    <th data-field="office" class="table-width">Office</th>
+                    <th data-field="staff" class="table-width">Staff</th>
                 </tr>
               </thead>
-
-              <tbody class="clientInfo">
-                
-                <tr>
-                  <td><a ui-sref="clientPage({id: 1})" href="#/client/1">1</a></td>
-                  <td><a ui-sref="clientPage({id: 1})" href="#/client/1">Daniel Carlson</a></td>
-                  <td><a ui-sref="clientPage({id: 1})" href="#/client/1">123456789</a></td>
-                  <td><a ui-sref="clientPage({id: 1})" href="#/client/1">Head Office</a></td>
-                  <td><a ui-sref="clientPage({id: 1})" href="#/client/1">Mark Ryan</a></td>
-                </tr>
-                
-                <tr>
-                  <td><a ui-sref="clientPage({id: 2})" href="#/client/2">2</a></td>
-                  <td><a ui-sref="clientPage({id: 2})" href="#/client/2">Charlize Theron</a></td>
-                  <td><a ui-sref="clientPage({id: 2})" href="#/client/2">123456789</a></td>
-                  <td><a ui-sref="clientPage({id: 2})" href="#/client/2">Head Office</a></td>
-                  <td><a ui-sref="clientPage({id: 2})" href="#/client/2">Daniel Ryan</a></td>
-                </tr>
-                <tr>
-                   <td><a ui-sref="clientPage({id: 3})" href="#/client/3">3</a></td>
-                  <td><a ui-sref="clientPage({id: 3})" href="#/client/3">Jackson Marcus</a></td>
-                  <td><a ui-sref="clientPage({id: 3})" href="#/client/3">123456789</a></td>
-                  <td><a ui-sref="clientPage({id: 3})" href="#/client/3">Head Office</a></td>
-                  <td><a ui-sref="clientPage({id: 3})" href="#/client/3">Daniel Mikael</a></td>
-                </tr>
-                <tr>
-                   <td><a ui-sref="clientPage({id: 4})" href="#/client/4">4</a></td>
-                  <td><a ui-sref="clientPage({id: 4})" href="#/client/4">Liam Jackwell</a></td>
-                  <td><a ui-sref="clientPage({id: 4})" href="#/client/4">123456789</a></td>
-                  <td><a ui-sref="clientPage({id: 4})" href="#/client/4">Head Office</a></td>
-                  <td><a ui-sref="clientPage({id: 4})" href="#/client/4">Sophia Boseman</a></td>
-                </tr>
-                <tr>
-                   <td><a ui-sref="clientPage({id: 5})" href="#/client/5">5</a></td>
-                  <td><a ui-sref="clientPage({id: 5})" href="#/client/5">Marcus Brody</a></td>
-                  <td><a ui-sref="clientPage({id: 5})" href="#/client/5">123456789</a></td>
-                  <td><a ui-sref="clientPage({id: 5})" href="#/client/5">Head Office</a></td>
-                  <td><a ui-sref="clientPage({id: 5})" href="#/client/5">Chadwick Seth</a></td>
+              <tbody class="clientInfo" ng-hide="loading">
+                <tr ng-repeat="client in clients">
+                  <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.displayName}}</a></td>
+                  <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.accountNo}}</a></td>
+                  <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.externalId}}</a></td>
+                  <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">
+                    <i class="tiny material-icons prefix" ng-class="client.active ? 'icon-green' : 'icon-red'">stop</i>&nbsp;{{client.status.value}}
+                    <small ng-if="client.subStatus.description">[{{client.subStatus.description}}]</small>
+                    </a>
+                  </td>
+                  <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.officeName}}</a></td>
+                  <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.staffName}}</td>
                 </tr>
               </tbody>
             </table>
+             <!-- spinner -->
+              <div class="sk-fading-circle spinner" ng-show="loading">
+                <div class="sk-circle1 sk-circle"></div>
+                <div class="sk-circle2 sk-circle"></div>
+                <div class="sk-circle3 sk-circle"></div>
+                <div class="sk-circle4 sk-circle"></div>
+                <div class="sk-circle5 sk-circle"></div>
+                <div class="sk-circle6 sk-circle"></div>
+                <div class="sk-circle7 sk-circle"></div>
+                <div class="sk-circle8 sk-circle"></div>
+                <div class="sk-circle9 sk-circle"></div>
+                <div class="sk-circle10 sk-circle"></div>
+                <div class="sk-circle11 sk-circle"></div>
+                <div class="sk-circle12 sk-circle"></div>
+              </div>
         </div>
       </div>
   </div>

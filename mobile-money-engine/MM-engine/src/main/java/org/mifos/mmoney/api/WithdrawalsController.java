@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import utilities.HttpRequest;
 
 @RestController
 public class WithdrawalsController {
@@ -46,23 +45,19 @@ public class WithdrawalsController {
 		 * 
 		 */
 		// build uri from string and parameters
-		final String url = "http://api.furthermarket.com/FM/MTN/MoMo/Placepayment?MyaccountID={accountNo}&CustomerPhonenumber=237{phone}&Amount={amount}&ItemDesignation=%22trans%22&ItemDescription=%22%22";
+		final String url = "http://api.furthermarket.com/FM/MTN/MoMo/Requestpayment?MyaccountID={accountNo}&CustomerPhonenumber=237{phone}&Amount={amount}&ItemDesignation=%22trans%22&ItemDescription=%22%22";
 		
 		Map<String, String> params = new HashMap<String, String>();
 		
 		params.put("accountNo", String.valueOf(accountID));
 		params.put("phone", String.valueOf(phoneNumber));
 		params.put("amount", String.valueOf(amount));
-		 
-	    RestTemplate restTemplate = new RestTemplate();
-	    String response = restTemplate.getForObject(url, String.class, params);
-	    System.out.println("result: " + response);
 		
 	    
 		try{
-			// String response1 = HttpRequest.get(url).body();
-			System.out.println("result: " + response);
-			
+			RestTemplate restTemplate = new RestTemplate();
+		    String response = restTemplate.getForObject(url, String.class, params);
+		    System.out.println("result: " + response);
 			/*
 			 * Since transaction was successfully  carried out save it to the database
 			 */
