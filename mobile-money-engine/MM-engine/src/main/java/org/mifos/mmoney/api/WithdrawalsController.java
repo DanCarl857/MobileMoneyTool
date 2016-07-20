@@ -42,7 +42,6 @@ public class WithdrawalsController {
 		
 		/*
 		 * uri: URL for withdrawing money in the mobile money API
-		 * 
 		 */
 		// build uri from string and parameters
 		final String url = "http://api.furthermarket.com/FM/MTN/MoMo/Requestpayment?MyaccountID={accountNo}&CustomerPhonenumber=237{phone}&Amount={amount}&ItemDesignation=%22trans%22&ItemDescription=%22%22";
