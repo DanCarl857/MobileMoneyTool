@@ -31,7 +31,7 @@ angular.module('mobileMoneyApp')
 
         $scope.sendMoneyRequest = function(clientId){
           // open the modal
-          $('#withModal').openModal({
+          $('#sendMoneyModal').openModal({
             dismissible: false,
             opacity: '.5'
           });
