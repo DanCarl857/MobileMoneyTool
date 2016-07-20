@@ -6,8 +6,79 @@ angular.module('mobileMoneyApp')
     function ($scope, $http, $timeout, $stateParams, $state) {
 
       // client's details
-      var clientId = $stateParams.id;
-      console.log(clientId);
+      $scope.clientId = $stateParams.id;
+      $scope.clientNo = '';
+      $scope.clientName = '';
+      $scope.staffName = '';
+      console.log($scope.clientId + " " + $scope.clientName);
+      $scope.loading = true;
+
+      var baseApiUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
+      var endUrl = "tenantIdentifier=default";
+
+      /* =================================================================== */
+      var basicAuthKey;
+
+        var loginCreds = {};
+        loginCreds.username = "mifos";
+        loginCreds.password = "password";
+
+        $scope.clientsPerPage = 15;
+
+        var config = {
+          cache: false,
+          dataType: 'json',
+          contentType: "application/json; charset=utf-8"
+        };
+        
+        var authKeyRequest = baseApiUrl + "authentication?username="+ loginCreds.username + "&password=" + loginCreds.password + "&"+endUrl;
+        console.log(authKeyRequest);
+
+        $http.post(authKeyRequest, config)
+          .success(function(data){
+            basicAuthKey = data.base64EncodedAuthenticationKey;
+            console.log("key in main: "+ basicAuthKey);
+
+            // set authorization in header
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + basicAuthKey;
+
+            // make request to get client's information 
+            var getClientDetails = baseApiUrl + "clients/" + $scope.clientId;
+          console.log(getClientDetails);
+
+        $http({
+          method: "GET",
+          url: getClientDetails
+        }).success(function(data){
+          $scope.data = data;
+          $scope.clientName = $scope.data.displayName;
+          $scope.accountNo = $scope.data.accountNo;
+          $scope.staffName = $scope.data.staffName;
+          $scope.activationDate = $scope.data.activationDate;
+          $scope.officeName = $scope.data.officeName;
+          $scope.userName = $scope.data.timeline.activatedByUsername;
+          console.log("test data: "+ $scope.userName);
+
+          // now get the client's account details
+          var getClientAccountInfo = baseApiUrl + "clients/" + $scope.clientId + "/accounts";
+          console.log(getClientAccountInfo);
+
+          $http({
+            method: "GET",
+            url: getClientAccountInfo
+          }).success(function(response){
+              // get and display client account details here
+          });
+
+          $scope.loading = false;
+        }).error(function(data){
+          console.log("Error retrieving client data");
+        });
+      }).error(function(data){
+        console.log("Error authenticating in client_page");
+      });
+
+          /* ====================================================== */
 
       // show modal when client submits form
       $(document).ready(function(){
