@@ -68,6 +68,7 @@ angular.module('mobileMoneyApp')
             url: getClientAccountInfo
           }).success(function(response){
               // get and display client account details here
+
           });
 
           $scope.loading = false;
