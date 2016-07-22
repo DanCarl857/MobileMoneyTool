@@ -4,6 +4,8 @@
 angular.module('mobileMoneyApp')
   .controller('withMoneyCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', 
     function ($scope, $http, $timeout, $stateParams, $state) {
+		
+	 /* TODO: redo logic to match the correct one */
 
       // client's details
       $scope.clientId = $stateParams.id;
@@ -11,6 +13,8 @@ angular.module('mobileMoneyApp')
       $scope.clientName = '';
       $scope.staffName = '';
       console.log($scope.clientId + " " + $scope.clientName);
+
+      // show spinner
       $scope.loading = true;
 
       var baseApiUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
@@ -34,6 +38,7 @@ angular.module('mobileMoneyApp')
         var authKeyRequest = baseApiUrl + "authentication?username="+ loginCreds.username + "&password=" + loginCreds.password + "&"+endUrl;
         console.log(authKeyRequest);
 
+        // authentication
         $http.post(authKeyRequest, config)
           .success(function(data){
             basicAuthKey = data.base64EncodedAuthenticationKey;
@@ -44,32 +49,33 @@ angular.module('mobileMoneyApp')
 
             // make request to get client's information 
             var getClientDetails = baseApiUrl + "clients/" + $scope.clientId;
-          console.log(getClientDetails);
+          	console.log(getClientDetails);
 
-        $http({
-          method: "GET",
-          url: getClientDetails
-        }).success(function(data){
-          $scope.data = data;
-          $scope.clientName = $scope.data.displayName;
-          $scope.accountNo = $scope.data.accountNo;
-          $scope.staffName = $scope.data.staffName;
-          $scope.activationDate = $scope.data.activationDate;
-          $scope.officeName = $scope.data.officeName;
-          $scope.userName = $scope.data.timeline.activatedByUsername;
-          console.log("test data: "+ $scope.userName);
+        	// getting client details
+        	$http({
+          	  method: "GET",
+          	  url: getClientDetails
+        	}).success(function(data){
+          	$scope.data = data;
+          	$scope.clientName = $scope.data.displayName;
+          	$scope.accountNo = $scope.data.accountNo;
+          	$scope.staffName = $scope.data.staffName;
+          	$scope.activationDate = $scope.data.activationDate;
+          	$scope.officeName = $scope.data.officeName;
+          	$scope.userName = $scope.data.timeline.activatedByUsername;
+          	console.log("test data: "+ $scope.userName);
 
-          // now get the client's account details
-          var getClientAccountInfo = baseApiUrl + "clients/" + $scope.clientId + "/accounts";
-          console.log(getClientAccountInfo);
+          	// now get the client's account details
+          	var getClientAccountInfo = baseApiUrl + "clients/" + $scope.clientId + "/accounts";
+          	console.log(getClientAccountInfo);
 
-          $http({
-            method: "GET",
-            url: getClientAccountInfo
-          }).success(function(response){
+          	$http({
+            	method: "GET",
+            	url: getClientAccountInfo
+          	}).success(function(response){
               // get and display client account details here
-
-          });
+              
+          	});
 
           $scope.loading = false;
         }).error(function(data){
@@ -109,6 +115,7 @@ angular.module('mobileMoneyApp')
             opacity: '.5'
           });
 
+          // request to mobile money engine
           $scope.accountId = "4904123";
 	      	var requestUrl = baseUrl + "?phone=" + $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId=" + clientId + "&accountId=" + $scope.accountId;
           console.log(requestUrl);
