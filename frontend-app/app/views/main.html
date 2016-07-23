@@ -18,42 +18,31 @@
               <thead>
                 <tr class="graybg">
                     <th data-field="name">Name</th>
-                    <th data-field="clientno">Client #</th>
-                    <th data-field="externalId" class="table-width">External Id</th>
-                    <th data-field="status" class="table-width">Status</th>
-                    <th data-field="office" class="table-width">Office</th>
-                    <th data-field="staff" class="table-width">Staff</th>
+                    <th data-field="client">Client #</th>
+					<th data-field="status">Status</th>
+                    <th data-field="externalId">External Id</th>
+                    <th data-field="office">Office</th>
+                    <th data-field="staff">Staff</th>
                 </tr>
               </thead>
               <tbody class="clientInfo" ng-hide="loading">
                 <tr ng-repeat="client in clients">
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.displayName}}</a></td>
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.accountNo}}</a></td>
-                  <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.externalId}}</a></td>
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">
                     <i class="tiny material-icons prefix" ng-class="client.active ? 'icon-green' : 'icon-red'">stop</i>&nbsp;{{client.status.value}}
                     <small ng-if="client.subStatus.description">[{{client.subStatus.description}}]</small>
                     </a>
                   </td>
+                  <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.externalId}}</a></td>
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.officeName}}</a></td>
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.staffName}}</td>
                 </tr>
               </tbody>
             </table>
              <!-- spinner -->
-              <div class="sk-fading-circle spinner" ng-show="loading">
-                <div class="sk-circle1 sk-circle"></div>
-                <div class="sk-circle2 sk-circle"></div>
-                <div class="sk-circle3 sk-circle"></div>
-                <div class="sk-circle4 sk-circle"></div>
-                <div class="sk-circle5 sk-circle"></div>
-                <div class="sk-circle6 sk-circle"></div>
-                <div class="sk-circle7 sk-circle"></div>
-                <div class="sk-circle8 sk-circle"></div>
-                <div class="sk-circle9 sk-circle"></div>
-                <div class="sk-circle10 sk-circle"></div>
-                <div class="sk-circle11 sk-circle"></div>
-                <div class="sk-circle12 sk-circle"></div>
+              <div class="spinner" ng-show="loading">
+                <img src="images/cubic_loader.gif">
               </div>
         </div>
       </div>

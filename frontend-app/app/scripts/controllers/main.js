@@ -2,8 +2,9 @@
 /*global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('mainCtrl', ['$rootScope', '$http', '$scope', 'dataService', function ($scope, $http, dataService) {
-
+  .controller('mainCtrl', ['$rootScope', '$http', '$scope', 
+	function ($scope, $http) {
+		
       $scope.totalClients = 0;
       $scope.clients = [];
 

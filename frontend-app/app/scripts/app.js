@@ -41,6 +41,18 @@ angular
         templateUrl: 'views/saveMoney.html',
         controller: 'saveMoneyCtrl'
       })
+	  
+	  .state('processSavings', {
+		  url: '/processSavings',
+		  templateUrl: 'processSave.htm',
+		  controller: 'processSaveCtrl'
+	  })
+	  
+	  .state('processWithdrawals', {
+	  	  url: '/processWithdrawals',
+		  templateUrl: 'processWith.htm',
+		  controller: 'processWithCtrl'
+	  })
 
       .state('sendMoney', {
         url: '/sendMoney/:id',
