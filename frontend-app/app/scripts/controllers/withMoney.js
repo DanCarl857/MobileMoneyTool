@@ -12,7 +12,14 @@ angular.module('mobileMoneyApp')
       $scope.clientNo = '';
       $scope.clientName = '';
       $scope.staffName = '';
-      console.log($scope.clientId + " " + $scope.clientName);
+ 	  $scope.loanAccounts = [];
+	  $scope.savingsAccounts = [];
+	  
+      $scope.amount = '';
+      $scope.phoneNumber = '';
+	  
+	  $scope.accountBalance = "";
+	  $scope.bal = "";
 
       // show spinner
       $scope.loading = true;
@@ -21,13 +28,10 @@ angular.module('mobileMoneyApp')
       var endUrl = "tenantIdentifier=default";
 
       /* =================================================================== */
-      var basicAuthKey;
-
+      	var basicAuthKey;
         var loginCreds = {};
         loginCreds.username = "mifos";
         loginCreds.password = "password";
-
-        $scope.clientsPerPage = 15;
 
         var config = {
           cache: false,
@@ -36,14 +40,11 @@ angular.module('mobileMoneyApp')
         };
         
         var authKeyRequest = baseApiUrl + "authentication?username="+ loginCreds.username + "&password=" + loginCreds.password + "&"+endUrl;
-        console.log(authKeyRequest);
 
         // authentication
         $http.post(authKeyRequest, config)
           .success(function(data){
             basicAuthKey = data.base64EncodedAuthenticationKey;
-            console.log("key in main: "+ basicAuthKey);
-
             // set authorization in header
             $http.defaults.headers.common['Authorization'] = 'Basic ' + basicAuthKey;
 
@@ -73,11 +74,13 @@ angular.module('mobileMoneyApp')
             	method: "GET",
             	url: getClientAccountInfo
           	}).success(function(response){
-              // get and display client account details here
-              
+              	// get and display client account details here
+				$scope.loanAccounts = response.loanAccounts;
+				$scope.savingsAccounts = response.savingsAccounts;
+				$scope.savingsLength = $scope.savingsAccounts.length;
+				$scope.loanLength = $scope.loanAccounts.length;
+				$scope.loading = false;
           	});
-
-          $scope.loading = false;
         }).error(function(data){
           console.log("Error retrieving client data");
         });
@@ -90,6 +93,7 @@ angular.module('mobileMoneyApp')
       // show modal when client submits form
       $(document).ready(function(){
         $('.modal-trigger').leanModal();
+		$('.collapsible').collapsible();
       });
 
         $scope.submitted = true;
@@ -103,9 +107,13 @@ angular.module('mobileMoneyApp')
             $scope.withMoneyRequest(clientId);
           }
         };
-        
-        $scope.amount = '';
-        $scope.phoneNumber = '';
+		
+		// function to set account balance for savings account chosen
+		$scope.setBalance = function(balance){
+			console.log("Debit clicked");
+			console.log("bal: "+ balance);
+			$scope.accountBalance = balance;
+		}
 
       	// function to handle requests to the mobile money engine
       	$scope.withMoneyRequest = function(clientId){
@@ -147,4 +155,8 @@ angular.module('mobileMoneyApp')
         $scope.goBack = function(){
           window.history.back();
         };
-  }]);
+  }])
+  .controller('processWithCtrl', ['$scope', '$http', '$stateParams', '$state',
+  	function($scope, $http, $stateParams, $state){
+  	
+  }])

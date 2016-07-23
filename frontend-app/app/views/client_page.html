@@ -1,18 +1,7 @@
 <div class="robotoReg" id="clientPageId">
        <!-- spinner -->
         <div class="sk-fading-circle spinner" ng-show="loading">
-          <div class="sk-circle1 sk-circle"></div>
-          <div class="sk-circle2 sk-circle"></div>
-          <div class="sk-circle3 sk-circle"></div>
-          <div class="sk-circle4 sk-circle"></div>
-          <div class="sk-circle5 sk-circle"></div>
-          <div class="sk-circle6 sk-circle"></div>
-          <div class="sk-circle7 sk-circle"></div>
-          <div class="sk-circle8 sk-circle"></div>
-          <div class="sk-circle9 sk-circle"></div>
-          <div class="sk-circle10 sk-circle"></div>
-          <div class="sk-circle11 sk-circle"></div>
-          <div class="sk-circle12 sk-circle"></div>
+		  <img src="images/cubic_loader.gif">
         </div>
       <div class="row" ng-hide="loading">
         <div class="col s8">
@@ -21,13 +10,13 @@
           </div>
           <div class="row">
             <div class="row">
-              <a class="btn-large waves-effect waves-light  yellow lighten-1" ui-sref="withdrawMoney({id: (clientId), name: (clientName)})" href="#/withMoney/{{clientId}}" style="color: rgba(0, 0, 0, 0.6)">Withdraw Money from MM account<i class="material-icons right">eject</i></a>
+              <a class="btn-large waves-effect waves-light  yellow lighten-1" ui-sref="withdrawMoney({id: (clientId), name: (clientName)})" href="#/withMoney/{{clientId}}" style="color: rgba(0, 0, 0, 0.6)">Withdraw Money Into MM account<i class="material-icons right">eject</i></a>
             </div>
             <div class="row">
               <a class="btn-large waves-effect waves-light orange lighten-1" href="#/loans/{{clientId}}">Loan Repayments<i class="material-icons right">receipt</i></a>
             </div>
             <div class="row">
-              <a class="btn-large waves-effect waves-light blue lighten-1" href="#/saveMoney/{{clientId}}">Save Money into MM account<i class="material-icons right">payment</i></a>
+              <a class="btn-large waves-effect waves-light blue lighten-1" href="#/saveMoney/{{clientId}}">Save Money From MM account<i class="material-icons right">payment</i></a>
             </div>
             <div class="row">
               <a class="btn-large waves-effect waves-light teal darken-2" href="#/sendMoney/{{clientId}}">Send Money through MM account<i class="material-icons right">reply</i></a>

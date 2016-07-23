@@ -1,31 +1,43 @@
 <div class="robotoReg" id="clientPageId">
       <!-- spinner -->
-        <div class="sk-fading-circle spinner" ng-show="loading">
-          <div class="sk-circle1 sk-circle"></div>
-          <div class="sk-circle2 sk-circle"></div>
-          <div class="sk-circle3 sk-circle"></div>
-          <div class="sk-circle4 sk-circle"></div>
-          <div class="sk-circle5 sk-circle"></div>
-          <div class="sk-circle6 sk-circle"></div>
-          <div class="sk-circle7 sk-circle"></div>
-          <div class="sk-circle8 sk-circle"></div>
-          <div class="sk-circle9 sk-circle"></div>
-          <div class="sk-circle10 sk-circle"></div>
-          <div class="sk-circle11 sk-circle"></div>
-          <div class="sk-circle12 sk-circle"></div>
+        <div class="spinner" ng-show="loading">
+		  <img src="images/cubic_loader.gif">
         </div>
       <div class="row" ng-hide="loading">
         <div class="col s9">
          <div class="row">
             <span class="medText" style="font-size: 40px">{{clientName}}</span>&nbsp;&nbsp;<span>Client#: <span class="nameStyle robotoLight">{{accountNo}}</span></span> &nbsp;&nbsp;<span style="font-size: 12px;">|</span>&nbsp;&nbsp;Assigned Staff: <span class="nameStyle robotoLight">{{staffName}}</span></span>
           </div>
+		  <div class="row">
+			  <div class="col s12" style="position: relative; left: 1%;">				
+	        	<table class="bordered centered responsive-table">
+					<thead style="background-color: rgba(0, 0, 0, 0.2)">
+	                    <th data-field="id">ID</th>
+	                    <th data-field="accountId">Account #</th>
+						<th data-field="name">Account Name</th>
+						<th data-field="balance">Account Balance</th>
+						<th data-field="button">Action<th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="acc in savingsAccounts" class="pointer tableHover">
+							<td>{{acc.id}}</td>
+							<td>{{acc.accountNo}}</td>
+							<td>{{acc.productName}}</td>
+							<td ng-model="bal">{{acc.accountBalance}}</td>
+							<td><a href="#/processWithdrawals" ng-click="setBalance(bal)" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
+						</tr>
+					</tbody>
+				</table>			
+			  </div>
+		  </div>
+		  <script type="text/ng-template" id="processWith.htm">
           <div class="row withMBox">
             <form class="col s8" name="withForm" ng-submit="submitForm(withForm.$valid)" novalidate>
               <div class="row" style="text-align: center;">
-                <span class="xlargeText robotoLight withHHead">Withdraw Money into MM Account</span>
+                <span class="xlargeText robotoLight withHHead">Withdraw Money Into MM Account</span>
               </div>
               <div class="row">
-                <span class="xlargeText robotoThin">Current Balance: 65000</span>
+                <span class="xlargeText robotoThin">Current Balance: {{accountBalance}}</span>
               </div>
               <div class="row">
                 <div class="input-field" ng-class="{'has-error': withForm.amount.$invalid && !withForm.amount.$pristine }">
@@ -51,6 +63,7 @@
               </div>
             </form>
           </div>
+	  	  </script>
         </div>
          <!-- Modal Structure -->
           <div id="withModal" class="modal">
@@ -69,13 +82,11 @@
               <span><img src="images/client-image-placeholder.png"></span>
             </div>
             <div class="row summaryInfo">
-              <div class="sumHead" style="text-align: center;">Client information</div><br>
-              <span>Activation Date: 27th May 2016</span><br><br>
-              <span>Current Account Balance: 65000</span><br><br>
-              <span>Staff Member: Jack Ryan</span><br><br>
-              <span>Gender: Male</span><br><br>
-              <span>Client Type: Footballer</span><br><br>
-              <span>Client Classification: Gold</span>
+              <div class="sumHead" style="text-align: center;">Client Information</div><br>
+              <span class="robotoThin">Activation Date: <span class="robotoReg">{{activationDate}}</span></span><br><br>
+              <span class="robotoThin">Staff Member: <span class="robotoReg">{{staffName}}</span></span><br><br>
+              <span class="robotoThin">Office: <span class="robotoReg">{{officeName}}</span></span><br><br>
+              <span class="robotoThin">Activated by: <span class="robotoReg">{{userName}}</span></span><br><br>
             </div>
           </div>
         </div>
