@@ -1,16 +1,46 @@
 <div class="robotoReg" id="clientPageId">
-      <div class="row">
+      <!-- spinner -->
+        <div class="spinner" ng-show="loading">
+		  <img src="images/cubic_loader.gif">
+        </div>
+      <div class="row" ng-hide="loading">
         <div class="col s8">
          <div class="row">
-            <span class="medText" style="font-size: 40px">Carlson, Daniel</span>&nbsp;&nbsp;<span class="nameStyle robotoLight">Client#: 1234567</span> &nbsp;&nbsp;<span style="font-size: 12px;">|</span>&nbsp;&nbsp;<span class="nameStyle robotoLight">Assigned Staff: Marcus Brody</span>
+            <span class="medText" style="font-size: 40px">{{clientName}}</span>&nbsp;&nbsp;<span>Client#: <span class="nameStyle robotoLight">{{accountNo}}</span></span>&nbsp;&nbsp;<span style="font-size: 12px;">|</span>&nbsp;&nbsp;Assigned Staff: <span class="nameStyle robotoLight">{{staffName}}</span></span>
           </div>
+		  <div class="row">
+			  <span class="robotoThin" style="font-size: 22px; color: blue"><center><i>Select a Loan Account to remove Money From </i></center></span><br />
+			  <div class="col s12" style="position: relative; left: 1%;" style="font-size: 15px">				
+	        	<table class="bordered centered responsive-table">
+					<thead style="background-color: rgba(0, 0, 0, 0.2)">
+	                    <th data-field="id">ID</th>
+	                    <th data-field="accountId">Account #</th>
+						<th data-field="name">Account Name</th>
+						<th data-field="balance">Account Balance</th>
+						<th data-field="button">Action<th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="acc in savingsAccounts" class="pointer tableHover">
+							<td>{{acc.id}}</td>
+							<td>{{acc.accountNo}}</td>
+							<td>{{acc.productName}}</td>
+							<td ng-model="bal">{{acc.accountBalance}}</td>
+							<td><a href="#/processTransfer" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
+						</tr>
+					</tbody>
+				</table>			
+			  </div>
+		  </div>
+		  
+		  <!-- Partial -->
+		  <script type="text/ng-template" id="/processTransfer.htm">
           <div class="row withMBox">
             <form class="col s9" name="sendForm" ng-submit="submitSendForm(sendForm.$valid)" novalidate>
               <div class="row" style="text-align: center;">
                 <span class="xlargeText robotoLight sendMon">Send Money through MM Account</span>
               </div>
               <div class="row">
-                <span class="xxlargeText robotoThin">Current Balance: 65000</span>
+                <span class="xxlargeText robotoThin">Current Balance: {{accountBalance}}</span>
               </div>
               <div class="row">
                 <div class="input-field" ng-class="{'has-error': sendForm.amount.$invalid && !sendForm.amount.$pristine }">
@@ -52,6 +82,9 @@
               </div>
             </form>
           </div>
+	  	</script>
+		<!-- End of partial -->
+		
         </div>
         <!-- Modal Structure -->
           <div id="sendMoneyModal" class="modal">
@@ -71,12 +104,10 @@
             </div>
             <div class="row summaryInfo">
               <div class="sumHead" style="text-align: center;">Client Information</div><br>
-              <span>Activation Date: 27th May 2016</span><br><br>
-              <span>Current Account Balance: 65000</span><br><br>
-              <span>Staff Member: Jack Ryan</span><br><br>
-              <span>Gender: Male</span><br><br>
-              <span>Client Type: Footballer</span><br><br>
-              <span>Client Classification: Gold</span>
+              	<span class="robotoThin">Activation Date: <span class="robotoReg">{{activationDate}}</span></span><br><br>
+              	<span class="robotoThin">Staff Member: <span class="robotoReg">{{staffName}}</span></span><br><br>
+              	<span class="robotoThin">Office: <span class="robotoReg">{{officeName}}</span></span><br><br>
+              	<span class="robotoThin">Activated by: <span class="robotoReg">{{userName}}</span></span><br><br>
             </div>
           </div>
       </div>

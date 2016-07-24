@@ -25,13 +25,15 @@
 							<td>{{acc.accountNo}}</td>
 							<td>{{acc.productName}}</td>
 							<td ng-model="bal">{{acc.accountBalance}}</td>
-							<td><a href="#/processWithdrawals" ng-click="setBalance(bal)" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
+							<td><a href="#/processWithdrawals" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
 						</tr>
 					</tbody>
 				</table>			
 			  </div>
 		  </div>
-		  <script type="text/ng-template" id="processWith.htm">
+		  
+		  <!-- Partial view -->
+		  <script type="text/ng-template" id="/processWith.htm">
           	<div class="row withMBox">
             <form class="col s8" name="withForm" ng-submit="submitForm(withForm.$valid)" novalidate>
               <div class="row" style="text-align: center;">
@@ -65,18 +67,19 @@
             </form>
           </div>
 	  	  </script>
+		  <!-- End of partial view -->
         </div>
-         <!-- Modal Structure -->
-          <div id="withModal" class="modal">
-              <div class="modal-content">
-                <h3 class="robotoThin">Please wait....Processing request</h3>
-              </div>
-              <div class="modal-footer">
-                <div class="progress">
-                  <div class="indeterminate"></div>
-                </div>
-              </div>
-          </div>
+        <!-- Modal Structure -->
+         <div id="withModal" class="modal">
+             <div class="modal-content">
+               <h3 class="robotoThin">Please wait....Processing request</h3>
+             </div>
+             <div class="modal-footer">
+               <div class="progress">
+                 <div class="indeterminate"></div>
+               </div>
+             </div>
+         </div>
         <div class="col s3 resetSize">
           <div class="clientBox">
             <div class="row clientImg">
@@ -84,10 +87,10 @@
             </div>
             <div class="row summaryInfo">
               <div class="sumHead" style="text-align: center;">Client Information</div><br>
-              <span class="robotoThin">Activation Date: <span class="robotoReg">{{activationDate}}</span></span><br><br>
-              <span class="robotoThin">Staff Member: <span class="robotoReg">{{staffName}}</span></span><br><br>
-              <span class="robotoThin">Office: <span class="robotoReg">{{officeName}}</span></span><br><br>
-              <span class="robotoThin">Activated by: <span class="robotoReg">{{userName}}</span></span><br><br>
+              	<span class="robotoThin">Activation Date: <span class="robotoReg">{{activationDate}}</span></span><br><br>
+              	<span class="robotoThin">Staff Member: <span class="robotoReg">{{staffName}}</span></span><br><br>
+              	<span class="robotoThin">Office: <span class="robotoReg">{{officeName}}</span></span><br><br>
+              	<span class="robotoThin">Activated by: <span class="robotoReg">{{userName}}</span></span><br><br>
             </div>
           </div>
         </div>

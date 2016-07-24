@@ -2,20 +2,16 @@
 /*global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('withMoneyCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', 
-    function ($scope, $http, $timeout, $stateParams, $state) {
+  .controller('withMoneyCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', '$state', 
+    function ($rootScope, $scope, $http, $timeout, $stateParams, $state) {
 
       // client's details
-      $scope.clientId = $stateParams.id;
+      $rootScope.clientId = $stateParams.id;
       $scope.clientNo = '';
       $scope.clientName = '';
       $scope.staffName = '';
  	  $scope.loanAccounts = [];
 	  $scope.savingsAccounts = [];
-	  
-      $scope.amount = '';
-      $scope.phoneNumber = '';
-	  
 	  $scope.accountBalance = "";
 	  $scope.bal = "";
 
@@ -47,8 +43,7 @@ angular.module('mobileMoneyApp')
             $http.defaults.headers.common['Authorization'] = 'Basic ' + basicAuthKey;
 
             // make request to get client's information 
-            var getClientDetails = baseApiUrl + "clients/" + $scope.clientId;
-          	console.log(getClientDetails);
+            var getClientDetails = baseApiUrl + "clients/" + $rootScope.clientId;
 
         	// getting client details
         	$http({
@@ -62,11 +57,9 @@ angular.module('mobileMoneyApp')
           	$scope.activationDate = $scope.data.activationDate;
           	$scope.officeName = $scope.data.officeName;
           	$scope.userName = $scope.data.timeline.activatedByUsername;
-          	console.log("test data: "+ $scope.userName);
 
           	// now get the client's account details
-          	var getClientAccountInfo = baseApiUrl + "clients/" + $scope.clientId + "/accounts";
-          	console.log(getClientAccountInfo);
+          	var getClientAccountInfo = baseApiUrl + "clients/" + $rootScope.clientId + "/accounts";
 
           	$http({
             	method: "GET",
@@ -76,7 +69,9 @@ angular.module('mobileMoneyApp')
 				$scope.loanAccounts = response.loanAccounts;
 				$scope.savingsAccounts = response.savingsAccounts;
 				$scope.loading = false;
-          	});
+          	}).error(function(data){
+          		console.log("Error retrieving client account information");
+          	})
         }).error(function(data){
           console.log("Error retrieving client data");
         });
@@ -85,32 +80,35 @@ angular.module('mobileMoneyApp')
       });
 
           /* ====================================================== */
-
-      // show modal when client submits form
-      $(document).ready(function(){
-        $('.modal-trigger').leanModal();
-		$('.collapsible').collapsible();
-      });
+  }])
+  
+  // controller which actually processes withdrawal transaction
+  .controller('processWithCtrl', ['$rootScope', '$scope', '$http', '$stateParams', '$state',
+  	function($rootScope, $scope, $http, $stateParams, $state){
+		
+		// data fields
+        $scope.amount = '';
+        $scope.phoneNumber = '';
+		
+        // show modal when client submits form
+        $(document).ready(function(){
+          	$('.modal-trigger').leanModal();
+  			$('.collapsible').collapsible();
+        });
 
         $scope.submitted = true;
         var baseUrl = "http://localhost:8090/api/v1/withdrawals";
 
         // function to submit the form after all form validation
         $scope.submitForm = function(){
-          // Check to make sure the form is completely valid
-          if($scope.withForm.$valid){
-            $scope.submitted = false;
-            $scope.withMoneyRequest(clientId);
-          }
+			console.log("In the processWith controller submit fxn");
+           // Check to make sure the form is completely valid
+           if($scope.withForm.$valid){
+             $scope.submitted = false;
+             $scope.withMoneyRequest($rootScope.clientId);
+           }
         };
 		
-		// function to set account balance for savings account chosen
-		$scope.setBalance = function(balance){
-			console.log("Debit clicked");
-			console.log("bal: "+ balance);
-			$scope.accountBalance = balance;
-		}
-
       	// function to handle requests to the mobile money engine
       	$scope.withMoneyRequest = function(clientId){
           // open the modal
@@ -121,8 +119,9 @@ angular.module('mobileMoneyApp')
 
           // request to mobile money engine
           $scope.accountId = "4904123";
-	      	var requestUrl = baseUrl + "?phone=" + $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId=" + clientId + "&accountId=" + $scope.accountId;
-          console.log(requestUrl);
+	      var requestUrl = baseUrl + "?phone=" + $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId=" + clientId + "&accountId=" + $scope.accountId;
+          
+		  // make request to the mobile money engine
           $http({
             method: "GET",
             url: requestUrl
@@ -153,8 +152,4 @@ angular.module('mobileMoneyApp')
         $scope.goBack = function(){
           window.history.back();
         };
-  }])
-  .controller('processWithCtrl', ['$scope', '$http', '$stateParams', '$state',
-  	function($scope, $http, $stateParams, $state){
-  	
-  }])
+  }]);

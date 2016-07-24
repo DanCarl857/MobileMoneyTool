@@ -42,17 +42,27 @@ angular
         controller: 'saveMoneyCtrl'
       })
 	  
+	  // start of partials
+	  
 	  .state('processSavings', {
 		  url: '/processSavings',
-		  templateUrl: 'processSave.htm',
+		  templateUrl: '/processSave.htm',
 		  controller: 'processSaveCtrl'
 	  })
 	  
 	  .state('processWithdrawals', {
 	  	  url: '/processWithdrawals',
-		  templateUrl: 'processWith.htm',
+		  templateUrl: '/processWith.htm',
 		  controller: 'processWithCtrl'
 	  })
+	  
+	  .state('processTransfer', {
+		  url: '/processTransfer',
+		  templateUrl: '/processTransfer.htm',
+		  controller: 'processSendCtrl'
+	  })
+	  
+	  // end of partials
 
       .state('sendMoney', {
         url: '/sendMoney/:id',
