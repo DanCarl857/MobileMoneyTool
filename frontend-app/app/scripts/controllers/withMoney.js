@@ -4,8 +4,6 @@
 angular.module('mobileMoneyApp')
   .controller('withMoneyCtrl', ['$scope', '$http', '$timeout', '$stateParams', '$state', 
     function ($scope, $http, $timeout, $stateParams, $state) {
-		
-	 /* TODO: redo logic to match the correct one */
 
       // client's details
       $scope.clientId = $stateParams.id;
@@ -77,8 +75,6 @@ angular.module('mobileMoneyApp')
               	// get and display client account details here
 				$scope.loanAccounts = response.loanAccounts;
 				$scope.savingsAccounts = response.savingsAccounts;
-				$scope.savingsLength = $scope.savingsAccounts.length;
-				$scope.loanLength = $scope.loanAccounts.length;
 				$scope.loading = false;
           	});
         }).error(function(data){
@@ -132,6 +128,8 @@ angular.module('mobileMoneyApp')
             url: requestUrl
           }).success(function(data){
             $scope.data = data;
+			
+			// TODO: make request to effect this change on the mifos platform
             console.log("Success with withdrawals: " + $scope.data);
 
             // close the modal and clean up 
