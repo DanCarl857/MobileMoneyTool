@@ -28,19 +28,15 @@ angular.module('mobileMoneyApp')
         };
         
         var authKeyRequest = baseApiUrl + "authentication?username="+ loginCreds.username + "&password=" + loginCreds.password + "&"+endUrl;
-        console.log(authKeyRequest);
         $http.post(authKeyRequest, config)
           .success(function(data){
             basicAuthKey = data.base64EncodedAuthenticationKey;
-            console.log("key in main: "+ basicAuthKey);
 
             // set authorization in header
             $http.defaults.headers.common['Authorization'] = 'Basic ' + basicAuthKey;
 
             // make request to get all clients 
             var clientsRequest = baseApiUrl + "clients";
-
-            console.log(clientsRequest);
             $http.get(clientsRequest)
               .success(function(data){
                 $scope.clients = data.pageItems;

@@ -50,6 +50,12 @@ angular
 		  controller: 'processSaveCtrl'
 	  })
 	  
+	  .state('processLoanRepayment', {
+		  url: '/processLoans',
+		  templateUrl: '/processLoan.htm',
+		  // controller: 'processLoanCtrl'
+	  })
+	  
 	  .state('processWithdrawals', {
 	  	  url: '/processWithdrawals',
 		  templateUrl: '/processWith.htm',
@@ -85,7 +91,7 @@ angular
       .state('loans', {
         url: '/loans/:id',
         templateUrl: 'views/loanRepayment.html',
-        contorller: 'loanCtrl'
+        // contorller: 'loanCtrl'
       });
 
       $urlRouterProvider.otherwise('/login');
