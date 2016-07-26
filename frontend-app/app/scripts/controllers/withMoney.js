@@ -86,15 +86,15 @@ angular.module('mobileMoneyApp')
   .controller('processWithCtrl', ['$rootScope', '$scope', '$http', '$stateParams', '$state',
   	function($rootScope, $scope, $http, $stateParams, $state){
 		
-		// data fields
-        $scope.amount = '';
-        $scope.phoneNumber = '';
-		
         // show modal when client submits form
         $(document).ready(function(){
           	$('.modal-trigger').leanModal();
   			$('.collapsible').collapsible();
         });
+		
+		// data fields
+        $scope.amount = '';
+        $scope.phoneNumber = '';
 
         $scope.submitted = true;
         var baseUrl = "http://localhost:8090/api/v1/withdrawals";
@@ -136,13 +136,14 @@ angular.module('mobileMoneyApp')
             $scope.cleanUp();
           }).error(function(data){
             // close the modal and clean up 
+			$scope.cleanUp();
             Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
-            $scope.cleanUp();
           });
       	};
 
         // function to clean up
         $scope.cleanUp = function(){
+		  console.log("Now cleaning up modal thingz :-)");
           $('#withModal').closeModal();
           $scope.amount = '';
           $scope.phoneNumber = '';

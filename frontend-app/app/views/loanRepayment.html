@@ -28,7 +28,7 @@
 							<td>{{acc.originalLoan}}</td>
 							<td>{{acc.loanBalance}}</td>
 							<td>{{acc.amountPaid}}</td>
-							<td><a href="#/processLoans" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'blue' : 'whiteBtn'">Credit</a></td>
+							<td><a href="#/processLoans" class="btn" ng-class="acc.status.active || !acc.status.closed ? 'blue' : 'whiteBtn'">Credit</a></td>
 						</tr>
 					</tbody>
 				</table>			
@@ -37,7 +37,44 @@
 		  
 		  <!-- Partial view -->
 		  <script type="text/ng-template" id="/processLoan.htm">
-          <div class="row withMBox" ng-controller="processLoanCtrl">
+  			<div class="row" id="loanThingz">
+				<center><span style="font-size: 25px;width: 60%" class="robotoThin">Choose Method</span></center>
+				<center>
+  				<form class="center-align" style="width: 60%">
+  					<div class="left">
+  						<input type="radio" name="loanConfig" value="1" ng-model="radioBoxSelection" id="savingsAccPay">
+  						<label for="savingsAccPay">Use Savings Account</label>
+  					</div>
+  					<div>
+  						<input type="radio" name="loanConfig" value="2" ng-model="radioBoxSelection" id="loanPay">
+  						<label for="loanPay">Pay Loan</label>
+  					</div>
+  				</form>
+				</center>
+  			</div>
+			  <div class="row" ng-show="radioBoxSelection == 1">
+				  <div class="col s12" style="position: relative; left: 1%;" style="font-size: 15px">				
+		        	<table class="bordered centered responsive-table">
+						<thead style="background-color: rgba(0, 0, 0, 0.2)">
+		                    <th data-field="id">ID</th>
+		                    <th data-field="accountId">Account #</th>
+							<th data-field="name">Account Name</th>
+							<th data-field="balance">Account Balance</th>
+							<th data-field="button">Action<th>
+						</thead>
+						<tbody>
+							<tr ng-repeat="acc in $root.savingsAccounts" class="pointer tableHover">
+								<td>{{acc.id}}</td>
+								<td>{{acc.accountNo}}</td>
+								<td>{{acc.productName}}</td>
+								<td ng-model="bal">{{acc.accountBalance}}</td>
+								<td><a href="#/processTransfer" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
+							</tr>
+						</tbody>
+					</table>			
+				  </div>
+			  </div>
+          <div class="row withMBox" ng-controller="processLoanCtrl" ng-show="radioBoxSelection == 2">
             <form class="col s8" name="loanForm" ng-submit="submitLoanForm(loanForm.$valid)" novalidate>
               <div class="row" style="text-align: center;">
                 <span class="xlargeText robotoLight" style="color: #ffa726">Repay Loans using MM Account</span>
@@ -74,6 +111,17 @@
               </div>
             </form>
           </div>
+          <!-- Modal Structure -->
+            <div id="loanRepayModal" class="modal">
+                <div class="modal-content">
+                  <span class="robotoThin" style="font-size: 25px;">Please wait....Processing request</span>
+                </div>
+                <div class="modal-footer">
+                  <div class="progress">
+                    <div class="indeterminate"></div>
+                  </div>
+                </div>
+            </div>
 	  	</script>
 		  <!-- End of control -->
 		  

@@ -1,5 +1,5 @@
 <div id="homeContent">
-      <div class="row container colorGrey">
+      <div class="row colorGrey" style="width: 90%">
         <div class="row">
           <form class="col s12">
             <div class="row">
@@ -14,7 +14,7 @@
           </form>
         </div>
         <div class="row col s12">
-          <table class="responsive-table bordered tableStyle" style="overflow: auto;">
+          <table class="responsive-table bordered tableStyle">
               <thead>
                 <tr class="graybg">
                     <th data-field="name">Name</th>
@@ -26,7 +26,7 @@
                 </tr>
               </thead>
               <tbody class="clientInfo" ng-hide="loading">
-                <tr ng-repeat="client in clients">
+                <tr ng-repeat="client in clients" class="tableStyle">
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.displayName}}</a></td>
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.accountNo}}</a></td>
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">

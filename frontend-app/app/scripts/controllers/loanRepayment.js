@@ -11,7 +11,7 @@ angular.module('mobileMoneyApp')
         $scope.clientName = '';
         $scope.staffName = '';
    	  	$scope.loanAccounts = [];
-  	  	$scope.savingsAccounts = [];
+  	  	$rootScope.savingsAccounts = [];
   	  	$scope.accountBalance = "";
   	  	$scope.bal = "";
 
@@ -67,7 +67,7 @@ angular.module('mobileMoneyApp')
             	}).success(function(response){
                 	// get and display client account details here
   					$scope.loanAccounts = response.loanAccounts;
-  					$scope.savingsAccounts = response.savingsAccounts;
+  					$rootScope.savingsAccounts = response.savingsAccounts;
   					$scope.loading = false;
             	}).error(function(data){
             		console.log("Error retrieving client account information");
