@@ -9,29 +9,34 @@
             <span class="medText" style="font-size: 40px">{{clientName}}</span>&nbsp;&nbsp;<span >Client#: </span><span class="nameStyle robotoLight">{{accountNo}}</span> &nbsp;&nbsp;<span style="font-size: 12px;">|</span>&nbsp;&nbsp;<span >Assigned Staff: </span><span class="nameStyle robotoLight">{{staffName}}</span>
           </div>
 		  <div class="row">
-			  <div class="col s12" style="position: relative; left: 1%;">
-	        	<table class="bordered centered responsive-table" style="font-size: 15px">
+			  <div class="col s12" style="position: relative; left: 1%;font-size: 15px">				
+	        	<table class="bordered centered responsive-table">
 					<thead style="background-color: rgba(0, 0, 0, 0.2)">
 	                    <th data-field="id">ID</th>
 	                    <th data-field="accountId">Account #</th>
 						<th data-field="name">Account Name</th>
-						<th data-field="originalLoan">Original Loan</th>
-						<th data-field="balance">Loan Balance</th>
-						<th data-field="paid">Amount Paid</th>
+						<th data-field="balance">Account Balance</th>
 						<th data-field="button">Action<th>
 					</thead>
 					<tbody>
-						<tr ng-repeat="acc in loanAccounts" class="pointer tableHover">
+						<tr dir-paginate="acc in savingsAccounts|itemsPerPage: 5" class="pointer tableHover">
 							<td>{{acc.id}}</td>
 							<td>{{acc.accountNo}}</td>
 							<td>{{acc.productName}}</td>
-							<td>{{acc.originalLoan}}</td>
-							<td>{{acc.loanBalance}}</td>
-							<td>{{acc.amountPaid}}</td>
-							<td><a href="#/processSavings" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'blue' : 'whiteBtn'">Credit</a></td>
+							<td ng-model="bal">{{acc.accountBalance}}</td>
+							<td><a href="#/processSavings" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
 						</tr>
 					</tbody>
 				</table>
+				<div>
+					<center>
+					<dir-pagination-controls
+				    	max-size="10"
+				    	direction-links="true"
+				    	boundary-links="true" >
+					</dir-pagination-controls>
+					</center>
+				</div>			
 			  </div>
 		  </div>
 		  <script type="text/ng-template" id="/processSave.htm">
@@ -41,7 +46,7 @@
                 <span class="xlargeText robotoLight saveMon">Save Money From MM Account</span>
               </div>
               <div class="row">
-                <span class="xxlargeText robotoThin">Current Balance: 65000</span>
+                <span class="xxlargeText robotoThin">Current Balance: {{accountBalance}}</span>
               </div>
               <div class="row">
                 <div class="input-field" ng-class="{'has-error': saveForm.amount.$invalid && !saveForm.amount.$pristine }">
@@ -63,14 +68,14 @@
               <br>
               <div class="row">
                   <a class="btn waves-effect waves-light yellow lighten-1 left" ng-click="goBack()" style="color: rgba(0, 0, 0, 0.6);">Cancel<i class="material-icons right">clear</i></a>
-                  <button class="btn waves-effect waves-light light-blue darken-1 right">Submit<i class="material-icons right">send</i></button>
+                  <button class="btn waves-effect waves-light light-green darken-2 right" ng-click="submitSaveForm()">Submit<i class="material-icons right">send</i></button>
               </div>
             </form>
           </div>
           <!-- Modal Structure -->
             <div id="sendMoneyModal" class="modal">
                 <div class="modal-content">
-                  <h3 class="robotoThin">Please wait....Processing request</h3>
+                  <h3 class="robotoThin" style="font-size: 25px;">Please wait....Processing request</h3>
                 </div>
                 <div class="modal-footer">
                   <div class="progress">

@@ -19,7 +19,7 @@
 						<th data-field="button">Action<th>
 					</thead>
 					<tbody>
-						<tr ng-repeat="acc in savingsAccounts" class="pointer tableHover">
+						<tr dir-paginate="acc in savingsAccounts|itemsPerPage: 5" class="pointer tableHover">
 							<td>{{acc.id}}</td>
 							<td>{{acc.accountNo}}</td>
 							<td>{{acc.productName}}</td>
@@ -27,7 +27,16 @@
 							<td><a href="#/processTransfer" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
 						</tr>
 					</tbody>
-				</table>			
+				</table>	
+				<div>
+					<center>
+					<dir-pagination-controls
+				    	max-size="10"
+				    	direction-links="true"
+				    	boundary-links="true" >
+					</dir-pagination-controls>
+					</center>
+				</div>		
 			  </div>
 		  </div>
 		  
@@ -44,7 +53,7 @@
               <div class="row">
                 <div class="input-field" ng-class="{'has-error': sendForm.amount.$invalid && !sendForm.amount.$pristine }">
                   <i class="material-icons prefix">attach_money</i>
-                  <input id="icon_prefix" name="amount" type="number" ng-minlength="3" ng-model="amount" required>
+                  <input id="icon_prefix" name="amount" type="number" ng-minlength="1" ng-model="amount" required>
                   <label for="icon_prefix">Enter Amount</label>
                   <p ng-show="(sendForm.amount.$invalid && !sendForm.amount.$pristine) && submitted" class="errorMsg">Amount is required.</p>
                 </div>

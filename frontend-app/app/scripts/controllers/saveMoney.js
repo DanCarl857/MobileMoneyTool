@@ -2,11 +2,11 @@
 /*global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('saveMoneyCtrl', ['$scope', '$http', '$stateParams', '$state', 
-    function ($scope, $http, $stateParams, $state) {
+  .controller('saveMoneyCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', '$state', 
+    function ($rootScope, $scope, $http, $timeout, $stateParams, $state) {
   		
       // client's details
-      $scope.clientId = $stateParams.id;
+      $rootScope.clientId = $stateParams.id;
       $scope.accountNo = '';
       $scope.clientName = '';
       $scope.staffName = '';
@@ -62,12 +62,9 @@ angular.module('mobileMoneyApp')
           	$scope.activationDate = $scope.data.activationDate;
           	$scope.officeName = $scope.data.officeName;
           	$scope.userName = $scope.data.timeline.activatedByUsername;
-          	console.log("test data: "+ $scope.userName);
-
+   
           	// now get the client's account details
           	var getClientAccountInfo = baseApiUrl + "clients/" + $scope.clientId + "/accounts";
-          	console.log(getClientAccountInfo);
-
           	$http({
             	method: "GET",
             	url: getClientAccountInfo
@@ -86,8 +83,8 @@ angular.module('mobileMoneyApp')
 
           /* ====================================================== */
   }])
-  .controller('processSaveCtrl', ['$scope', '$http', '$stateParams', '$state', 
-  	function($scope, $http, $stateParams, $state){
+  .controller('processSaveCtrl', ['$rootScope', '$scope', '$http', '$stateParams', '$state',
+  	function($rootScope, $scope, $http, $stateParams, $state){
         // show modal when client submits form
         $(document).ready(function(){
           $('.modal-trigger').leanModal();
@@ -101,11 +98,11 @@ angular.module('mobileMoneyApp')
         $scope.submitSaveForm = function(){
           if($scope.saveForm.$valid){
             $scope.submitted = false;
-            $scope.saveMoneyRequest(clientId);
+            $scope.saveMoneyRequest($rootScope.clientId);
           }
         };
 
-        // function to handle requests to the mobile money engine
+        	// function to handle requests to the mobile money engine
         	$scope.saveMoneyRequest = function(clientId){
             // open the modal
             $('#sendMoneyModal').openModal({

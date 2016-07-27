@@ -101,7 +101,6 @@ angular.module('mobileMoneyApp')
 
         // function to submit the form after all form validation
         $scope.submitForm = function(){
-			console.log("In the processWith controller submit fxn");
            // Check to make sure the form is completely valid
            if($scope.withForm.$valid){
              $scope.submitted = false;

@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('mobileMoneyApp', ['ngAnimate','ngCookies','ngResource','ngRoute','ngSanitize', 'ui.router'])
+  .module('mobileMoneyApp', ['ngAnimate','ngCookies','ngResource','ngRoute','ngSanitize', 'ui.router', 'angularUtils.directives.dirPagination'])
   .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
     // Set headers and enable CORS

@@ -2,7 +2,7 @@
 /*global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('mainCtrl', ['$rootScope', '$http', '$scope', 
+  .controller('mainCtrl', ['$rootScope', '$http', '$scope',
 	function ($scope, $http) {
 		
       $scope.totalClients = 0;
@@ -40,7 +40,7 @@ angular.module('mobileMoneyApp')
             $http.get(clientsRequest)
               .success(function(data){
                 $scope.clients = data.pageItems;
-                $scope.totalClients = data.totalFilteredRecords;
+				$scope.totalClients = data.totalFilteredRecords;
                 $scope.loading = false;
               })
               .error(function(data){

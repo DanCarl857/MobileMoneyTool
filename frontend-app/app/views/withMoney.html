@@ -19,7 +19,7 @@
 						<th data-field="button">Action<th>
 					</thead>
 					<tbody>
-						<tr ng-repeat="acc in savingsAccounts" class="pointer tableHover">
+						<tr dir-paginate="acc in savingsAccounts|itemsPerPage: 5" class="pointer tableHover">
 							<td>{{acc.id}}</td>
 							<td>{{acc.accountNo}}</td>
 							<td>{{acc.productName}}</td>
@@ -27,7 +27,16 @@
 							<td><a href="#/processWithdrawals" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
 						</tr>
 					</tbody>
-				</table>			
+				</table>	
+				<div>
+					<center>
+					<dir-pagination-controls
+				    	max-size="10"
+				    	direction-links="true"
+				    	boundary-links="true" >
+					</dir-pagination-controls>
+					</center>
+				</div>		
 			  </div>
 		  </div>
 		  

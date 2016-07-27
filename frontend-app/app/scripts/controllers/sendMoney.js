@@ -88,6 +88,8 @@ angular.module('mobileMoneyApp')
   
   .controller('processSendCtrl', ['$scope', '$http', '$stateParams', '$state',
   	function($rootScope, $scope, $http, $stateParams, $state){
+
+    console.log("In the send Money process");
 		
 		// required fields
         $scope.amount = '';
@@ -113,6 +115,7 @@ angular.module('mobileMoneyApp')
           };
 		  
           $scope.sendMoneyRequest = function(clientId){
+			console.log("in send money request");
             // open the modal
             $('#sendMoneyModal').openModal({
               dismissible: false,

@@ -3,12 +3,9 @@
         <div class="row">
           <form class="col s12">
             <div class="row">
-              <div class="input-field col s10">
+              <div class="input-field col s12">
                 <i class="material-icons prefix colorGrey">search</i>
-                <input type="text" placeholder="Search Clients by id/#externalId/Name" name="clientSearch" class="validate" id="clientSearchId">
-              </div>
-              <div class="col s2">
-                <a class="btn waves-effect waves-light blue darken-3 searchBtn">Search</a>
+                <input type="text" ng-model="search" placeholder="Search Clients by id/#externalId/Name" name="clientSearch" class="validate" id="clientSearchId">
               </div>
             </div>
           </form>
@@ -26,7 +23,7 @@
                 </tr>
               </thead>
               <tbody class="clientInfo" ng-hide="loading">
-                <tr ng-repeat="client in clients" class="tableStyle">
+                <tr dir-paginate="client in clients | filter:search | itemsPerPage: 6" class="tableStyle">
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.displayName}}</a></td>
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.accountNo}}</a></td>
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">
@@ -40,6 +37,15 @@
                 </tr>
               </tbody>
             </table>
+			<div>
+				<center>
+				<dir-pagination-controls
+			    	max-size="10"
+			    	direction-links="true"
+			    	boundary-links="true" >
+				</dir-pagination-controls>
+				</center>
+			</div>
              <!-- spinner -->
               <div class="spinner" ng-show="loading">
                 <img src="images/cubic_loader.gif">

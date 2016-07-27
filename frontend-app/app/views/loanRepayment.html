@@ -21,7 +21,7 @@
 						<th data-field="button">Action<th>
 					</thead>
 					<tbody>
-						<tr ng-repeat="acc in loanAccounts" class="pointer tableHover">
+						<tr dir-paginate="acc in loanAccounts|itemsPerPage: 5" class="pointer tableHover">
 							<td>{{acc.id}}</td>
 							<td>{{acc.accountNo}}</td>
 							<td>{{acc.productName}}</td>
@@ -31,7 +31,16 @@
 							<td><a href="#/processLoans" class="btn" ng-class="acc.status.active || !acc.status.closed ? 'blue' : 'whiteBtn'">Credit</a></td>
 						</tr>
 					</tbody>
-				</table>			
+				</table>
+				<div>
+					<center>
+					<dir-pagination-controls
+				    	max-size="10"
+				    	direction-links="true"
+				    	boundary-links="true" >
+					</dir-pagination-controls>
+					</center>
+				</div>			
 			  </div>
 		  </div>
 		  
@@ -52,10 +61,10 @@
   				</form>
 				</center>
   			</div>
-			  <div class="row" ng-show="radioBoxSelection == 1">
-				  <div class="col s12" style="position: relative; left: 1%;" style="font-size: 15px">				
+			  <div class="row" ng-show="radioBoxSelection == 1" style="width: 80%;">
+				  <div class="col s12" style="position: relative; left: 1%; font-size: 15px">				
 		        	<table class="bordered centered responsive-table">
-						<thead style="background-color: rgba(0, 0, 0, 0.2)">
+						<thead style="background-color: rgba(0, 0, 0, 0.2);">
 		                    <th data-field="id">ID</th>
 		                    <th data-field="accountId">Account #</th>
 							<th data-field="name">Account Name</th>
@@ -63,7 +72,7 @@
 							<th data-field="button">Action<th>
 						</thead>
 						<tbody>
-							<tr ng-repeat="acc in $root.savingsAccounts" class="pointer tableHover">
+							<tr dir-paginate="acc in $root.savingsAccounts|itemsPerPage: 5" class="pointer tableHover">
 								<td>{{acc.id}}</td>
 								<td>{{acc.accountNo}}</td>
 								<td>{{acc.productName}}</td>
@@ -71,7 +80,16 @@
 								<td><a href="#/processTransfer" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
 							</tr>
 						</tbody>
-					</table>			
+					</table>
+					<div>
+						<center>
+						<dir-pagination-controls
+					    	max-size="10"
+					    	direction-links="true"
+					    	boundary-links="true" >
+						</dir-pagination-controls>
+						</center>
+					</div>			
 				  </div>
 			  </div>
           <div class="row withMBox" ng-controller="processLoanCtrl" ng-show="radioBoxSelection == 2">

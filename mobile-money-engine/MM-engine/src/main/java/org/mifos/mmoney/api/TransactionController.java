@@ -43,6 +43,7 @@ public class TransactionController {
 	 * This end point enables us to get all the transactions in the database
 	 */
 	@SuppressWarnings("unused")
+	@CrossOrigin
 	@RequestMapping(value="/api/v1/transactions", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public
 	@ResponseBody
