@@ -4,7 +4,7 @@
 		  <img src="images/cubic_loader.gif">
         </div>
       <div class="row" ng-hide="loading">
-        <div class="col s9">
+        <div class="col s8">
          <div class="row">
             <span class="medText" style="font-size: 40px;">{{clientName}}</span>&nbsp;&nbsp;<span>Client#: <span class="nameStyle robotoLight">{{accountNo}}</span></span> &nbsp;&nbsp;<span style="font-size: 12px;">|</span>&nbsp;&nbsp;Assigned Staff: <span class="nameStyle robotoLight">{{staffName}}</span></span>
           </div>
@@ -108,7 +108,7 @@
               <div class="row">
                 <div class="input-field" ng-class="{'has-error': loanForm.amount.$invalid && !loanForm.amount.$pristine }">
                   <i class="material-icons prefix">attach_money</i>
-                  <input name="amount" id="icon_prefix" ng-model="amount" type="number" ng-minlength="3" required>
+                  <input name="amount" id="icon_prefix" ng-model="amount" type="number" ng-minlength="1" required>
                   <label for="icon_prefix">Enter Amount</label>
                   <p ng-show="(loanForm.amount.$invalid && !loanForm.amount.$pristine) && submitted" class="errorMsg">Amount is required.</p>
                 </div>
@@ -144,18 +144,23 @@
 		  <!-- End of control -->
 		  
         </div>
-        <div class="col s3 resetSize">
-          <div class="clientBox">
-            <div class="row clientImg">
-              <span><img src="images/client-image-placeholder.png"></span>
+        <div class="col s4 resetSize">
+          <div class="clientBox" style="width: 100%">
+			<div class="row" style="color: #1E88E5; text-decoration: underline;">
+				<center>{{clientName}}</center>
+			</div>
+            <div class="row">
+              <center><img src="images/client-image-placeholder.png"></center>
             </div>
             <div class="row summaryInfo">
-                <div class="sumHead" style="text-align: center;">Client Information</div><br>
-                	<span class="robotoThin">Activation Date: <span class="robotoReg">{{activationDate}}</span></span><br><br>
-                	<span class="robotoThin">Staff Member: <span class="robotoReg">{{staffName}}</span></span><br><br>
-                	<span class="robotoThin">Office: <span class="robotoReg">{{officeName}}</span></span><br><br>
-                	<span class="robotoThin">Activated by: <span class="robotoReg">{{userName}}</span></span><br><br>
-              </div>
+              <div class="sumHead" style="text-align: center;">&nbsp;Client Information</div><br>
+            	<span>Activation Date: <span class="robotoLight">&nbsp;{{activationDate}}</span></span><br>
+            	<span>Staff Member: <span class="robotoLight">&nbsp;{{staffName}}</span></span><br>
+				<span># of Loan Cycle: <span class="robotoLight">&nbsp;5</span></span><br>
+				<span># of Active Savings: <span class="robotoLight">&nbsp;5</span></span><br>
+				<span>Total Savings: <span class="robotoLight">&nbsp;50000000</span></span><br>
+            	<span>Office: <span class="robotoLight">&nbsp;{{officeName}}</span></span><br>
+            	<span>Activated by: <span class="robotoLight">&nbsp;{{userName}}</span></span>
             </div>
           </div>
         </div>

@@ -54,7 +54,8 @@ angular.module('mobileMoneyApp')
           	$scope.clientName = $scope.data.displayName;
           	$scope.accountNo = $scope.data.accountNo;
           	$scope.staffName = $scope.data.staffName;
-          	$scope.activationDate = $scope.data.activationDate;
+          	$scope.activDate = new Date($scope.data.activationDate);
+			$scope.activationDate = $scope.activDate.toDateString();
           	$scope.officeName = $scope.data.officeName;
           	$scope.userName = $scope.data.timeline.activatedByUsername;
 
@@ -128,6 +129,32 @@ angular.module('mobileMoneyApp')
             $scope.data = data;
 			
 			// TODO: make request to effect this change on the mifos platform
+		  // now effect changes on the mifos platform
+		  // TODO: actually use the amount
+		  var mifosUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
+		  var changeRequestUrl = mifosUrl + "savingsaccounts/" + 321 + "/transactions?command=withdrawal";
+		  console.log(changeRequestUrl);
+		  
+		  $http({
+		      url: changeRequestUrl,
+		      method: "POST",
+		      data: { 
+				  "locale" : "en",
+				  "dateFormat": "dd MMMM yyyy",
+				  "transactionDate": "1 Aug 2016",
+				  "transactionAmount": $scope.amount,
+				  "paymentTypeId": "",
+				  "accountNumber": "",
+				  "checkNumber": "",
+				  "routingCode": "",
+				  "receiptNumber": "",
+				  "bankNumber": ""
+		      }
+		  }).success(function(data){
+			  console.log("Successfully deposited");
+		  }).error(function(data){
+		  	  console.log("Failed to do a deposit");
+		  });
             console.log("Success with withdrawals: " + $scope.data);
 
             // close the modal and clean up 

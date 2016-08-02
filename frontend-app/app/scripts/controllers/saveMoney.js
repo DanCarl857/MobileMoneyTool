@@ -59,7 +59,8 @@ angular.module('mobileMoneyApp')
           	$scope.clientName = $scope.data.displayName;
           	$scope.accountNo = $scope.data.accountNo;
           	$scope.staffName = $scope.data.staffName;
-          	$scope.activationDate = $scope.data.activationDate;
+          	$scope.activDate = new Date($scope.data.activationDate);
+			$scope.activationDate = $scope.activDate.toDateString();
           	$scope.officeName = $scope.data.officeName;
           	$scope.userName = $scope.data.timeline.activatedByUsername;
    
@@ -112,14 +113,39 @@ angular.module('mobileMoneyApp')
 
             $scope.accountId = "4904123";
   	      	var srequestUrl = baseUrl + "?phone="+ $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId="+ clientId + "&accountId=" + $scope.accountId;
-            console.log(srequestUrl);
             $http({
               method: "GET",
               url: srequestUrl
             }).success(function(data){
               $scope.data = data;
-              console.log("success with savings: " + $scope.data);
 
+			  // now effect changes on the mifos platform
+			  // TODO: actually use the amount
+			  var mifosUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
+			  var changeRequestUrl = mifosUrl + "savingsaccounts/" + 321 + "/transactions?command=deposit";
+			  console.log(changeRequestUrl);
+			  
+			  $http({
+			      url: changeRequestUrl,
+			      method: "POST",
+			      data: { 
+					  "locale" : "en",
+					  "dateFormat": "dd MMMM yyyy",
+					  "transactionDate": "1 Aug 2016",
+					  "transactionAmount": $scope.amount,
+  					  "paymentTypeId": "",
+  					  "accountNumber": "",
+  					  "checkNumber": "",
+  					  "routingCode": "",
+  					  "receiptNumber": "",
+  					  "bankNumber": ""
+			      }
+			  }).success(function(data){
+				  console.log("Successfully deposited");
+			  }).error(function(data){
+			  	  console.log("Failed to do a deposit");
+			  });
+			   
               // close the modal and clean up 
               Materialize.toast('Transaction successful', 6000, 'rounded');
               $scope.cleanUp();

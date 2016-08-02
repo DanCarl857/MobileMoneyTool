@@ -3,7 +3,8 @@
 
 angular.module('mobileMoneyApp')
 	/* factory for authentication */
-	.factory('authFactory', ['$http', function($http){
+	.factory('authFactory', ['$http',
+		function($http){
 		
 		var baseUrl = "";
 		var authFactory = {};
@@ -63,10 +64,22 @@ angular.module('mobileMoneyApp')
 	/* utilities for the mobile money engine*/
 	.factory('utilFactory', ['$http', function($http){
 		
-		var baseUrl = "";
+		var baseUrl = "http://localhost:8090/api/v1/transactions";
 		var utilFactory = {};
+		
+		utilFactory.getAllTransactions = function(){
+			return $http.get(baseUrl);
+		};
 		
 		return utilFactory;
 	}])
 	
+	/* factory for loan repayment */
+	.factory('loanFactory', ['$http', function($http){
+		
+		var baseUrl = "";
+		var loanFactory = {};
+		
+		return loanFactory;
+	}]);
 	

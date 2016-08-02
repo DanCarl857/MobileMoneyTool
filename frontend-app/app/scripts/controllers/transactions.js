@@ -2,27 +2,24 @@
 /*global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('transCtrl', ['$scope', '$http', 
-	function ($scope, $http) {
+  .controller('transCtrl', ['$scope', '$http', 'utilFactory',
+	function ($scope, $http, utilFactory) {
 	  var baseUrl = "http://localhost:8090/api/v1/transactions";
 	  $scope.id = "";
 	  
-	  $http({
-		  method: "GET",
-		  url: baseUrl
-	  }).success(function(data){
-		  $scope.data = new Object();
-		  $scope.data = data;
-		  
-		  for(var i = 0; i < $scope.data.length; i++){
-			  for(var obj in $scope.data[i]){
-				  console.log(obj);
-			  }
-		  }
-		  
-		  console.log("Data from engine: " + $scope.data["id"]);
-	  }).error(function(response){
-		  console.log("Error getting all transactions from the database: " + response);
+	  $(document).ready(function(){
+	  	$('.tooltipped').tooltip({delay: 50});
 	  });
+	  
+	  utilFactory.getAllTransactions()
+            .then(function (response) {
+				$scope.transactions = response.data;
+            }, function (error) {
+                console.log("Error getting all transactions from the database");
+            });
+	 
+      $scope.goBack = function(){
+        window.history.back();
+      };
      
   }]);

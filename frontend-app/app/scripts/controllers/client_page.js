@@ -10,6 +10,7 @@ angular.module('mobileMoneyApp')
   	$scope.staffName = "";
   	$scope.activationDate = "";
   	$scope.officeName = "";
+	$scope.groups = "";
 
   	$scope.loading = true;
 
@@ -51,7 +52,8 @@ angular.module('mobileMoneyApp')
     			$scope.accountNo = $scope.data.accountNo;
     			$scope.clientName = $scope.data.displayName;
     			$scope.staffName = $scope.data.staffName;
-    			$scope.activationDate = $scope.data.activationDate;
+	          	$scope.activDate = new Date($scope.data.activationDate);
+				$scope.activationDate = $scope.activDate.toDateString();
     			$scope.officeName = $scope.data.officeName;
     			$scope.userName = $scope.data.timeline.activatedByUsername;
     			$scope.loading = false;

@@ -1,3 +1,43 @@
-<div class="row">
-	
+<div class="row" style="font-size: 15px"><br />
+	<div class="row" style="width: 80%">
+		<div class="col s3">
+			<a class="btn waves-effect waves-light blue lighten-1 left tooltipped" data-position="right" data-delay="3" data-tooltip="Go back" ng-click="goBack()" style="color: rgba(0, 0, 0, 0.6);"><i class="material-icons" style="font-size: 25px;color: white">fast_rewind</i></a>
+		</div>
+		<div class="col s9">
+			<center><span style="font-size: 25px;color: blue">Transactions log</span></center>
+		</div>
+	</div>
+	<center>
+	<table class="bordered centered responsive-table" style="width: 80%">
+		<thead style="background-color: rgba(0, 0, 0, 0.2)">
+			<th data-field="ClientId">Client #</th>
+			<th data-field="Transaction-type">Type</th>
+			<th data-field="amount">Amount</th>
+			<th data-field="recipient">Recipient</th>
+			<th data-field="date">Date</th>
+			<th data-field="office">Office</th>
+			<th data-field="staff">Staff</th>
+		</thead>
+		<tbody>
+			<tr dir-paginate="trans in transactions|itemsPerPage:5">
+				<td>{{trans.client_id}}</td>
+				<td>{{trans.type}}</td>
+				<td>{{trans.amount}}</td>
+				<td>{{trans.recipient}}</td>
+				<td>{{trans.date}}</td>
+				<td>{{trans.office}}</td>
+				<td>{{trans.staff}}</td>
+			</tr>
+		</tbody>
+	</table>
+	</center>
+	<div>
+		<center>
+		<dir-pagination-controls
+	    	max-size="10"
+	    	direction-links="true"
+	    	boundary-links="true" >
+		</dir-pagination-controls>
+		</center>
+	</div>
 </div>
