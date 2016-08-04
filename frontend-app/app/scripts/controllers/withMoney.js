@@ -86,6 +86,8 @@ angular.module('mobileMoneyApp')
   // controller which actually processes withdrawal transaction
   .controller('processWithCtrl', ['$rootScope', '$scope', '$http', '$stateParams', '$state',
   	function($rootScope, $scope, $http, $stateParams, $state){
+		// var testDate = new Date().format('d-m-Y');
+		// console.log(testDate);
 		
         // show modal when client submits form
         $(document).ready(function(){
@@ -116,7 +118,9 @@ angular.module('mobileMoneyApp')
             dismissible: false,
             opacity: '.5'
           });
-
+  		  $rootScope.accountId = $stateParams.accId;
+  		  console.log($rootScope.accountId);
+		
           // request to mobile money engine
           $scope.accountId = "4904123";
 	      var requestUrl = baseUrl + "?phone=" + $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId=" + clientId + "&accountId=" + $scope.accountId;
@@ -132,7 +136,7 @@ angular.module('mobileMoneyApp')
 		  // now effect changes on the mifos platform
 		  // TODO: actually use the amount
 		  var mifosUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
-		  var changeRequestUrl = mifosUrl + "savingsaccounts/" + 321 + "/transactions?command=withdrawal";
+		  var changeRequestUrl = mifosUrl + "savingsaccounts/" + $rootScope.accountId + "/transactions?command=withdrawal";
 		  console.log(changeRequestUrl);
 		  
 		  $http({

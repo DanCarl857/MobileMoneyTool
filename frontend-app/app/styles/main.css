@@ -333,6 +333,7 @@ table {
 .whiteBtn {
 	color: grey;
 	background-color: white;
+	display: none;
 }
 .whiteBtn:hover{
 	color: grey;

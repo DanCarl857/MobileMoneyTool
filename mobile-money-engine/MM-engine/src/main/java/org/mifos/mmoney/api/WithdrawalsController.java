@@ -57,6 +57,15 @@ public class WithdrawalsController {
 			RestTemplate restTemplate = new RestTemplate();
 		    String response = restTemplate.getForObject(url, String.class, params);
 		    System.out.println("result: " + response);
+		    
+		    /* 
+			 * error handling: rudimentary but necessary
+			 */
+			if(response.contains("error")){
+				System.out.println("Error making request to Mobile money api.");
+				return new ResponseEntity<String>("\"Withdrawals failure\"", HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		    
 			/*
 			 * Since transaction was successfully  carried out save it to the database
 			 */

@@ -110,6 +110,9 @@ angular.module('mobileMoneyApp')
               dismissible: false,
               opacity: '.5'
             });
+			
+    		$rootScope.accountId = $stateParams.accId;
+    		console.log($rootScope.accountId);
 
             $scope.accountId = "4904123";
   	      	var srequestUrl = baseUrl + "?phone="+ $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId="+ clientId + "&accountId=" + $scope.accountId;
@@ -119,11 +122,9 @@ angular.module('mobileMoneyApp')
             }).success(function(data){
               $scope.data = data;
 
-			  // now effect changes on the mifos platform
-			  // TODO: actually use the amount
+			 
 			  var mifosUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
-			  var changeRequestUrl = mifosUrl + "savingsaccounts/" + 321 + "/transactions?command=deposit";
-			  console.log(changeRequestUrl);
+			  var changeRequestUrl = mifosUrl + "savingsaccounts/" + $rootScope.accountId + "/transactions?command=deposit";
 			  
 			  $http({
 			      url: changeRequestUrl,

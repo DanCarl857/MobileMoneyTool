@@ -24,7 +24,7 @@
 							<td>{{acc.accountNo}}</td>
 							<td>{{acc.productName}}</td>
 							<td ng-model="bal">{{acc.accountBalance}}</td>
-							<td><a href="#/processSavings" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
+							<td><a href="#/processSavings" ui-sref="processSavings({accId: {{acc.id}} })" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
 						</tr>
 					</tbody>
 				</table>

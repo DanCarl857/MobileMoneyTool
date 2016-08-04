@@ -122,6 +122,9 @@ angular.module('mobileMoneyApp')
               dismissible: false,
               opacity: '.5'
             });
+			
+    		  $rootScope.accountId = $stateParams.accId;
+    		  console.log($rootScope.accountId);
 
             var sendRequestUrl = baseUrl + "?phone=" + $scope.phone + "&amount=" + $scope.amount + "&recipient=" + $scope.rec_name + "&clientId=" + clientId;
             $http({
@@ -133,7 +136,7 @@ angular.module('mobileMoneyApp')
 			  // now effect changes on the mifos platform
 			  // TODO: make use of service for all this
 			  var mifosUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
-			  var changeRequestUrl = mifosUrl + "savingsaccounts/" + 321 + "/transactions?command=withdrawal";
+			  var changeRequestUrl = mifosUrl + "savingsaccounts/" + $rootScope.accountId + "/transactions?command=withdrawal";
 			  console.log(changeRequestUrl);
 			  
 			  $http({

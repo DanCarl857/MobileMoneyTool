@@ -45,19 +45,30 @@ angular
 	  // start of partials
 	  
 	  .state('processSavings', {
-		  url: '/processSavings',
+		  url: '/processSavings/:accId',
 		  templateUrl: '/processSave.htm',
 		  controller: 'processSaveCtrl'
 	  })
 	  
 	  .state('processLoanRepayment', {
-		  url: '/processLoans',
+		  url: '/processLoans/:accId',
 		  templateUrl: '/processLoan.htm',
 		  // controller: 'processLoanCtrl'
 	  })
 	  
+	  .state('processLoansWithSavings', {
+		  url: '/processLoanWithSavings',
+		  templateUrl: '/processLoanWithSavings.htm'
+	  })
+	  
+	  .state('processLoansFinale', {
+		  url: '/processLoansFinale',
+		  templateUrl: '/processLoansFinale.htm', 
+		  // controller: "this controller"
+	  })
+	  
 	  .state('processWithdrawals', {
-	  	  url: '/processWithdrawals',
+	  	  url: '/processWithdrawals/:accId',
 		  templateUrl: '/processWith.htm',
 		  controller: 'processWithCtrl'
 	  })

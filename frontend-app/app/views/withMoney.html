@@ -4,7 +4,7 @@
 		  <img src="images/cubic_loader.gif">
         </div>
       <div class="row" ng-hide="loading">
-        <div class="col s9">
+        <div class="col s8">
          <div class="row">
             <span class="medText" style="font-size: 40px;">{{clientName}}</span>&nbsp;&nbsp;<span>Client#: <span class="nameStyle robotoLight">{{accountNo}}</span></span> &nbsp;&nbsp;<span style="font-size: 12px;">|</span>&nbsp;&nbsp;Assigned Staff: <span class="nameStyle robotoLight">{{staffName}}</span></span>
           </div>
@@ -24,7 +24,7 @@
 							<td>{{acc.accountNo}}</td>
 							<td>{{acc.productName}}</td>
 							<td ng-model="bal">{{acc.accountBalance}}</td>
-							<td><a href="#/processWithdrawals" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
+							<td><a href="#/processWithdrawals" ui-sref="processWithdrawals({accId: {{acc.id}} })" class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
 						</tr>
 					</tbody>
 				</table>	
@@ -45,7 +45,7 @@
           	<div class="row withMBox">
             <form class="col s8" name="withForm" ng-submit="submitForm(withForm.$valid)" novalidate>
               <div class="row" style="text-align: center;">
-                <span class="xlargeText robotoLight withHHead">Withdraw Money Into MM Account</span>
+                <span class="xlargeText robotoLight withHHead">Withdraw Money Into MM Account From MFI account</span>
               </div>
               <div class="row">
                 <span class="xlargeText robotoThin">Current Balance: {{accountBalance}}</span>
