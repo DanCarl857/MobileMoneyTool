@@ -68,7 +68,7 @@ angular
 	  })
 	  
 	  .state('processWithdrawals', {
-	  	  url: '/processWithdrawals/:accId',
+	  	url: '/processWithdrawals/:accId',
 		  templateUrl: '/processWith.htm',
 		  controller: 'processWithCtrl'
 	  })
@@ -103,7 +103,13 @@ angular
         url: '/loans/:id',
         templateUrl: 'views/loanRepayment.html',
         // contorller: 'loanCtrl'
-      });
+      })
+	  
+	  .state('disburseLoans', {
+		  url: '/disburseLoans/:id',
+		  templateUrl: 'views/loanDisbursals.html',
+		  controller: 'loanDisbursalCtrl'
+	  });
 
       $urlRouterProvider.otherwise('/login');
   });
