@@ -79,6 +79,23 @@ angular
 		  controller: 'processSendCtrl'
 	  })
 	  
+	  .state('processDisbursals', {
+		  url: '/processDisbursals/:accId',
+		  templateUrl: '/processDisbursals.htm',
+		  // controller: 'processDisbursalCtrl'
+	  })
+	  
+	  .state('processDisbursalsToSavings', {
+		  url: '/processDisbursalsToSavings',
+		  templateUrl: '/processDisbursalsToSavings.htm',
+		  // controller: 'disburseToSavingsCtrl'
+	  })
+	  
+	  .state('processDisbursalsMoMo', {
+		  url: '/processDisbursalsMoMo',
+		  templateUrl: '/processDisbursalsMoMo.htm'
+	  })
+	  
 	  // end of partials
 
       .state('sendMoney', {

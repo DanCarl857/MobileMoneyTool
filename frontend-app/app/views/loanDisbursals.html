@@ -28,7 +28,7 @@
 							<td>{{acc.originalLoan}}</td>
 							<td>{{acc.loanBalance}}</td>
 							<td>{{acc.amountPaid}}</td>
-							<td><a href="#/processLoans" ui-sref="processLoanRepayment({accId: {{acc.id}} })" class="btn" ng-class="acc.status.active && !acc.status.closed && !acc.status.waitingForDisbursal ? 'blue' : 'whiteBtn'">Credit</a></td>
+							<td><a href="#/processDisbursals" ui-sref="processDisbursals({accId: {{acc.id}} })" class="btn" ng-class="!acc.status.active && !acc.status.closed && !acc.status.pendingApproval ? 'blue' : 'whiteBtn'">Disburse</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -44,6 +44,88 @@
 			  </div>
 		  </div>
 		  
+		  <!-- Partial views -->
+		  <!-- Partial view to give option for client to choose where to disburse loan to -->
+		  <script type="text/ng-template" id="/processDisbursals.htm">
+			<br><br>
+  			<div class="row" id="loanThingz" ng-controller="disburseToSavingsCtrl">
+				<center><span style="font-size: 25px;width: 60%" class="robotoThin">Choose Method</span></center>
+				<center><br><br>
+  				<form class="center-align" style="width: 80%">
+  					<div class="col s6 left">
+  						<a ng-click="disburseToSavings()" class="btn waves-effect waves-light blue lighten-1">Disburse loan to a Savings Account<i class="material-icons right">payment</i></a>
+  					</div>
+  					<div class="col s6 right">
+  						<a class="btn waves-effect waves-light orange lighten-1" href="#/processDisbursalsMoMo">Disburse to Mobile Money Account<i class="material-icons right">receipt</i></a>
+  					</div>
+  				</form>
+				</center>
+  			</div>
+            <!-- Modal Structure -->
+              <div id="loanDisbursalToSavings" class="modal">
+                  <div class="modal-content">
+                    <span class="robotoThin" style="font-size: 25px;">Please wait....Processing request</span>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="progress">
+                      <div class="indeterminate"></div>
+                    </div>
+                  </div>
+              </div>
+			</script>
+			
+			<!-- handle loan disbursals by mobile money -->
+			  <script type="text/ng-template" id="/processDisbursalsMoMo.htm">
+	          <div class="row withMBox" ng-controller="disburseToSavingsCtrl">
+	            <form class="col s8" name="disburseForm" ng-submit="submitDisbursalForm(disburseForm.$valid)" novalidate>
+	              <div class="row" style="text-align: center;">
+	                <span class="xlargeText robotoLight" style="color: #ffa726">Repay Loans using MM Account</span>
+	              </div>
+	              <div class="row">
+	              	<div class="col s6">
+	                	<span class="largeText robotoReg">Current Balance: 65000</span>
+	                </div>
+	                <div class="col s6">
+	                	<span class="largeText roboReg" style="color: red">Current loans: 5000</span>
+	                </div>
+	              </div>
+	              <div class="row">
+	                <div class="input-field" ng-class="{'has-error': disburseForm.amount.$invalid && !disburseForm.amount.$pristine }">
+	                  <i class="material-icons prefix">attach_money</i>
+	                  <input name="amount" id="icon_prefix" ng-model="amount" type="number" ng-minlength="1" required>
+	                  <label for="icon_prefix">Enter Amount</label>
+	                  <p ng-show="(disburseForm.amount.$invalid && !disburseForm.amount.$pristine) && submitted" class="errorMsg">Amount is required.</p>
+	                </div>
+	              </div>
+	              <div class="row">
+	                <div class="input-field" ng-class="{ 'has-error': disburseForm.phone.$invalid && !disburseForm.phone.$pristine }">
+	                  <i class="material-icons prefix">phone</i>
+	                  <input name="phone" type="number" id="phoneNumber" ng-model="phoneNumber" ng-minlength="8" required>
+	                  <label for="icon_prefix">Phone Number</label>
+	                  <p ng-show="disburseForm.phone.$error.minlength && submitted" class="errorMsg">Phone number is too short.</p>
+	                  <p ng-show="(disburseForm.phone.$invalid && !disburseForm.phone.$pristine) && submitted" class="errorMsg">Phone number is required.</p>
+	                </div>
+	              </div>
+	              <br><br>
+	              <div class="row">
+	                  <a class="btn waves-effect waves-light black left" ng-click="goBack()">Cancel<i class="material-icons right">clear</i></a>
+	                  <button class="btn waves-effect waves-light orange lighten-1 right" ng-click="submitDisbursalForm()">Submit<i class="material-icons right">send</i></button>
+	              </div>
+	            </form>
+	          </div>
+	          <!-- Modal Structure -->
+	            <div id="loanDisbursalToMoMo" class="modal">
+	                <div class="modal-content">
+	                  <span class="robotoThin" style="font-size: 25px;">Please wait....Processing request</span>
+	                </div>
+	                <div class="modal-footer">
+	                  <div class="progress">
+	                    <div class="indeterminate"></div>
+	                  </div>
+	                </div>
+	            </div>
+		  	</script>
+
         </div>
         <div class="col s4 resetSize">
           <div class="clientBox" style="width: 100%">

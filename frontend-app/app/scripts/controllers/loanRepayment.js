@@ -178,6 +178,7 @@ angular.module('mobileMoneyApp')
 	        // function to clean up
 	        $scope.cleanUp = function(){
 			  console.log("Now cleaning up modal thingz :-)");
+			  $('.lean-overlay').remove();
 	          $('#loanRepayModal').closeModal();
 	          $scope.amount = '';
 	          $scope.phoneNumber = '';

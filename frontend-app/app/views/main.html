@@ -23,7 +23,7 @@
                 </tr>
               </thead>
               <tbody class="clientInfo" ng-hide="loading">
-                <tr dir-paginate="client in clients | filter:search | itemsPerPage: 6" class="tableStyle">
+                <tr dir-paginate="client in clients | filter:search | itemsPerPage: 6" class="pointer tableHover">
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.displayName}}</a></td>
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">{{client.accountNo}}</a></td>
                   <td><a ui-sref="clientPage({id: (client.id)})" href="#/client/client.id">

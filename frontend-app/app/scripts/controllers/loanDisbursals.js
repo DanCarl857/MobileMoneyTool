@@ -6,6 +6,7 @@ angular.module('mobileMoneyApp')
       // client's details
       $rootScope.clientId = $stateParams.id;
 	  $rootScope.accountNo = '';
+	  $rootScope.dateToUse = '';
 	  $rootScope.accountId = '';
       $scope.clientNo = '';
       $scope.clientName = '';
@@ -57,6 +58,7 @@ angular.module('mobileMoneyApp')
           	$scope.staffName = $scope.data.staffName;
           	$scope.activDate = new Date($scope.data.activationDate);
 			$scope.activationDate = $scope.activDate.toDateString();
+			$rootScope.dateToUse = $scope.activationDate.substring(4);
           	$scope.officeName = $scope.data.officeName;
           	$scope.userName = $scope.data.timeline.activatedByUsername;
 
@@ -84,17 +86,51 @@ angular.module('mobileMoneyApp')
           /* ====================================================== */
 }])
 
-.controller('processLoanCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', '$state',
+.controller('disburseToSavingsCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', '$state',
 	function($rootScope, $scope, $http, $timeout, $stateParams, $state){
 		
 		$rootScope.accountId = $stateParams.accId;
-		console.log($rootScope.accountId);
 		
         // show modal when client submits form
         $(document).ready(function(){
           	$('.modal-trigger').leanModal();
   			$('.collapsible').collapsible();
         });
+		
+	  // function to handle loan disbursals to a savings account
+	  $scope.disburseToSavings = function(accId){
+		  var uri = "https://demo.openmf.org/fineract-provider/api/v1/loans" + $rootScope.accountId + "?command=disburseToSavings";
+		  console.log(uri);
+		  
+          $('#loanDisbursalToSavings').openModal({
+            dismissible: false,
+            opacity: '.5'
+          });
+		  
+		  var disburseDate = $rootScope.dateToUse;
+		  
+		  $http({
+			  method: "POST",
+			  url: uri,
+			  data: {
+				    "dateFormat": "MMMM dd yyyy",
+				    "locale": "en",
+				    "transactionAmount":"",
+				    "fixedEmiAmount": "",
+				    "actualDisbursementDate": disburseDate,
+				    "note": "Disbursing to savings account using Mobile Money application"
+			  }
+		  }).success(function(data){
+			  console.log("successfully disbursed to savings account");
+			  console.log(data);
+              Materialize.toast('Loan successfully disbursed to Savings account', 6000, 'rounded');
+              $('#loanDisbursalToSavings').closeModal();
+		  }).error(function(data){
+			  console.log("Failed to disburse to savings account");
+              Materialize.toast('Failure to disburse loans. You should try disbursing by cash', 6000, 'rounded');
+              $('#loanDisbursalToSavings').closeModal();
+		  })
+	  }
 	
 		// data fields
         $scope.amount = '';
@@ -131,10 +167,10 @@ angular.module('mobileMoneyApp')
 			      url: changeRequestUrl,
 			      method: "POST",
 			      data: { 
-					  "locale" : "en",
-					  "dateFormat": "dd MMMM yyyy",
-					  "transactionDate": "1 Aug 2016",
-					  "transactionAmount": $scope.amount,
+				  "locale" : "en",
+				  "dateFormat": "dd MMMM yyyy",
+				  "transactionDate": "1 Aug 2016",
+				  "transactionAmount": $scope.amount,
   				  "paymentTypeId": "",
   			      "accountNumber": "",
   			      "checkNumber": "",
@@ -159,11 +195,90 @@ angular.module('mobileMoneyApp')
             Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
           });
       	};
+		
+		/* ******************* */
+		// data fields
+        $scope.amount = '';
+        $scope.phoneNumber = '';
+
+        $scope.submitted = true;
+        var baseUrl = "http://localhost:8090/api/v1/withdrawals";
+
+        // function to submit the form after all form validation
+        $scope.submitDisbursalForm = function(){
+			
+           // Check to make sure the form is completely valid
+           if($scope.disburseForm.$valid){
+             $scope.submitted = false;
+             $scope.loanRequest($rootScope.clientId);
+           }
+        };
+	
+      	// function to handle requests to the mobile money engine
+      	$scope.loanRequest = function(clientId){
+          // open the modal
+          $('#loanDisbursalToMoMo').openModal({
+            dismissible: false,
+            opacity: '.5'
+          });
+
+          // request to mobile money engine
+          $scope.accountId = "4904123";
+	      var requestUrl = baseUrl + "?phone=" + $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId=" + clientId + "&accountId=" + $scope.accountId;
+		  
+		  console.log(requestUrl);
+      
+		  // make request to the mobile money engine
+          $http({
+            method: "GET",
+            url: requestUrl
+          }).success(function(data){
+            $scope.data = data;
+		
+			// TODO: make request to effect this change on the mifos platform
+		  // now effect changes on the mifos platform
+		  var mifosUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
+		  var changeRequestUrl = mifosUrl + "loans/" + $rootScope.accountId + "/transactions?command=repayment";
+		  console.log(changeRequestUrl);
+		  
+		  $http({
+		      url: changeRequestUrl,
+		      method: "POST",
+		      data: { 
+				  "locale" : "en",
+				  "dateFormat": "dd MMMM yyyy",
+				  "transactionDate": "1 Aug 2016",
+				  "transactionAmount": $scope.amount,
+				  "paymentTypeId": "",
+			      "accountNumber": "",
+			      "checkNumber": "",
+				  "routingCode": "",
+				  "receiptNumber": "",
+				  "bankNumber": ""
+		      }
+		  }).success(function(data){
+			  console.log("Successfully deposited");
+		  }).error(function(data){
+		  	  console.log("Failed to do a deposit");
+		  });
+		  
+            console.log("Success with withdrawals for loan");
+
+            // close the modal and clean up 
+            Materialize.toast('Transaction successful', 6000, 'rounded');
+            $scope.cleanUp();
+          }).error(function(data){
+            // close the modal and clean up 
+			$scope.cleanUp();
+            Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
+          });
+      	};
 
         // function to clean up
         $scope.cleanUp = function(){
 		  console.log("Now cleaning up modal thingz :-)");
-          $('#loanRepayModal').closeModal();
+		  $('.lean-overlay').remove();
+          $('#loanDisbursalToMoMo').closeModal();
           $scope.amount = '';
           $scope.phoneNumber = '';
         };
