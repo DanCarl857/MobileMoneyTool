@@ -1,7 +1,9 @@
 'use strict';
+/* global $ */
+/* global Materialize */
 angular.module('mobileMoneyApp')
-  .controller('loanDisbursalCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', '$state', 
-	function ($rootScope, $scope, $http, $timeout, $stateParams, $state) {
+  .controller('loanDisbursalCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', 
+	function ($rootScope, $scope, $http, $timeout, $stateParams) {
   	   
       // client's details
       $rootScope.clientId = $stateParams.id;
@@ -73,21 +75,21 @@ angular.module('mobileMoneyApp')
 					$scope.loanAccounts = response.loanAccounts;
 					$rootScope.savingsAccounts = response.savingsAccounts;
 					$scope.loading = false;
-          	}).error(function(data){
+          	}).error(function(){
           		console.log("Error retrieving client account information");
-          	})
-        }).error(function(data){
+          	});
+        }).error(function(){
           console.log("Error retrieving client data");
         });
-      }).error(function(data){
+      }).error(function(){
         console.log("Error authenticating in client_page");
       });
 
           /* ====================================================== */
 }])
 
-.controller('disburseToSavingsCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', '$state',
-	function($rootScope, $scope, $http, $timeout, $stateParams, $state){
+.controller('disburseToSavingsCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams',
+	function($rootScope, $scope, $http, $timeout, $stateParams){
 		
 		$rootScope.accountId = $stateParams.accId;
 		
@@ -98,7 +100,7 @@ angular.module('mobileMoneyApp')
         });
 		
 	  // function to handle loan disbursals to a savings account
-	  $scope.disburseToSavings = function(accId){
+	  $scope.disburseToSavings = function(){
 		  var uri = "https://demo.openmf.org/fineract-provider/api/v1/loans" + $rootScope.accountId + "?command=disburseToSavings";
 		  console.log(uri);
 		  
@@ -120,17 +122,16 @@ angular.module('mobileMoneyApp')
 				    "actualDisbursementDate": disburseDate,
 				    "note": "Disbursing to savings account using Mobile Money application"
 			  }
-		  }).success(function(data){
+		  }).success(function(){
 			  console.log("successfully disbursed to savings account");
-			  console.log(data);
               Materialize.toast('Loan successfully disbursed to Savings account', 6000, 'rounded');
               $('#loanDisbursalToSavings').closeModal();
-		  }).error(function(data){
+		  }).error(function(){
 			  console.log("Failed to disburse to savings account");
               Materialize.toast('Failure to disburse loans. You should try disbursing by cash', 6000, 'rounded');
               $('#loanDisbursalToSavings').closeModal();
-		  })
-	  }
+		  });
+	  };
 	
 		// data fields
         $scope.amount = '';
@@ -178,9 +179,9 @@ angular.module('mobileMoneyApp')
   				  "receiptNumber": "",
   				  "bankNumber": ""
 			      }
-			  }).success(function(data){
+			  }).success(function(){
 				  console.log("Successfully deposited");
-			  }).error(function(data){
+			  }).error(function(){
 			  	  console.log("Failed to do a deposit");
 			  });
 		  
@@ -189,7 +190,7 @@ angular.module('mobileMoneyApp')
             // close the modal and clean up 
             Materialize.toast('Transaction successful', 6000, 'rounded');
             $scope.cleanUp();
-          }).error(function(data){
+          }).error(function(){
             // close the modal and clean up 
 			$scope.cleanUp();
             Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
@@ -256,9 +257,9 @@ angular.module('mobileMoneyApp')
 				  "receiptNumber": "",
 				  "bankNumber": ""
 		      }
-		  }).success(function(data){
+		  }).success(function(){
 			  console.log("Successfully deposited");
-		  }).error(function(data){
+		  }).error(function(){
 		  	  console.log("Failed to do a deposit");
 		  });
 		  
@@ -267,7 +268,7 @@ angular.module('mobileMoneyApp')
             // close the modal and clean up 
             Materialize.toast('Transaction successful', 6000, 'rounded');
             $scope.cleanUp();
-          }).error(function(data){
+          }).error(function(){
             // close the modal and clean up 
 			$scope.cleanUp();
             Materialize.toast('Transaction unsuccessful', 6000, 'rounded');

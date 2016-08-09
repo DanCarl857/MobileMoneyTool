@@ -6,9 +6,9 @@
       <div class="row" ng-hide="loading">
         <div class="col s8">
           <div class="row">
-            <span class="medText" style="font-size: 30px">{{clientName}}</span>&nbsp;&nbsp;<span>Client#: <span class="nameStyle robotoLight">{{accountNo}}</span></span> &nbsp;&nbsp;<span style="font-size: 12px;">|</span>&nbsp;&nbsp;<span>Assigned Staff: <span class="nameStyle robotoLight">{{staffName}}</span></span>
+            <span style="font-size: 25px">{{clientName}}</span>&nbsp;&nbsp;<span>Client#: <span class="nameStyle robotoLight">{{accountNo}}</span></span> &nbsp;&nbsp;<span style="font-size: 10px;">|</span>&nbsp;&nbsp;<span>Assigned Staff: <span class="nameStyle robotoLight">{{staffName}}</span></span>
           </div>
-          <div class="row">
+          <div class="row" style="font-size: 15px">
             <div class="row">
               <a class="btn-large waves-effect waves-light  yellow lighten-1" ui-sref="withdrawMoney({id: (clientId), name: (clientName)})" href="#/withMoney/{{clientId}}" style="color: rgba(0, 0, 0, 0.6)">Withdraw Money Into MM account<i class="material-icons right">eject</i></a>
             </div>
@@ -16,7 +16,7 @@
               <a class="btn-large waves-effect waves-light orange lighten-1" href="#/loans/{{clientId}}">Loan Repayments<i class="material-icons right">receipt</i></a>
             </div>
             <div class="row">
-              <a class="btn-large waves-effect waves-light blue darken-1" href="#/disburseLoans/{{clientId}}">Loan Disbursals<i class="material-icons right">receipt</i></a>
+              <a class="btn-large waves-effect waves-light blue darken-1" href="#/disburseLoans/{{clientId}}">Loan Disbursals<i class="material-icons right">import_export</i></a>
             </div>
             <div class="row">
               <a class="btn-large waves-effect waves-light blue lighten-1" href="#/saveMoney/{{clientId}}">Save Money From MM account<i class="material-icons right">payment</i></a>
@@ -38,7 +38,7 @@
             <div class="row">
               <center><img src="images/client-image-placeholder.png"></center>
             </div>
-            <div class="row summaryInfo">
+            <div class="row summaryInfo" style="font-size: 15px">
               <div class="sumHead" style="text-align: center;">&nbsp;Client Information</div><br>
             	<span>Activation Date: <span class="robotoLight">&nbsp;{{activationDate}}</span></span><br>
             	<span>Staff Member: <span class="robotoLight">&nbsp;{{staffName}}</span></span><br>

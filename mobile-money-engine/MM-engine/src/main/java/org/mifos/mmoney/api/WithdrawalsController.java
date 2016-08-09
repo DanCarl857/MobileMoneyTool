@@ -63,7 +63,7 @@ public class WithdrawalsController {
 			 */
 			if(response.contains("error")){
 				System.out.println("Error making request to Mobile money api.");
-				return new ResponseEntity<String>("\"Withdrawals failure\"", HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<String>("\"Withdrawals failure\"", HttpStatus.EXPECTATION_FAILED);
 			}
 		    
 			/*

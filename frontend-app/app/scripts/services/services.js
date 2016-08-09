@@ -1,17 +1,31 @@
-'use strict'
-/* global $ */
+'use strict';
 
 angular.module('mobileMoneyApp')
 	/* factory for authentication */
 	.factory('authFactory', ['$http',
 		function($http){
 		
-		var baseUrl = "";
+		var baseUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
 		var authFactory = {};
 		
 		authFactory.getAuthKey = function(username, password){
-			return $http.post(baseUrl, username, password);
+	        var loginCreds = {};
+	        loginCreds.username = "mifos";
+	        loginCreds.password = "password";
+			
+	        var config = {
+	          cache: false,
+	          dataType: 'json',
+	          contentType: "application/json; charset=utf-8"
+	        };
+			
+			var authKeyRequest = baseUrl + "authentication?username="+ loginCreds.username + "&password=" + loginCreds.password + "&" 									+ "tenantIdentifier=default";
+			return $http.post(authKeyRequest, config);
 		};
+		
+		authFactory.setBasicAuthKey = function(key){
+			$http.defaults.headers.common['Authorization'] = 'Basic ' + key;
+		}
 		
 		return authFactory;
 	}])
@@ -19,15 +33,15 @@ angular.module('mobileMoneyApp')
 	/* factory to get client data */
 	.factory('dataFactory', ['$http', function($http){
 		
-		var urlBase = '';
+		var urlBase = "https://demo.openmf.org/fineract-provider/api/v1/";
 		var dataFactory = {};
 		
 		dataFactory.getAllClients = function(){
-			return $http.get(urlBase + "/clients");
+			return $http.get(urlBase + "clients");
 		};
 		
 		dataFactory.getClient = function(clientId){
-			return $http.get(urlBase + "/clients/" + clientId);
+			return $http.get(urlBase + "clients/" + clientId);
 		};
 		
 		dataFactory.getClientAccounts = function(clientId){

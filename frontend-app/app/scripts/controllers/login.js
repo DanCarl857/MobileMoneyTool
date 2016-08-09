@@ -1,6 +1,7 @@
 'use strict';
 angular.module('mobileMoneyApp')
-  .controller('userLoginCtrl', ['$scope', '$state', function ($scope, $state, loginService) {
+  .controller('userLoginCtrl', ['$scope', '$http', '$state', 
+	function ($scope, $http, $state) {
   	   
        // variable to verify if the form has been submitted
       $scope.submitted = true;

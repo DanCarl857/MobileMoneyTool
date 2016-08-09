@@ -1,9 +1,10 @@
 'use strict';
 /* global $ */
+/* Materialize */
 
 angular.module('mobileMoneyApp')
-	.controller('loanCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', '$state', 
-		function($rootScope, $scope, $http, $timeout, $stateParams, $state){
+	.controller('loanCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', 
+		function($rootScope, $scope, $http, $timeout, $stateParams){
 			
         // client's details
         $rootScope.clientId = $stateParams.id;
@@ -73,21 +74,21 @@ angular.module('mobileMoneyApp')
   					$scope.loanAccounts = response.loanAccounts;
   					$rootScope.savingsAccounts = response.savingsAccounts;
   					$scope.loading = false;
-            	}).error(function(data){
+            	}).error(function(){
             		console.log("Error retrieving client account information");
             	})
-          }).error(function(data){
+          }).error(function(){
             console.log("Error retrieving client data");
           });
-        }).error(function(data){
+        }).error(function(){
           console.log("Error authenticating in client_page");
         });
 
             /* ====================================================== */
 	}])
 	
-	.controller('processLoanCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', '$state',
-		function($rootScope, $scope, $http, $timeout, $stateParams, $state){
+	.controller('processLoanCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams',
+		function($rootScope, $scope, $http, $timeout, $stateParams){
 			
 			$rootScope.accountId = $stateParams.accId;
 			console.log($rootScope.accountId);
@@ -157,9 +158,9 @@ angular.module('mobileMoneyApp')
     				  "receiptNumber": "",
     				  "bankNumber": ""
   			      }
-  			  }).success(function(data){
+  			  }).success(function(){
   				  console.log("Successfully deposited");
-  			  }).error(function(data){
+  			  }).error(function(){
   			  	  console.log("Failed to do a deposit");
   			  });
 			  
@@ -168,7 +169,7 @@ angular.module('mobileMoneyApp')
 	            // close the modal and clean up 
 	            Materialize.toast('Transaction successful', 6000, 'rounded');
 	            $scope.cleanUp();
-	          }).error(function(data){
+	          }).error(function(){
 	            // close the modal and clean up 
 				$scope.cleanUp();
 	            Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
@@ -190,8 +191,8 @@ angular.module('mobileMoneyApp')
 	        };
 	}])
 	
-	.controller("processLoansWithSavingsCtrl", ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', '$state',
-		function($rootScope, $scope, $http, $timeout, $stateParams, $state){
+	.controller("processLoansWithSavingsCtrl", ['$rootScope', '$scope', '$http', '$stateParams',
+		function($rootScope, $scope, $http, $stateParams){
 	        // show modal when client submits form
 	        $(document).ready(function(){
 	          	$('.modal-trigger').leanModal();
@@ -240,7 +241,7 @@ angular.module('mobileMoneyApp')
 	            // close the modal and clean up 
 	            Materialize.toast('Transaction successful', 6000, 'rounded');
 	            $scope.cleanUp();
-	          }).error(function(data){
+	          }).error(function(){
 	            // close the modal and clean up 
 				$scope.cleanUp();
 	            Materialize.toast('Transaction unsuccessful', 6000, 'rounded');

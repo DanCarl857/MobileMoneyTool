@@ -62,7 +62,7 @@ public class SendMoneyController {
 			 */
 			if(response.contains("error")){
 				System.out.println("Error making request to Mobile money api.");
-				return new ResponseEntity<String>("\"Money transfer failure\"", HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<String>("\"Money transfer failure\"", HttpStatus.EXPECTATION_FAILED);
 			}
 			
 			/*

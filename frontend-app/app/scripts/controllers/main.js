@@ -1,5 +1,4 @@
 'use strict';
-/*global $ */
 
 angular.module('mobileMoneyApp')
   .controller('mainCtrl', ['$rootScope', '$http', '$scope',
@@ -10,7 +9,6 @@ angular.module('mobileMoneyApp')
 
       $scope.loading = true;
 
-      var service = {};
       var baseApiUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
       var endUrl = "tenantIdentifier=default";
       var basicAuthKey;
@@ -43,11 +41,11 @@ angular.module('mobileMoneyApp')
 				$scope.totalClients = data.totalFilteredRecords;
                 $scope.loading = false;
               })
-              .error(function(data){
+              .error(function(){
                 console.log("Error getting clients");
               });
           })
-          .error(function(data){
+          .error(function(){
             console.log("Error authenticating in main");
           });
   }]);

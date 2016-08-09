@@ -56,7 +56,7 @@ public class SavingsController {
 			 */
 			if(resp.contains("error")){
 				System.out.println("Error making request to Mobile money api.");
-				return new ResponseEntity<String>("\"Savings failure\"", HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<String>("\"Savings failure\"", HttpStatus.EXPECTATION_FAILED);
 			}
 			
 			/*
