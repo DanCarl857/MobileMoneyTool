@@ -1,7 +1,7 @@
 <div class="robotoReg">
       <!-- spinner -->
         <div class="spinner" ng-show="loading">
-		  <img src="images/cubic_loader.gif">
+		  <img src="images/default.gif">
         </div>
       <div class="row" ng-hide="loading">
         <div class="col s8">
@@ -10,7 +10,7 @@
           </div>
 		  <div class="row">
 			  <div class="col s12" style="position: relative; left: 1%;" style="font-size: 14px">				
-	        	<table class="bordered centered responsive-table">
+	        	<table class="bordered centered responsive-table" style="font-size: 14px;">
 					<thead style="background-color: rgba(0, 0, 0, 0.2)">
 	                    <th data-field="id">ID</th>
 	                    <th data-field="accountId">Account #</th>
@@ -76,7 +76,7 @@
 			
 			<!-- handle loan disbursals by mobile money -->
 			  <script type="text/ng-template" id="/processDisbursalsMoMo.htm">
-	          <div class="row withMBox" ng-controller="disburseToSavingsCtrl">
+	          <div class="row withMBox" ng-controller="disburseToMoMoCtrl">
 	            <form class="col s8" name="disburseForm" ng-submit="submitDisbursalForm(disburseForm.$valid)" novalidate>
 	              <div class="row" style="text-align: center;">
 	                <span class="xlargeText robotoLight" style="color: #ffa726">Repay Loans using MM Account</span>
@@ -108,7 +108,7 @@
 	              </div>
 	              <br><br>
 	              <div class="row">
-	                  <a class="btn waves-effect waves-light black left" ng-click="goBack()">Cancel<i class="material-icons right">clear</i></a>
+	                  <a class="btn waves-effect waves-light black left" ng-click="$root.goBack()">Cancel<i class="material-icons right">clear</i></a>
 	                  <button class="btn waves-effect waves-light orange lighten-1 right" ng-click="submitDisbursalForm()">Submit<i class="material-icons right">send</i></button>
 	              </div>
 	            </form>

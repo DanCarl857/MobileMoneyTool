@@ -94,7 +94,7 @@ body{
 
 .subButton{
 	position: relative;
-	left: 45%;
+	left: 35%;
 }
 
 .searchBtn {
@@ -102,7 +102,7 @@ body{
 	top: 20px;
 }
 
-.loginForm{
+.loginFormStyle{
 	position: relative;
 	left: 20%;
 }
@@ -263,11 +263,11 @@ tr.pointer-main:hover {
 
 .errorMsg {
 	position: relative;
-	left: 40%;
+	left: 30%;
 	color: red;
 	font-weight: bold;
 	font-size: 12px;
-	width: 50%;
+	width: 60%;
 }
 
 .genErrMsg {

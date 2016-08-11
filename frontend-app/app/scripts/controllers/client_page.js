@@ -1,18 +1,17 @@
 'use strict';
 
 angular.module('mobileMoneyApp')
-  .controller('clientCtrl', ['$scope', '$http', '$timeout', '$stateParams', 'authFactory', 'dataFactory',
-  	function ($scope, $http, $timeout, $stateParams, authFactory, dataFactory) {
+  .controller('clientCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', 'authFactory', 'dataFactory',
+  	function ($rootScope, $scope, $http, $timeout, $stateParams, authFactory, dataFactory) {
   	
 	$scope.clientId = $stateParams.id;
   	$scope.loading = true;
 	
 	
 	// authenticate user
-	authFactory.getAuthKey()
+	authFactory.getAuthKey($rootScope.username, $rootScope.password)
     	.then(function (response) {
 			var basicKey = response.data.base64EncodedAuthenticationKey;
-			console.log(basicKey);
 			authFactory.setBasicAuthKey(basicKey);
 	
 			// get client data

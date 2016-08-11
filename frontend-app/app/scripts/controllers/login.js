@@ -1,40 +1,44 @@
 'use strict';
 angular.module('mobileMoneyApp')
-  .controller('userLoginCtrl', ['$scope', '$http', '$state', 
-	function ($scope, $http, $state) {
+  .controller('userLoginCtrl', ['$rootScope', '$scope', '$state','$http', 'authFactory', 'utilFactory',
+	function ($rootScope, $scope, $state, $http, authFactory, utilFactory) {
   	   
        // variable to verify if the form has been submitted
       $scope.submitted = true;
       $scope.loginSuccessful = true;
 
-      $scope.username = '';
-      $scope.password = '';
-
-    	$scope.navigateTo = function(view){
-    		$state.transitionTo(view);
-    	};
-
-      // function to send name of staff member and office to api
-        $scope.makeRequest = function(){
-          var wReqUrl = 'http://localhost:8090/api/v1/create?staff="Marcus Brody"&office="Head Office"';
-          $http({
-            method: "GET",
-            url: wReqUrl
-          })
-          .success(function(data){
-            $scope.data = data;
-            console.log("data: " + $scope.data);
-          })
-          .error(function(data){
-            console.log("Error with initial creation" + data);
-          });
-        };
-
-    	console.log($state.current.name);
-
-    	$scope.checkLogin = function(){
-    		return false;
-    	};
-
-    	$scope.checkLogin();
+      $scope.submitLoginForm = function(){
+         // Check to make sure the form is valid
+         if($scope.loginForm.$valid){
+			 $rootScope.username = $scope.username;
+			 $rootScope.password = $scope.password;
+			 // show spinner
+		     $scope.loading = true;
+			 $scope.submitted = false;
+			 authFactory.getAuthKey($scope.username, $scope.password)
+			 	.then(function(response){
+					var basicKey = response.data.base64EncodedAuthenticationKey;
+					
+					// set authorization header
+					authFactory.setBasicAuthKey(basicKey);
+					
+					// initialize values for person carrying out transaction
+					utilFactory.initTransactions("test staff", "office test")
+						.then(function(response){
+							$state.transitionTo('home');
+						}, function(error){
+							console.log("Error initialising staff");
+						})
+			 	}, function(error){
+			 		 $scope.loginSuccessful = false;
+					 $scope.submitted = true;
+					 $scope.loading = false;
+			 	});
+           	 
+         } else{
+			 $scope.loading = false;
+	 		 $scope.loginSuccessful = false;
+			 $scope.submitted = true;
+         }
+      };
   }]);

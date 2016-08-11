@@ -5,18 +5,6 @@
 angular.module('mobileMoneyApp')
 	.controller('loanCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', 
 		function($rootScope, $scope, $http, $timeout, $stateParams){
-			
-        // client's details
-        $rootScope.clientId = $stateParams.id;
-		$rootScope.accountNo = '';
-		$rootScope.accountId = '';
-        $scope.clientNo = '';
-        $scope.clientName = '';
-        $scope.staffName = '';
-   	  	$scope.loanAccounts = [];
-  	  	$rootScope.savingsAccounts = [];
-  	  	$scope.accountBalance = "";
-  	  	$scope.bal = "";
 
         // show spinner
         $scope.loading = true;
@@ -24,7 +12,6 @@ angular.module('mobileMoneyApp')
         var baseApiUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
         var endUrl = "tenantIdentifier=default";
 
-        /* =================================================================== */
           var basicAuthKey;
           var loginCreds = {};
           loginCreds.username = "mifos";

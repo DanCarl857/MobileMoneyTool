@@ -1,13 +1,14 @@
 <!-- Dropdown Structure -->
-    <ul id="dropdown1" class="dropdown-content" style="font-size: 9px; color: black">
-      <li><a href="#!"><i class="material-icons left colorGrey" style="font-size: 18px;">info_outline</i><span style="color: black">Help</span></a></li>
-      <li><a href="#/home"><i class="material-icons left colorGrey" style="font-size: 18px;">power_settings_new</i><span style="color: black">LogOut</span></a></li>
+    <ul ng-controller="dropCtrl" id="dropdown1" class="dropdown-content" style="font-size: 9px; color: black">
+      <li><a><i class="material-icons left colorGrey" style="font-size: 13px;">info_outline</i><span style="color: black">Help</span></a></li>
+      <li><a><i class="material-icons left colorGrey" style="font-size: 13px;">power_settings_new</i><span style="color: black" ng-click="logout()">Log out</span></a></li>
     </ul>
       <!-- navigation bar -->
       <nav class="blue darken-1" ng-controller="navCtrl">
         <div class="nav-wrapper">
           <a href="#/home" class="brand-logo left" style="position: relative; left: 2%;"><img src="images/MifosX_logoSmall.png"></a>
           <ul id="nav-mobile" class="right hide-on-med-and-down" style="position: relative; right: 2%;">
+			<li><a href="#/home"><i class="material-icons left">group</i>Clients</a></li>
             <li><a href="#/transactions"><i class="material-icons left">visibility</i>Transactions</a></li>
             <li><a href="#/configurations"><i class="material-icons left">settings</i>Configurations</a></li>
             <!-- Triggers the dropdown -->

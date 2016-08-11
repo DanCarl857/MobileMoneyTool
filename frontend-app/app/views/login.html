@@ -14,27 +14,31 @@
             <p class="smallText">
               Version 01.00.01.RELEASE <br />
             Mobile Money Application is designed by the Mifos Initiative. A global community that aims to speed the elimination of poverty by enabling Organizations to more effectively and efficiently deliver responsible financial services to the world’s poor and unbanked <br />
-            Sounds interesting? <a href="https://github.com/DanCarl857/Mobile-application">Get involved!</a>
+            Sounds interesting? <a target="_blank" href="https://github.com/DanCarl857/Mobile-application">Get involved!</a>
             </p>
           </div>
         </div>
-        <div class="row loginForm">
+        <!-- spinner -->
+        <div class="spinner" ng-show="loading">
+  			<img src="images/cubic_loader.gif">
+        </div>
+        <div class="row loginFormStyle">
           <form class="col s10" name="loginForm" ng-submit="submitLoginForm(loginForm.$valid)" novalidate>
-            <div class="input-field col s5" ng-class="{'has-error': loginForm.amount.$invalid && !loginForm.amount.$pristine }">
+            <div class="input-field col s5" ng-class="{'has-error': loginForm.username.$invalid && !loginForm.username.$pristine }">
               <i class="material-icons prefix colorBlack">perm_identity</i>
-              <input placeholder="username" id="username" name="username" type="text" ng-minlength="3" required>
-              <p ng-show="(loginForm.amount.$invalid && !loginForm.amount.$pristine) && submitted" class="errorMsg">Username is required.</p>
+              <input placeholder="username" id="username" name="username" ng-model="username" type="text" required>
+              <p ng-show="(loginForm.username.$invalid && !loginForm.username.$pristine) && submitted" style="color: red; font-size: 12px">Username is required.</p>
             </div>
-            <div class="input-field col s5" ng-class="{'has-error': loginForm.amount.$invalid && !loginForm.amount.$pristine }">
+            <div class="input-field col s5" ng-class="{'has-error': loginForm.password.$invalid && !loginForm.password.$pristine }">
               <i class="material-icons prefix colorBlack">vpn_key</i>
-              <input placeholder="password" id="password" name="password" type="password" ng-minlength="8" required>
-              <p ng-show="(loginForm.amount.$invalid && !loginForm.amount.$pristine) && submitted" class="errorMsg">Username is required.</p>
+              <input placeholder="password" id="password" name="password" ng-model="password" type="password" required>
+              <p ng-show="(loginForm.password.$invalid && !loginForm.password.$pristine) && submitted" style="color: red; font-size: 12px">Password is required.</p>
             </div>
+	        <div class="row">
+	          <br><p class="errorMsg" ng-show="!loginSuccessful && submitted">Username or Password incorrect</p>
+	          <a class="btn waves-effect waves-light green subButton" ng-click="submitLoginForm()">Sign In</a>
+	        </div>
           </form>
-        </div>
-        <div class="row">
-          <p class="errorMsg" ng-show="!loginSuccessful && submitted">Username or Password incorrect</p>
-          <a class="btn waves-effect waves-light green subButton" ng-click="navigateTo('home')">Sign In</a>
-        </div>
+        </div>    
       </div>
   </div>

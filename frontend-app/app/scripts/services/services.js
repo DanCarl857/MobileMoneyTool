@@ -10,8 +10,8 @@ angular.module('mobileMoneyApp')
 		
 		authFactory.getAuthKey = function(username, password){
 	        var loginCreds = {};
-	        loginCreds.username = "mifos";
-	        loginCreds.password = "password";
+	        loginCreds.username = username;
+	        loginCreds.password = password
 			
 	        var config = {
 	          cache: false,
@@ -45,7 +45,7 @@ angular.module('mobileMoneyApp')
 		};
 		
 		dataFactory.getClientAccounts = function(clientId){
-			return $http.get(urlBase + "/clients/" + clientId + "/accounts");
+			return $http.get(urlBase + "clients/" + clientId + "/accounts");
 		};
 		
 		dataFactory.getClientImage = function(clientId){
@@ -58,7 +58,7 @@ angular.module('mobileMoneyApp')
 	/* mobile money engine processes */
 	.factory('mobileMoneyFactory', ['$http', function($http){
 		
-		var baseUrl = "";
+		var baseUrl = "http://localhost:8090/api/v1/";
 		var mobileMoneyFactory = {};
 		
 		mobileMoneyFactory.transactions = function(phone, amount, clientId, accountId, val){
@@ -85,14 +85,45 @@ angular.module('mobileMoneyApp')
 			return $http.get(baseUrl);
 		};
 		
+		utilFactory.initTransactions = function(staff, office){
+			var requestUrl = "http://localhost:8090/api/v1/create?staff=" + staff + "&office=" + office; 
+			return $http.get(requestUrl);
+		};
+		
 		return utilFactory;
 	}])
 	
 	/* factory for loan repayment */
 	.factory('loanFactory', ['$http', function($http){
 		
-		var baseUrl = "";
+		var baseUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
 		var loanFactory = {};
+		
+		loanFactory.disburseToSavingsProcess = function(accountId, disburseDate){
+  			var url = baseUrl + "loans/" + accountId + "?command=disburseToSavings";
+			var data = {
+    				 "dateFormat": "MMMM dd yyyy",
+    				 "locale": "en",
+    				 "transactionAmount":"",
+    				 "fixedEmiAmount": "",
+    				 "actualDisbursementDate": disburseDate,
+    				 "note": "Disbursing to savings account using Mobile Money application"
+    			 };
+			return $http.post(url, data);
+		}
+		
+		loanFactory.disburseToMoMo = function(accountId, amount, disburseDate){
+			var url = baseUrl + "loans/" + accountId + "?command=disburse";
+			var data = {
+				"dateFormat": "MMMM dd yyyy",
+				"locale": "en",
+				"transactionAmount": amount,
+				"fixedEmiAmount": "",
+				"actualDisbursementDate": disburseDate,
+				"note": "Disbursing to mobile money account using Mobile money application"
+			};
+			return $http.post(url, data);
+		}
 		
 		return loanFactory;
 	}]);

@@ -23,6 +23,7 @@ public class TransactionController {
 	 * sent to the mobile money engine
 	 */
 	@SuppressWarnings("unused")
+	@CrossOrigin
 	@RequestMapping(value="/api/v1/create", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	public
 	@ResponseBody
@@ -36,7 +37,7 @@ public class TransactionController {
 		trans.setStaff(staff);
 		trans.setOffice(office);
 		
-		return new ResponseEntity<String>("Success", HttpStatus.OK);
+		return new ResponseEntity<String>("\"Success\"", HttpStatus.OK);
 	}
 	
 	/*

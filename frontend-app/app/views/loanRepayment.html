@@ -1,7 +1,7 @@
 <div class="robotoReg" ng-controller="loanCtrl">
       <!-- spinner -->
         <div class="spinner" ng-show="loading">
-		  <img src="images/cubic_loader.gif">
+		  <img src="images/default.gif">
         </div>
       <div class="row" ng-hide="loading">
         <div class="col s8">
@@ -65,8 +65,8 @@
 			<!-- View for handling loans with savings -->
 			<script type="text/ng-template" id="/processLoanWithSavings.htm">
 			  <div class="row" ng-controller="processLoansWithSavingsCtrl" style="width: 80%;">
-				  <div class="col s12" style="position: relative; left: 1%; font-size: 14px">		
-		        	<table class="bordered centered responsive-table">
+				  <div class="col s12" style="position: relative; left: 1%; font-size: 14px;">		
+		        	<table class="bordered centered responsive-table" style="font-size: 14px;">
 						<thead style="background-color: rgba(0, 0, 0, 0.2);">
 		                    <th data-field="id">ID</th>
 		                    <th data-field="accountId">Account #</th>
