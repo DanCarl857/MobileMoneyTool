@@ -94,6 +94,40 @@ angular.module('mobileMoneyApp')
 			return $http.get(requestUrl);
 		};
 		
+		utilFactory.withdrawals = function(accountId, amount, dateToUse){
+				var url = "https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts" + accountId + "/transactions?command=withdrawal";
+				var data = { 
+				  "locale" : "en",
+				  "dateFormat": "dd MMMM yyyy",
+				  "transactionDate": dateToUse,
+				  "transactionAmount": amount,
+				  "paymentTypeId": "",
+				  "accountNumber": "",
+				  "checkNumber": "",
+				  "routingCode": "",
+				  "receiptNumber": "",
+				  "bankNumber": ""
+		      };
+			  
+			  return $http.post(url, data);
+			};
+			
+			utilFactory.savings = function(accountId, amount, dateToUse){
+				var url = "https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts" + accountId + "/transactions?command=deposit";
+		      var data = { 
+				  "locale" : "en",
+				  "dateFormat": "dd MMMM yyyy",
+				  "transactionDate": dateToUse,
+				  "transactionAmount": amount,
+				  "paymentTypeId": "",
+				  "accountNumber": "",
+				  "checkNumber": "",
+				  "routingCode": "",
+				  "receiptNumber": "",
+				  "bankNumber": ""
+		      }
+			}
+		
 		return utilFactory;
 	}])
 	
