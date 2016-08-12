@@ -94,7 +94,9 @@ angular.module('mobileMoneyApp')
 		  	});
 			
 			// make request to mobile money engine
-			// the 1 in the list of arguments shows that this transaction is a withdrawal
+			// 1 - withdrawal
+			// 2 - savings
+			// 3 - loan transactions
 			mobileMoneyFactory.transactions($scope.phoneNumber, $scope.amount, clientId, $scope.accountId, 1)
 				.then(function(response){
 					// since transaction is successful, 

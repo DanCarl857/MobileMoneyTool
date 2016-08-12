@@ -80,7 +80,7 @@
 								<td>{{acc.accountNo}}</td>
 								<td>{{acc.productName}}</td>
 								<td ng-model="bal">{{acc.accountBalance}}</td>
-								<td><a class="btn" ng-class="acc.status.active && acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
+								<td><a class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
 							</tr>
 						</tbody>
 					</table>
@@ -99,7 +99,7 @@
 		  
 		  <!-- View for handling loans with cash -->
 		  <script type="text/ng-template" id="/processLoansFinale.htm">
-          <div class="row withMBox" ng-controller="processLoanCtrl">
+          <div class="row withMBox" ng-controller="processLoanFinaleCtrl">
             <form class="col s8" name="loanForm" ng-submit="submitLoanForm(loanForm.$valid)" novalidate>
               <div class="row" style="text-align: center;">
                 <span class="xlargeText robotoLight" style="color: #ffa726">Repay Loans using MM Account</span>
@@ -131,7 +131,7 @@
               </div>
               <br><br>
               <div class="row">
-                  <a class="btn waves-effect waves-light black left" ng-click="goBack()">Cancel<i class="material-icons right">clear</i></a>
+                  <a class="btn waves-effect waves-light black left" ng-click="$root.goBack()">Cancel<i class="material-icons right">clear</i></a>
                   <button class="btn waves-effect waves-light orange lighten-1 right" ng-click="submitLoanForm()">Submit<i class="material-icons right">send</i></button>
               </div>
             </form>

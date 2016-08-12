@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('mobileMoneyApp')
+
 	/* factory for authentication */
 	.factory('authFactory', ['$http',
 		function($http){
@@ -25,7 +26,7 @@ angular.module('mobileMoneyApp')
 		
 		authFactory.setBasicAuthKey = function(key){
 			$http.defaults.headers.common['Authorization'] = 'Basic ' + key;
-		}
+		};
 		
 		return authFactory;
 	}])
@@ -63,9 +64,12 @@ angular.module('mobileMoneyApp')
 		
 		mobileMoneyFactory.transactions = function(phone, amount, clientId, accountId, val){
 			if(val == 1){
-				return $http.get(baseUrl + "withdrawals/" + phone + "/" + amount + "/" + clientId + "/" + accountId);
+				return $http.get(baseUrl + "withdrawals?phone" + phone + "&amount=" + amount + "&clientId" + clientId + "&accountId=" + accountId);
+			} else if(val == 2){
+				return $http.get(baseUrl + "savings?phone=" + phone + "&amount=" + amount + "&clientId=" + clientId + "&accountId=" + accountId);
+			} else {
+				return $http.get(baseUrl + "loans?phone=" + phone + "&amount=" + amount + "&clientId=" + clientId + "&accountId=" + accountId);
 			}
-			return $http.get(baseUrl + "savings/" + phone + "/" + amount + "/" + clientId + "/" + accountId);
 		};
 		
 		mobileMoneyFactory.sendMoney = function(phone, amount, recipient, clientId, accountId){
@@ -110,7 +114,7 @@ angular.module('mobileMoneyApp')
     				 "note": "Disbursing to savings account using Mobile Money application"
     			 };
 			return $http.post(url, data);
-		}
+		};
 		
 		loanFactory.disburseToMoMo = function(accountId, amount, disburseDate){
 			var url = baseUrl + "loans/" + accountId + "?command=disburse";
@@ -123,7 +127,24 @@ angular.module('mobileMoneyApp')
 				"note": "Disbursing to mobile money account using Mobile money application"
 			};
 			return $http.post(url, data);
-		}
+		};
+		
+		loanFactory.loanRepayments = function(accountId, amount, repaymentDate){
+			var url = baseUrl + "loans/" + accountId + "?command=repayment";
+			var data = {
+  				"locale" : "en",
+  				"dateFormat": "dd MMMM yyyy",
+  				"transactionDate": repaymentDate,
+  				"transactionAmount": amount,
+    			"paymentTypeId": "",
+    			"accountNumber": "",
+    			"checkNumber": "",
+    			"routingCode": "",
+    			"receiptNumber": "",
+    			"bankNumber": ""
+			};
+			return $http.post(url, data);
+		};
 		
 		return loanFactory;
 	}]);

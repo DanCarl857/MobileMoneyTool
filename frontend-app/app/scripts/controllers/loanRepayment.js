@@ -25,6 +25,7 @@ angular.module('mobileMoneyApp')
 		            	$scope.staffName = $scope.data.staffName;
 			          	$scope.activDate = new Date($scope.data.activationDate);
 						$scope.activationDate = $scope.activDate.toDateString();
+						$rootScope.dateToUse = $scope.activationDate.substring(4);
 		            	$scope.officeName = $scope.data.officeName;
 		            	$scope.userName = $scope.data.timeline.activatedByUsername;
 						
@@ -39,94 +40,34 @@ angular.module('mobileMoneyApp')
 			}, function(error){});
 	}])
 	
-	.controller('processLoanCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams',
-		function($rootScope, $scope, $http, $timeout, $stateParams){
-			
+	.controller('processLoanCtrl', ['$rootScope', '$scope', '$http', '$stateParams', 'mobileMoneyFactory',
+		function($rootScope, $scope, $http, $stateParams, mobileMoneyFactory){
 			$rootScope.accountId = $stateParams.accId;
-			
+	}])
+	
+	.controller("processLoansWithSavingsCtrl", ['$rootScope', '$scope', '$http', '$stateParams',
+		function($rootScope, $scope, $http, $stateParams){
 	        // show modal when client submits form
 	        $(document).ready(function(){
 	          	$('.modal-trigger').leanModal();
 	  			$('.collapsible').collapsible();
 	        });
+
 	        $scope.submitted = true;
-	        var baseUrl = "http://localhost:8090/api/v1/withdrawals";
 
 	        // function to submit the form after all form validation
-	        $scope.submitLoanForm = function(){
-				
+	        $scope.submitForm = function(){
 	           // Check to make sure the form is completely valid
 	           if($scope.loanForm.$valid){
 	             $scope.submitted = false;
 	             $scope.loanRequest($rootScope.clientId);
 	           }
 	        };
-		
-	      	// function to handle requests to the mobile money engine
-	      	$scope.loanRequest = function(clientId){
-	          // open the modal
-	          $('#loanRepayModal').openModal({
-	            dismissible: false,
-	            opacity: '.5'
-	          });
-
-	          // request to mobile money engine
-	          $scope.accountId = "4904123";
-		      var requestUrl = baseUrl + "?phone=" + $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId=" + clientId + "&accountId=" + $scope.accountId;
-			  
-			  console.log(requestUrl);
-          
-			  // make request to the mobile money engine
-	          $http({
-	            method: "GET",
-	            url: requestUrl
-	          }).success(function(data){
-	            $scope.data = data;
-			
-				// TODO: make request to effect this change on the mifos platform
-  			  // now effect changes on the mifos platform
-  			  var mifosUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
-  			  var changeRequestUrl = mifosUrl + "loans/" + $rootScope.accountId + "/transactions?command=repayment";
-  			  console.log(changeRequestUrl);
-			  
-  			  $http({
-  			      url: changeRequestUrl,
-  			      method: "POST",
-  			      data: { 
-  					  "locale" : "en",
-  					  "dateFormat": "dd MMMM yyyy",
-  					  "transactionDate": "1 Aug 2016",
-  					  "transactionAmount": $scope.amount,
-    				  "paymentTypeId": "",
-    			      "accountNumber": "",
-    			      "checkNumber": "",
-    				  "routingCode": "",
-    				  "receiptNumber": "",
-    				  "bankNumber": ""
-  			      }
-  			  }).success(function(){
-  				  console.log("Successfully deposited");
-  			  }).error(function(){
-  			  	  console.log("Failed to do a deposit");
-  			  });
-			  
-	            console.log("Success with withdrawals for loan");
-
-	            // close the modal and clean up 
-	            Materialize.toast('Transaction successful', 6000, 'rounded');
-	            $scope.cleanUp();
-	          }).error(function(){
-	            // close the modal and clean up 
-				$scope.cleanUp();
-	            Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
-	          });
-	      	};
 
 	        // function to clean up
 	        $scope.cleanUp = function(){
 			  console.log("Now cleaning up modal thingz :-)");
-			  $('.lean-overlay').remove();
-	          $('#loanRepayModal').closeModal();
+	          $('#loanRepayModal1').closeModal();
 	          $scope.amount = '';
 	          $scope.phoneNumber = '';
 	        };
@@ -137,73 +78,54 @@ angular.module('mobileMoneyApp')
 	        };
 	}])
 	
-	.controller("processLoansWithSavingsCtrl", ['$rootScope', '$scope', '$http', '$stateParams',
-		function($rootScope, $scope, $http, $stateParams){
+	.controller("processLoanFinaleCtrl", ['$rootScope', '$scope', '$http', '$stateParams', 'mobileMoneyFactory', 'loanFactory',
+		function($rootScope, $scope, $http, $stateParams, mobileMoneyFactory, loanFactory){
+			$scope.submitted = true;
 	        // show modal when client submits form
 	        $(document).ready(function(){
 	          	$('.modal-trigger').leanModal();
 	  			$('.collapsible').collapsible();
 	        });
-		
-			// data fields
-	        $scope.amount = '';
-	        $scope.phoneNumber = '';
-
-	        $scope.submitted = true;
-	        var baseUrl = "http://localhost:8090/api/v1/withdrawals";
-
+			
 	        // function to submit the form after all form validation
-	        $scope.submitForm = function(){
-	           // Check to make sure the form is completely valid
+	        $scope.submitLoanForm = function(){
+				
+	           // Check to make sure the form is valid
 	           if($scope.loanForm.$valid){
 	             $scope.submitted = false;
-	             $scope.loanRequest($rootScope.clientId);
+	             $scope.loanRepayments($rootScope.clientId);
 	           }
 	        };
-		
-	      	// function to handle requests to the mobile money engine
-	      	$scope.loanRequest = function(clientId){
-	          // open the modal
-	          $('#loanRepayModal').openModal({
-	            dismissible: false,
-	            opacity: '.5'
-	          });
-
-	          // request to mobile money engine
-	          $scope.accountId = "4904123";
-		      var requestUrl = baseUrl + "?phone=" + $scope.phoneNumber + "&amount=" + $scope.amount + "&clientId=" + clientId + "&accountId=" + $scope.accountId;
-          
-			  // make request to the mobile money engine
-	          $http({
-	            method: "GET",
-	            url: requestUrl
-	          }).success(function(data){
-	            $scope.data = data;
 			
-				// TODO: make request to effect this change on the mifos platform
+			$scope.loanRepayments = function(clientId){
+  	          // open the modal
+  	          $('#loanRepayModal').openModal({
+  	            dismissible: false,
+  	            opacity: '.5'
+  	          });
 			  
-	            console.log("Success with withdrawals: " + $scope.data);
-
-	            // close the modal and clean up 
-	            Materialize.toast('Transaction successful', 6000, 'rounded');
-	            $scope.cleanUp();
-	          }).error(function(){
-	            // close the modal and clean up 
-				$scope.cleanUp();
-	            Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
-	          });
-	      	};
-
+			  // make request to mobile money engine
+			  $scope.accountId = "4904123";
+			  mobileMoneyFactory.transactions($scope.phoneNumber, $scope.amount, clientId, $scope.accountId, 3)
+			  	.then(function(response){
+			  		loanFactory.loanRepayments($rootScope.accountId, $scope.amount, $rootScope.dateToUse);
+					
+		            // close the modal and clean up 
+		            Materialize.toast('Transaction successful', 6000, 'rounded');
+		            $scope.cleanUp();
+			  	}, function(error){
+		            // close the modal and clean up 
+					$scope.cleanUp();
+		            Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
+			  	});
+			};
+			
 	        // function to clean up
 	        $scope.cleanUp = function(){
 			  console.log("Now cleaning up modal thingz :-)");
+			  $('.lean-overlay').remove();
 	          $('#loanRepayModal').closeModal();
 	          $scope.amount = '';
 	          $scope.phoneNumber = '';
 	        };
-
-	        // function to go back to source page
-	        $scope.goBack = function(){
-	          window.history.back();
-	        };
-	}]);
+		}]);
