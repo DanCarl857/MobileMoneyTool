@@ -12,13 +12,13 @@ angular.module('mobileMoneyApp')
     $rootScope.clientId = $stateParams.id;
 	
 	// authenticate user
-	authFactory.getAuthKey()
+	authFactory.getAuthKey($rootScope.username, $rootScope.password)
     	.then(function (response) {
 			var basicKey = response.data.base64EncodedAuthenticationKey;
 			authFactory.setBasicAuthKey(basicKey);
 	
 			// get client data
-			dataFactory.getClient($scope.clientId)
+			dataFactory.getClientDetails($scope.clientId)
 				.then(function(response){
 		          	$scope.data = response.data;
 		          	$scope.clientName = $scope.data.displayName;
@@ -40,10 +40,6 @@ angular.module('mobileMoneyApp')
 						}, function(error){});
 				}, function(error){});
     	}, function (error){});
-	
-    	$rootScope.goBack = function(){
-    		window.history.back();
-    	};
 }])
 
 .controller('disburseToSavingsCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', 'loanFactory',

@@ -3,93 +3,52 @@
 /* Materialize */
 
 angular.module('mobileMoneyApp')
-	.controller('loanCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', 
-		function($rootScope, $scope, $http, $timeout, $stateParams){
+	.controller('loanCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams', 'authFactory', 'dataFactory',
+		function($rootScope, $scope, $http, $timeout, $stateParams, authFactory, dataFactory){
 
         // show spinner
         $scope.loading = true;
-
-        var baseApiUrl = "https://demo.openmf.org/fineract-provider/api/v1/";
-        var endUrl = "tenantIdentifier=default";
-
-          var basicAuthKey;
-          var loginCreds = {};
-          loginCreds.username = "mifos";
-          loginCreds.password = "password";
-
-          var config = {
-            cache: false,
-            dataType: 'json',
-            contentType: "application/json; charset=utf-8"
-          };
-        
-          var authKeyRequest = baseApiUrl + "authentication?username="+ loginCreds.username + "&password=" + loginCreds.password + "&"+endUrl;
-
-          // authentication
-          $http.post(authKeyRequest, config)
-            .success(function(data){
-              basicAuthKey = data.base64EncodedAuthenticationKey;
-              // set authorization in header
-              $http.defaults.headers.common['Authorization'] = 'Basic ' + basicAuthKey;
-
-              // make request to get client's information 
-              var getClientDetails = baseApiUrl + "clients/" + $rootScope.clientId;
-
-          	// getting client details
-          	$http({
-            	  method: "GET",
-            	  url: getClientDetails
-          	}).success(function(data){
-            	$scope.data = data;
-            	$scope.clientName = $scope.data.displayName;
-            	$rootScope.accountNo = $scope.data.accountNo;
-				$rootScope.accountId = $scope.data.id;
-            	$scope.staffName = $scope.data.staffName;
-	          	$scope.activDate = new Date($scope.data.activationDate);
-				$scope.activationDate = $scope.activDate.toDateString();
-            	$scope.officeName = $scope.data.officeName;
-            	$scope.userName = $scope.data.timeline.activatedByUsername;
-
-            	// now get the client's account details
-            	var getClientAccountInfo = baseApiUrl + "clients/" + $rootScope.clientId + "/accounts";
-
-            	$http({
-              		method: "GET",
-              		url: getClientAccountInfo
-            	}).success(function(response){
-                	// get and display client account details here
-  					$scope.loanAccounts = response.loanAccounts;
-  					$rootScope.savingsAccounts = response.savingsAccounts;
-  					$scope.loading = false;
-            	}).error(function(){
-            		console.log("Error retrieving client account information");
-            	})
-          }).error(function(){
-            console.log("Error retrieving client data");
-          });
-        }).error(function(){
-          console.log("Error authenticating in client_page");
-        });
-
-            /* ====================================================== */
+		$rootScope.clientId = $stateParams.id;
+		
+		authFactory.getAuthKey($rootScope.username, $rootScope.password)
+			.then(function(response){
+				var basicKey = response.data.base64EncodedAuthenticationKey;
+				authFactory.setBasicAuthKey(basicKey);
+				
+				// get the personal details for a particular client
+				dataFactory.getClientDetails($rootScope.clientId)
+					.then(function(response){
+		            	$scope.data = response.data;
+		            	$scope.clientName = $scope.data.displayName;
+		            	$rootScope.accountNo = $scope.data.accountNo;
+						$rootScope.accountId = $scope.data.id;
+		            	$scope.staffName = $scope.data.staffName;
+			          	$scope.activDate = new Date($scope.data.activationDate);
+						$scope.activationDate = $scope.activDate.toDateString();
+		            	$scope.officeName = $scope.data.officeName;
+		            	$scope.userName = $scope.data.timeline.activatedByUsername;
+						
+						// get client's account details
+						dataFactory.getClientAccounts($rootScope.clientId)
+							.then(function(response){
+			  					$scope.loanAccounts = response.data.loanAccounts;
+			  					$rootScope.savingsAccounts = response.data.savingsAccounts;
+			  					$scope.loading = false;
+							}, function(error){});
+					}, function(error){});
+			}, function(error){});
 	}])
 	
 	.controller('processLoanCtrl', ['$rootScope', '$scope', '$http', '$timeout', '$stateParams',
 		function($rootScope, $scope, $http, $timeout, $stateParams){
 			
 			$rootScope.accountId = $stateParams.accId;
-			console.log($rootScope.accountId);
 			
 	        // show modal when client submits form
 	        $(document).ready(function(){
 	          	$('.modal-trigger').leanModal();
 	  			$('.collapsible').collapsible();
 	        });
-		
-			// data fields
-	        $scope.amount = '';
-	        $scope.phoneNumber = '';
-
 	        $scope.submitted = true;
 	        var baseUrl = "http://localhost:8090/api/v1/withdrawals";
 

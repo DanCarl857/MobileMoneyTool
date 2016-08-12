@@ -7,7 +7,6 @@ angular.module('mobileMoneyApp')
 	$scope.clientId = $stateParams.id;
   	$scope.loading = true;
 	
-	
 	// authenticate user
 	authFactory.getAuthKey($rootScope.username, $rootScope.password)
     	.then(function (response) {
@@ -15,7 +14,7 @@ angular.module('mobileMoneyApp')
 			authFactory.setBasicAuthKey(basicKey);
 	
 			// get client data
-			dataFactory.getClient($scope.clientId)
+			dataFactory.getClientDetails($scope.clientId)
 				.then(function(response){
     				$scope.data = response.data;
     				$scope.accountNo = $scope.data.accountNo;
@@ -29,7 +28,7 @@ angular.module('mobileMoneyApp')
 				}, function(error){});
     	}, function (error){});
 	
-    	$scope.goBack = function(){
+    	$rootScope.goBack = function(){
     		window.history.back();
     	};
   }]);

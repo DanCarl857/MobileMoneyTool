@@ -36,7 +36,7 @@
             </div>
 	        <div class="row">
 	          <br><p class="errorMsg" ng-show="!loginSuccessful && submitted">Username or Password incorrect</p>
-	          <a class="btn waves-effect waves-light green subButton" ng-click="submitLoginForm()">Sign In</a>
+	          <a class="btn waves-effect waves-light green subButton" ngEnter="submitLoginForm()" ng-click="submitLoginForm()">Sign In</a>
 	        </div>
           </form>
         </div>    

@@ -4,9 +4,6 @@
 angular.module('mobileMoneyApp')
   .controller('transCtrl', ['$scope', '$http', 'utilFactory',
 	function ($scope, $http, utilFactory) {
-	  var baseUrl = "http://localhost:8090/api/v1/transactions";
-	  $scope.id = "";
-	  
 	  $(document).ready(function(){
 	  	$('.tooltipped').tooltip({delay: 50});
 	  });
@@ -21,5 +18,4 @@ angular.module('mobileMoneyApp')
       $scope.goBack = function(){
         window.history.back();
       };
-     
   }]);

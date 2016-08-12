@@ -40,7 +40,7 @@ angular.module('mobileMoneyApp')
 			return $http.get(urlBase + "clients");
 		};
 		
-		dataFactory.getClient = function(clientId){
+		dataFactory.getClientDetails = function(clientId){
 			return $http.get(urlBase + "clients/" + clientId);
 		};
 		
