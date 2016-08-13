@@ -42,51 +42,50 @@
 		  
 		  <!-- Partial -->
 		  <script type="text/ng-template" id="/processTransfer.htm">
-          <div class="row withMBox">
-            <form class="col s8" name="sendForm" ng-submit="submitSendForm(sendForm.$valid)" novalidate>
+          <div class="row withMBox" ng-controller="processWithCtrl">
+            <form class="col s8" name="withForm" ng-submit="submitForm(withForm.$valid)" novalidate>
               <div class="row" style="text-align: center;">
-                <span class="xlargeText robotoLight sendMon">Send Money through MM Account</span>
+                <span class="xlargeText robotoLight withHHead">Send Money Using MoMo From MFI account</span>
               </div>
               <div class="row">
-                <span class="xxlargeText robotoThin">Current Balance: {{accountBalance}}</span>
+                <span class="xlargeText robotoThin">Current Balance: {{accountBalance}}</span>
               </div>
               <div class="row">
-                <div class="input-field" ng-class="{'has-error': sendForm.amount.$invalid && !sendForm.amount.$pristine }">
+                <div class="input-field" ng-class="{'has-error': withForm.amount.$invalid && !withForm.amount.$pristine }">
                   <i class="material-icons prefix">attach_money</i>
-                  <input id="icon_prefix" name="amount" type="number" ng-minlength="1" ng-model="amount" required>
+                  <input name="amount" id="icon_prefix" ng-model="amount" type="number" ng-minlength="1" required>
                   <label for="icon_prefix">Enter Amount</label>
-                  <p ng-show="(sendForm.amount.$invalid && !sendForm.amount.$pristine) && submitted" class="errorMsg">Amount is required.</p>
+                  <p ng-show="(withForm.amount.$invalid && !withForm.amount.$pristine) && submitted" class="errorMsg">Amount is required.</p>
                 </div>
               </div>
               <div class="row">
-                <div class="input-field" ng-class="{'has-error': sendForm.phone.$invalid && !sendForm.phone.$pristine }">
+                <div class="input-field" ng-class="{ 'has-error': withForm.phone.$invalid && !withForm.phone.$pristine }">
                   <i class="material-icons prefix">phone</i>
-                  <input type="number" name="phone" id="phoneNumber" ng-model="phone" ng-minlength="8" required>
-                  <label for="icon_prefix">Client's Phone Number</label>
-                  <p ng-show="sendForm.phone.$error.minlength && submitted" class="errorMsg">Phone number is too short.</p>
-                  <p ng-show="(sendForm.phone.$invalid && !sendForm.phone.$pristine) && submitted" class="errorMsg">Phone number is required.</p>
+                  <input name="phone" type="number" id="phoneNumber" ng-model="phoneNumber" ng-minlength="8" required>
+                  <label for="icon_prefix">Phone Number</label>
+                  <p ng-show="withForm.phone.$error.minlength && submitted" class="errorMsg">Phone number is too short.</p>
+                  <p ng-show="(withForm.phone.$invalid && !withForm.phone.$pristine) && submitted" class="errorMsg">Phone number is required.</p>
                 </div>
-              </div>
-              <div class="row">
-                <div class="input-field" ng-class="{'has-error': sendForm.rec_name.$invalid && !sendForm.rec_name.$pristine }">
+                <div class="row">
+                <div class="input-field" ng-class="{ 'has-error': withForm.rec_phone.$invalid && !withForm.rec_phone.$pristine }">
+                  <i class="material-icons prefix">phone</i>
+                  <input name="rec_phone" type="number" id="rec_phonefix" ng-model="rec_phone" ng-minlength="8" required>
+                  <label for="rec_phonefix">Recipient's Phone Number</label>
+                  <p ng-show="withForm.rec_phone.$error.minlength && submitted" class="errorMsg">Phone number is too short.</p>
+                  <p ng-show="(withForm.rec_phone.$invalid && !withForm.rec_phone.$pristine) && submitted" class="errorMsg">Phone number is required.</p>
+                </div>
+                <div class="input-field" ng-class="{ 'has-error': withForm.rec_name.$invalid && !withForm.rec_name.$pristine }">
                   <i class="material-icons prefix">perm_identity</i>
-                  <input name="rec_name" id="icon_to" type="text" name="rec_name" ng-model="rec_name" required>
-                  <label for="icon_to">To</label>
-                  <p ng-show="(sendForm.rec_name.$invalid && !sendForm.rec_name.$pristine) && submitted" class="errorMsg">Recipient's name is required.</p>
+                  <input name="rec_name" type="text" id="rec_namefix" ng-model="rec_name" ng-minlength="3" required>
+                  <label for="rec_phonefix">Recipient's Name</label>
+                  <p ng-show="withForm.rec_name.$error.minlength && submitted" class="errorMsg">Name is too short.</p>
+                  <p ng-show="(withForm.rec_name.$invalid && !withForm.rec_name.$pristine) && submitted" class="errorMsg">Recipient's name is required.</p>
                 </div>
               </div>
+              <br><br>
               <div class="row">
-                <div class="input-field" ng-class="{'has-error': sendForm.rec_phone.$invalid && !sendForm.rec_phone.$pristine }">
-                  <i class="material-icons prefix">call</i>
-                  <input id="icon_recp" name="rec_phone" type="number" ng-model="rec_phone" required>
-                  <label for="icon_recp">Recipient's Number</label>
-                  <p ng-show="(sendForm.rec_phone.$invalid && !sendForm.rec_phone.$pristine) && submitted" class="errorMsg">Recipient's phone number is required.</p>
-                </div>
-              </div>
-              <br>
-              <div class="row">
-                  <a class="btn waves-effect waves-light grey lighten-3 left" ng-click="goBack()" style="color: rgba(0, 0, 0, 0.6);">Cancel<i class="material-icons right">clear</i></a>
-                  <button class="btn waves-effect waves-light teal darken-2 right">Submit<i class="material-icons right">send</i></button>
+                  <a class="btn waves-effect waves-light grey lighten-1 left" ng-click="$root.goBack()">Cancel<i class="material-icons right">clear</i></a>
+                  <button class="btn waves-effect waves-light green right">Submit<i class="material-icons right">send</i></button>
               </div>
             </form>
           </div>

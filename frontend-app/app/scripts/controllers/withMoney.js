@@ -70,8 +70,25 @@ angular.module('mobileMoneyApp')
 			mobileMoneyFactory.transactions($scope.phoneNumber, $scope.amount, clientId, $scope.accountId, 1)
 				.then(function(response){
 					$scope.data = response.data;
-					
-					utilFactory.withdrawals($rootScope.accountId, $scope.amount, $rootScope.dateToUse)
+
+					if($state.current.url == "/processTransfer"){
+						console.log("Jeez");
+						mobileMoneyFactory.sendMoney($scope.phone, $scope.amount, $scope.rec_name, clientId, $rootScope.accountId)
+                			.then(function(response){
+                    			$scope.data = response.data;
+                    
+			                    utilFactory.withdrawals($rootScope.accountId, $scope.amount, $rootScope.dateToUse)
+			                        .then(function(response){
+			                            // close the modal and clean up 
+			                            Materialize.toast('Transaction successful', 6000, 'rounded');
+			                            $scope.cleanUp();
+			                        }, function(error){
+			                            Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
+			                            $scope.cleanUp();
+			                        });
+                		}, function(error){});
+					} else{
+						utilFactory.withdrawals($rootScope.accountId, $scope.amount, $rootScope.dateToUse)
 						.then(function(response){
 				            // close the modal and clean up 
 				            Materialize.toast('Transaction successful', 6000, 'rounded');
@@ -81,6 +98,7 @@ angular.module('mobileMoneyApp')
 							$scope.cleanUp();
 				            Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
 						});
+					}
 				}, function(error){});
 		};
 		

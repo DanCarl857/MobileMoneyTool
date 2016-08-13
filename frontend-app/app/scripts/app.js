@@ -75,9 +75,8 @@ angular
 	  
 	  .state('processTransfer', {
 		  url: '/processTransfer',
-		  templateUrl: '/processTransfer.htm',
-		  controller: 'processSendCtrl'
-	  })
+		  templateUrl: '/processTransfer.htm'
+    })
 	  
 	  .state('processDisbursals', {
 		  url: '/processDisbursals/:accId',

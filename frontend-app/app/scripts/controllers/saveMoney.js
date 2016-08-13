@@ -13,29 +13,29 @@ angular.module('mobileMoneyApp')
 	  
 	  authFactory.getAuthKey($rootScope.username, $rootScope.password)
 	  		.then(function(response){
-				var basicKey = response.data.base64EncodedAuthenticationKey;
-				authFactory.setBasicAuthKey(basicKey);
-				
-				dataFactory.getClientDetails($rootScope.clientId)
-					.then(function(response){
-			          	$scope.data = response.data;
-			          	$scope.clientName = $scope.data.displayName;
-			          	$scope.accountNo = $scope.data.accountNo;
-			          	$scope.staffName = $scope.data.staffName;
-			          	$scope.activDate = new Date($scope.data.activationDate);
-						$scope.activationDate = $scope.activDate.toDateString();
-						$rootScope.dateToUse = $scope.activationDate.substring(4);
-			          	$scope.officeName = $scope.data.officeName;
-			          	$scope.userName = $scope.data.timeline.activatedByUsername;
-						
-						dataFactory.getClientAccounts($rootScope.clientId)
-							.then(function(response){
-				              	// get and display client account details here
-								$scope.loanAccounts = response.data.loanAccounts;
-								$scope.savingsAccounts = response.data.savingsAccounts;
-								$scope.loading = false;
-							}, function(error){});
-					}, function(error){});
+  				var basicKey = response.data.base64EncodedAuthenticationKey;
+  				authFactory.setBasicAuthKey(basicKey);
+  				
+  				dataFactory.getClientDetails($rootScope.clientId)
+  					.then(function(response){
+  			          	$scope.data = response.data;
+  			          	$scope.clientName = $scope.data.displayName;
+  			          	$scope.accountNo = $scope.data.accountNo;
+  			          	$scope.staffName = $scope.data.staffName;
+  			          	$scope.activDate = new Date($scope.data.activationDate);
+  						      $scope.activationDate = $scope.activDate.toDateString();
+  						      $rootScope.dateToUse = $scope.activationDate.substring(4);
+  			          	$scope.officeName = $scope.data.officeName;
+  			          	$scope.userName = $scope.data.timeline.activatedByUsername;
+  						
+  						dataFactory.getClientAccounts($rootScope.clientId)
+  							.then(function(response){
+  				              	// get and display client account details here
+  								$scope.loanAccounts = response.data.loanAccounts;
+  								$scope.savingsAccounts = response.data.savingsAccounts;
+  								$scope.loading = false;
+  							}, function(error){});
+  					}, function(error){});
 	  		}, function(error){});
   }])
   .controller('processSaveCtrl', ['$rootScope', '$scope', '$stateParams', '$state',
@@ -43,7 +43,7 @@ angular.module('mobileMoneyApp')
         // show modal when client submits form
         $(document).ready(function(){
           $('.modal-trigger').leanModal();
-  		$('.collapsible').collapsible();
+  		    $('.collapsible').collapsible();
         });
 
         $scope.submitted = true;
