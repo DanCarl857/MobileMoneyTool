@@ -2,7 +2,7 @@
 /*global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('saveMoneyCtrl', ['$rootScope', '$scope', '$stateParams', '$state', 'authFactory', 'dataFactory',
+  .controller('saveMoneyCtrl', ['$rootScope', '$scope', '$stateParams', '$state', 'authFactory', 'dataFactory', 
     function ($rootScope, $scope, $stateParams, $state, authFactory, dataFactory) {
   		
       // client's details
@@ -38,8 +38,8 @@ angular.module('mobileMoneyApp')
   					}, function(error){});
 	  		}, function(error){});
   }])
-  .controller('processSaveCtrl', ['$rootScope', '$scope', '$stateParams', '$state',
-  	function($rootScope, $scope, $stateParams, $state){
+  .controller('processSaveCtrl', ['$rootScope', '$scope', '$stateParams', '$state', 'mobileMoneyFactory', 'utilFactory',
+  	function($rootScope, $scope, $stateParams, $state, mobileMoneyFactory, utilFactory){
         // show modal when client submits form
         $(document).ready(function(){
           $('.modal-trigger').leanModal();

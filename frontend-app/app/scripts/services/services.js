@@ -64,7 +64,7 @@ angular.module('mobileMoneyApp')
 		
 		mobileMoneyFactory.transactions = function(phone, amount, clientId, accountId, val){
 			if(val == 1){
-				return $http.get(baseUrl + "withdrawals?phone" + phone + "&amount=" + amount + "&clientId" + clientId + "&accountId=" + accountId);
+				return $http.get(baseUrl + "withdrawals?phone=" + phone + "&amount=" + amount + "&clientId=" + clientId + "&accountId=" + accountId);
 			} else if(val == 2){
 				return $http.get(baseUrl + "savings?phone=" + phone + "&amount=" + amount + "&clientId=" + clientId + "&accountId=" + accountId);
 			} else {
@@ -95,7 +95,7 @@ angular.module('mobileMoneyApp')
 		};
 		
 		utilFactory.withdrawals = function(accountId, amount, dateToUse){
-				var url = "https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts" + accountId + "/transactions?command=withdrawal";
+				var url = "https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts/" + accountId + "/transactions?command=withdrawal";
 				var data = { 
 				  "locale" : "en",
 				  "dateFormat": "dd MMMM yyyy",
@@ -113,7 +113,7 @@ angular.module('mobileMoneyApp')
 			};
 			
 			utilFactory.savings = function(accountId, amount, dateToUse){
-				var url = "https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts" + accountId + "/transactions?command=deposit";
+				var url = "https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts/" + accountId + "/transactions?command=deposit";
 		      var data = { 
 				  "locale" : "en",
 				  "dateFormat": "dd MMMM yyyy",
