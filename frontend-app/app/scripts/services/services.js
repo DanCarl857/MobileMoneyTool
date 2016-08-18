@@ -95,26 +95,32 @@ angular.module('mobileMoneyApp')
 		};
 		
 		utilFactory.withdrawals = function(accountId, amount, dateToUse){
-				var url = "https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts/" + accountId + "/transactions?command=withdrawal";
-				var data = { 
-				  "locale" : "en",
-				  "dateFormat": "dd MMMM yyyy",
-				  "transactionDate": dateToUse,
-				  "transactionAmount": amount,
-				  "paymentTypeId": "",
-				  "accountNumber": "",
-				  "checkNumber": "",
-				  "routingCode": "",
-				  "receiptNumber": "",
-				  "bankNumber": ""
-		      };
+				var url = "https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts/" + accountId
+					 + "/transactions?command=withdrawal";
+				//https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts/321/transactions?command=withdrawal
+		      	return $http({
+		      		method: "POST",
+		      		url: url,
+		      		data: {
+					  "locale": "en",
+					  "dateFormat": "MMMM dd yyyy",
+					  "transactionDate": dateToUse,
+					  "transactionAmount": amount,
+					  "paymentTypeId": "",
+					  "accountNumber": "",
+					  "checkNumber": "",
+					  "routingCode": "",
+					  "receiptNumber": "",
+					  "bankNumber": ""
+					}
+		      	});
 			  
-			  return $http.post(url, data);
+			  // return $http.post(url, data);
 			};
 			
 			utilFactory.savings = function(accountId, amount, dateToUse){
 				var url = "https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts/" + accountId + "/transactions?command=deposit";
-		      var data = { 
+		      	var data = { 
 				  "locale" : "en",
 				  "dateFormat": "dd MMMM yyyy",
 				  "transactionDate": dateToUse,
@@ -125,10 +131,12 @@ angular.module('mobileMoneyApp')
 				  "routingCode": "",
 				  "receiptNumber": "",
 				  "bankNumber": ""
-		      }
-			}
+		      	}
+
+		      	return $http.post(url, data);
+			};
 		
-		return utilFactory;
+			return utilFactory;
 	}])
 	
 	/* factory for loan repayment */
