@@ -4,14 +4,34 @@
 angular.module('mobileMoneyApp')
   .controller('configCtrl', ['$scope', '$window', function ($scope, $window) {
     // variables
-    $scope.hide;
+    $scope.hide = false;
+    $scope.withHide = false;
 
-    // TODO: get these from the database
-    $scope.accountId = "4123456";
-    $scope.savingsURL = "http://api.furthermarket.com/FM/MTN/MoMo/requestpayment";
-    $scope.withURL = "http://api.furthermarket.com/FM/MTN/MoMo/requestpayment";
-    $scope.sendURL = "http://api.furthermarket.com/FM/MTN/MoMo/placepayment";
-    $scope.otherURL = "http://api.furthermarket.com/FM/MTN/MoMo/checkpayment";
+    $scope.savingsParams = [];
+    $scope.withdrawalParams = [];
+
+    // function to add a parameter
+    $scope.addSavingsParam = function(){
+      $scope.hide = true;
+      $scope.savingsParams.push({savingsParamName: $scope.savingsParamName, savingsParamValue: $scope.savingsParamValue});
+      $scope.savingsParamName = '';
+      $scope.savingsParamValue = '';
+    }
+
+    $scope.delSavingsParam = function(index){
+      $scope.savingsParams.splice(index, 1);
+    }
+
+    $scope.addWithParams = function(){
+      $scope.withHide = true;
+      $scope.withdrawalParams.push({withParamName: $scope.withParamName, withParamValue: $scope.withParamValue});
+      $scope.withParamName = '';
+      $scope.withParamValue = '';
+    }
+
+    $scope.delWithParams = function(index){
+      $scope.withdrawalParams.splice(index, 1);
+    }
 
   	// activate collapsibles on UI
   	 $(document).ready(function(){

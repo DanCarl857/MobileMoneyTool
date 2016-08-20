@@ -94,6 +94,11 @@ angular
 		  url: '/processDisbursalsMoMo',
 		  templateUrl: '/processDisbursalsMoMo.htm'
 	  })
+
+	  .state('settings', {
+	  	  url: '/settings',
+	  	  templateUrl: '/settings'
+	  })
 	  
 	  // end of partials
 

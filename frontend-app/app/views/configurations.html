@@ -1,39 +1,10 @@
-<div class="robotoReg" id="configurationsPage">
+<div class="robotoReg" id="configurationsPage" ng-controller="configCtrl">
 	<center>
 		<div class="main configBox">
 			<div class="row bottomLine">
 				<h2>Configurations</h2>
 			</div><br>
 
-			<div class="row">
-				<div class="col s6">
-					<div class="input-field">
-						<select>
-							<option value="" disabled>Choose your option</option>
-							<option>Africa, East</option>
-							<option selected>Africa, West</option>
-							<option>Africa, North</option>
-							<option>Africa, South</option>
-						</select>
-						<label>Region</label>
-					</div>
-				</div>
-				<div class="col s6">
-					<div class="input-field">
-						<select>
-							<option value="" disabled>Choose your option</option>
-							<option selected>Cameroon</option>
-							<option>Nigeria</option>
-							<option>Kenya</option>
-							<option>Ethiopia</option>
-							<option>Namibia</option>
-							<option>Tanzania</option>
-						</select>
-						<label>Country</label>
-					</div>
-				</div>
-			</div>
-			<br>
 			<div class="row" id="apis">
 				<form class="center-align">
 					<div class="left">
@@ -47,258 +18,194 @@
 				</form>
 			</div>
 			<br>
-			<div class="row" id="REST" ng-show="radioBoxSelection == 1">
-				<!-- Domain -->
+			<div class="row" id="REST" ng-show="radioBoxSelection == 1" style="font-size: 14px">
 				<div class="row">
-					<span style="position: relative;float: left" class="leftLine">Domains:&nbsp;<i class="material-icons tiny tooltipped" data-position="top" data-delay="10" data-tooltip="Domain names for you mobile money API">help</i> </span>
+					<a class="btn right blue darken-1" href="#/settings"><i class="material-icons left">add</i>Add API</a>
 				</div>
-				<div class="row">
-					<ul class="collapsible" data-collapsible="accordion">
-						<li>
-							<div class="collapsible-header"><i class="material-icons left">payment</i><span style="positon: relative; float: left">Savings URL</span>
-							</div>
-							<div class="collapsible-body">
-								<div class="row">
-									<br>
-									<div class="col s10">
-										<div class="input-field">
-                  							<i class="material-icons prefix">vpn_lock</i>
-                  							<input name="savingsUrl" id="icon_prefix" type="text" value="{{savingsURL}}" ng-disabled="saveBtn" ng-init="saveBtn=true">
-                						</div>
-									</div>
-									<div class="col s2">
-										<a class="btn waves-effect waves-light blue tooltipped" data-position="top" data-delay="10" data-tooltip="Edit URL used for savings in API" ng-click="saveBtn=false"><i class="material-icons right">create</i></a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="collapsible-header"><i class="material-icons left">eject</i><span style="positon: relative; float: left">Withdrawals</span></div>
-							<div class="collapsible-body">
-								<div class="row">
-									<br>
-									<div class="col s10">
-										<div class="input-field">
-                  							<i class="material-icons prefix">vpn_lock</i>
-                  							<input name="withUrl" id="icon_prefix" type="text" value="{{withURL}}" ng-disabled="withBtn" ng-init="withBtn=true">
-                						</div>
-									</div>
-									<div class="col s2">
-										<a class="btn waves-effect waves-light blue tooltipped" data-position="top"data-delay="10" data-tooltip="Edit URL used for withdrawals in API" ng-click="withBtn=false"><i class="material-icons right">create</i></a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="collapsible-header"><i class="material-icons left">reply</i><span style="positon: relative; float: left">Send Money</span></div>
-							<div class="collapsible-body">
-								<div class="row">
-									<br>
-									<div class="col s10">
-										<div class="input-field">
-                  							<i class="material-icons prefix">vpn_lock</i>
-                  							<input name="sendUrl" id="icon_prefix" type="text" value="{{sendURL}}" ng-disabled="sendBtn" ng-init="sendBtn=true">
-                						</div>
-									</div>
-									<div class="col s2">
-										<a class="btn waves-effect waves-light blue tooltipped" data-position="top" data-delay="10" data-tooltip="Edit URL used for sending money in API" ng-click="sendBtn=false"><i class="material-icons right">create</i></a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="collapsible-header"><i class="material-icons left">power</i><span style="positon: relative; float: left">Others:</span></div>
-							<div class="collapsible-body">
-								<div class="row">
-									<br>
-									<div class="col s10">
-										<div class="input-field">
-                  							<i class="material-icons prefix">vpn_lock</i>
-                  							<input name="otherUrls" id="icon_prefix" type="text" value="{{otherURL}}" ng-disabled="otherBtn" ng-init="otherBtn=true">
-                						</div>
-									</div>
-									<div class="col s2">
-										<a class="btn waves-effect waves-light blue" ng-click="otherBtn=false"><i class="material-icons right">create</i></a>
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul>
+				<div class="row" style="font-size: 14px">
+					<table class="bordered centered responsive-table">
+						<thead style="background-color: rgba(0, 0, 0, 0.2)">
+							<th data-field="region">Region</th>
+      	         			<th data-field="api_name">API Name</th>
+      					 	<th data-field="country">Country</th>
+      					 	<th data-field="active">Active?</th>
+						</thead>
+						<tbody>
+							<tr>
+								<td>West Africa</td>
+								<td>MTN Mobile money</td>
+								<td>Cameroon</td>
+								<td>True</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 
-				<!-- Others -->
-				<div class="row">
-					<span style="position: relative;float: left" class="leftLine">Other Settings:&nbsp;<i class="material-icons tiny tooltipped" data-position="top" data-delay="10" data-tooltip="Other settings needed by your mobile money API">help</i> </span>
-					<span class="right"><a class="btn-floating waves-effect waves-light blue tooltipped" data-position="top" data-delay="10" data-tooltip="Add other settings needed by Mobile money API"><i class="material-icons right" >add</i></a></span>
-				</div>
-				<div class="row">
-					<div class="col s4">
-						<span>Mobile money account ID:</span>&nbsp;<span class="colorGrey" style="font-style: italic">{{accountId}}</span>
+				<!-- Partials -->
+				<script type="text/ng-template" id="/settings">
+					<div class="row" style="width: 80%; position: relative; left: 5%;" ng-controller="configCtrl">
+						<center>
+							<div class="row">
+								<br>
+								<span style="font-weight: bold; font-size: 30px;">Configure API</span>
+								<br>
+								<span style="font-weight: bold; font-size: 20px;" class="left">Basic Information</span>
+								<br>
+								<hr>
+							</div>
+							<div class="row" style="position: relative; left: 8%;">
+								<form>
+									<div class="row">
+										<div class="input-field col s10">
+											<input id="displayName" type="text" class="validate">
+											<label for="displayName" data-error="wrong" data-success="right">Display Name<span style="color: red">*</span>&nbsp;&nbsp;<span style="color: rgba(0,0,0,0.3); font-size: 15px">eg. MTN mobile money</span></label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col s10">
+											<input id="savingsUrl" type="text" class="validate">
+											<label for="savingsUrl" data-error="wrong" data-success="right">Savings URL<span style="color: red">*</span>&nbsp;&nbsp;<span style="color: rgba(0,0,0,0.3); font-size: 15px">eg. http://api.furthermarket.com/FM/MTN/MoMo/requestpayment</span></label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col s10">
+											<input id="withdrawUrl" type="text" class="validate">
+											<label for="withdrawUrl" data-error="wrong" data-success="right">Withdrawals URL<span style="color: red">*</span>&nbsp;&nbsp;<span style="color: rgba(0,0,0,0.3); font-size: 15px">eg. http://api.furthermarket.com/FM/MTN/MoMo/requestpayment</span></label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col s10">
+											<input id="orgAccId" type="number" class="validate">
+											<label for="orgAccId" data-error="wrong" data-success="right">Org Account Id<span style="color: red">*</span>&nbsp;&nbsp;<span style="color: rgba(0,0,0,0.3); font-size: 15px">3456</span></label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col s10">
+											<input id="phoneNumber" type="number" class="validate">
+											<label for="phoneNumber" data-error="wrong" data-success="right">Phone number<span style="color: red">*</span></label>
+										</div>
+									</div>
+								</form>
+								<div class="row">
+									<div class="row" style="position:relative; left: -10%;">
+										<span style="font-weight: bold; font-size: 20px;" class="left">Parameters</span>
+										<br>
+										<hr>
+									</div>
+									<div class="row">
+										<span class="left">Savings Parameters:</span>
+										<div class="col s12">
+											<div class="col s5">
+												<div class="input-field col s10">
+													<input id="savingsParamName" type="text" class="validate" ng-model="savingsParamName">
+													<label for="savingsParamName" data-error="wrong" data-success="right">Parameter name<span style="color: red">*</span></label>
+												</div>
+											</div>
+											<div class="col s4">
+												<div class="input-field col s10">
+													<input id="savingsParamValue" type="text" class="validate" ng-model="savingsParamValue">
+													<label for="savingsParamValue" data-error="wrong" data-success="right">Sample Value<span style="color: red">*</span></label>
+												</div>
+											</div>
+											<div class="row">
+												<a class="left" ng-click="addSavingsParam()"><i style="color: #1976d2; cursor:pointer" class="material-icons">add</i></a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row left" style="font-size: 14px; width:80%; clear: both" ng-show="hide">
+									<div class="col s12">
+										<table class="bordered centered responsive-table">
+											<thead style="background-color: rgba(0, 0, 0, 0.2)">
+												<th data-field="region">Parameter Name</th>
+					      	         			<th data-field="api_name">Sample Parameter Value</th>
+					      	         			<th data-field="action">Action</th>
+											</thead>
+											<tbody>
+												<tr dir-paginate="param in savingsParams|itemsPerPage: 5" class="pointer">
+													<td>{{param.savingsParamName}}</td>
+													<td>{{param.savingsParamValue}}</td>
+													<td>
+														<a class="left" ng-click="delSavingsParam($index)">
+															<i style="color: red; cursor:pointer" class="material-icons">clear</i>
+														</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div>
+										<center>
+											<dir-pagination-controls
+										    	max-size="10"
+										    	direction-links="true"
+										    	boundary-links="true" >
+											</dir-pagination-controls>
+										</center>
+									</div>
+								</div>	
+								<br>
+								<div class="row">
+									<div style="clear: both">
+										<span class="left">Withdrawal Parameters:</span>
+										<div class="col s12">
+											<div class="col s5">
+												<div class="input-field col s10">
+													<input id="withParamName" type="text" class="validate" ng-model="withParamName">
+													<label for="withParamName" data-error="wrong" data-success="right">Parameter name<span style="color: red">*</span></label>
+												</div>
+											</div>
+											<div class="col s4">
+												<div class="input-field col s10">
+													<input id="withParamValue" type="text" class="validate" ng-model="withParamValue">
+													<label for="withParamValue" data-error="wrong" data-success="right">Sample Value<span style="color: red">*</span></label>
+												</div>
+											</div>
+											<a class="left" ng-click="addWithParams()"><i style="color: #1976d2; cursor:pointer" class="material-icons">add</i></a>
+										</div>
+									</div>
+								</div>
+								<div class="row left" style="font-size: 14px; width:80%;" ng-show="withHide">
+									<div class="col s12">
+										<table class="bordered centered responsive-table">
+											<thead style="background-color: rgba(0, 0, 0, 0.2)">
+												<th data-field="region">Parameter Name</th>
+					      	         			<th data-field="api_name">Sample Parameter Value</th>
+					      	         			<th data-field="action">Action</th>
+											</thead>
+											<tbody>
+												<tr dir-paginate="param in withdrawalParams|itemsPerPage: 5" class="pointer">
+													<td>{{param.withParamName}}</td>
+													<td>{{param.withParamValue}}</td>
+													<td>
+														<a class="left" ng-click="delWithParams($index)">
+															<i style="color: red; cursor:pointer" class="material-icons">clear</i>
+														</a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div>
+										<center>
+											<dir-pagination-controls
+										    	max-size="10"
+										    	direction-links="true"
+										    	boundary-links="true" >
+											</dir-pagination-controls>
+										</center>
+									</div>
+								</div>	
+								<div class="row">
+									 <div class="col s10">
+                  						<a class="btn waves-effect waves-light red darken-1 left" ng-click="$root.goBack()">Cancel<i class="material-icons right">clear</i></a>
+                  						<button class="btn waves-effect waves-light blue darken-1 right">Submit<i class="material-icons right">send</i></button>
+              						</div>
+								</div>
+							</div>
+	            		</center>
 					</div>
-					<div class="input-field col s5">
-						<input type="text" name="url" id="url" ng-model="accountId" ng-disabled="button" ng-init="button=true">
-					</div>
-					<div class="col s3">
-						<a class="btn waves-effect waves-light blue tooltipped" ng-click="button=false" data-position="top" data-delay="10" data-tooltip="Edit Mobile money Account Id"><i class="material-icons right">create</i></a>
-						<a class="btn waves-effect waves-light red tooltipped" data-position="top" data-delay="10" data-tooltip="Delete this setting"><i class="material-icons right">clear</i></a>
-					</div>
-				</div>
-
-				<!-- Parameters -->
-				<div class="row">
-					<span style="position: relative;float: left" class="leftLine">Parameters:&nbsp;<i class="material-icons tiny tooltipped" data-position="top" data-delay="10" data-tooltip="Parameters needed for your mobile money API">help</i> </span>
-				</div>
-				<div class="row">
-					<ul class="collapsible" data-collapsible="accordion">
-						<li>
-							<div class="collapsible-header"><i class="material-icons left">payment</i><span style="positon: relative; float: left">Savings</span>
-							</div>
-							<div class="collapsible-body">
-								<div class="row topify">
-									<div class="col s9 left">
-										<span style="color: rgba(0, 0, 0, 0.5);">/Domain/savings?phoneNumber="674377956"&amount=
-										5000&clientId="12345678</span>
-									</div>
-									<div class="col s3 right">
-										<a class="btn-floating waves-effect waves-light blue" href=""><i class="material-icons right">add</i></a>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col s1">
-									<i class="material-icons left colorGrey">play_arrow</i>
-									</div>
-									<div class="col s8">
-										<div class="input-field">
-                  							<i class="material-icons prefix">phone</i>
-                  							<input type="number" id="phoneNumber" value="674377956" disabled>
-                						</div>
-									</div>
-									<div class="col s2">
-										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col s1">
-									<i class="material-icons left colorGrey">play_arrow</i>
-									</div>
-									<div class="col s8" style="position: relative; top: 0">
-										<div class="input-field">
-                  							<i class="material-icons prefix">attach_money</i>
-                  							<input type="number" id="amount" value="5000" disabled>
-                						</div>
-									</div>
-									<div class="col s2">
-										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="collapsible-header"><i class="material-icons left">eject</i><span style="positon: relative; float: left">Withdrawals</span></div>
-							<div class="collapsible-body">
-								<div class="row topify">
-									<div class="col s9 left">
-										<span style="color: rgba(0, 0, 0, 0.5);">/Domain/withdrawals?phoneNumber="674377956"&amount=5000&clientId="12345678"</span>
-									</div>
-									<div class="col s3 right">
-										<a class="btn-floating waves-effect waves-light blue" href=""><i class="material-icons right">add</i></a>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col s1">
-									<i class="material-icons left colorGrey">play_arrow</i>
-									</div>
-									<div class="col s8" style="position: relative; top: 0">
-										<div class="input-field">
-                  							<i class="material-icons prefix">phone</i>
-                  							<input type="number" id="phoneNumber" value="674377956" disabled>
-                						</div>
-									</div>
-									<div class="col s2">
-										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col s1">
-									<i class="material-icons left colorGrey">play_arrow</i>
-									</div>
-									<div class="col s8" style="position: relative; top: 0">
-										<div class="input-field">
-                  							<i class="material-icons prefix">attach_money</i>
-                  							<input type="number" id="amount" value="5000" disabled>
-                						</div>
-									</div>
-									<div class="col s2">
-										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="collapsible-header">
-								<i class="material-icons left">reply</i>
-								<span style="positon: relative; float: left">Send Money</span>
-							</div>
-							<div class="collapsible-body">
-								<div class="row topify">
-									<div class="col s10">
-										<span style="color: rgba(0, 0, 0, 0.5);">/Domain/send?phoneNumber="674377956"&amount=5000&recipient="Daniel Carlson"&clientId="12345678"</span>
-									</div>
-									<div class="col s2">
-										<a class="btn-floating waves-effect waves-light blue" href=""><i class="material-icons right">add</i></a>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col s1">
-									<i class="material-icons left colorGrey">play_arrow</i>
-									</div>
-									<div class="col s8" style="position: relative; top: 0">
-										<div class="input-field">
-                  							<i class="material-icons prefix">phone</i>
-                  							<input type="number" id="phoneNumber" value="674377956" disabled>
-                						</div>
-									</div>
-									<div class="col s2">
-										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col s1">
-									<i class="material-icons left colorGrey">play_arrow</i>
-									</div>
-									<div class="col s8" style="position: relative; top: 0">
-										<div class="input-field">
-                  							<i class="material-icons prefix">person</i>
-                  							<input type="text" id="recipient" value="Daniel Carlson" disabled>
-                						</div>
-									</div>
-									<div class="col s2">
-										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col s1">
-									<i class="material-icons left colorGrey">play_arrow</i>
-									</div>
-									<div class="col s8" style="position: relative; top: 0">
-										<div class="input-field">
-                  							<i class="material-icons prefix">attach_money</i>
-                  							<input type="number" id="amount" value="5000" disabled>
-                						</div>
-									</div>
-									<div class="col s2">
-										<a class="btn waves-effect waves-light red" href=""><i class="material-icons right">clear</i></a>
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="row">
-					<button class="btn waves-effect waves-light blue modal-trigger" data-target="updateModal"><i class="material-icons left">build</i>Update Settings</button>
-					<button class="btn waves-effect waves-light green modal-trigger" data-target="cancelModal"><i class="material-icons right">clear</i>Cancel</button>
-				</div>
-
+				</script>
 				<!-- Modal code -->
   				<div id="updateModal" class="modal">
 	    			<div class="modal-content">
