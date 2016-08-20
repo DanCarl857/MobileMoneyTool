@@ -25,7 +25,12 @@ angular.module('mobileMoneyApp')
 		            	$scope.staffName = $scope.data.staffName;
 			          	$scope.activDate = new Date($scope.data.activationDate);
 						$scope.activationDate = $scope.activDate.toDateString();
-						$rootScope.dateToUse = $scope.activationDate.substring(4);
+
+						// now get the date of today
+						$scope.newDate = new Date();
+						$scope.newDate1 = $scope.newDate.toDateString();
+						$rootScope.todayDate = $scope.newDate1.substring(4);
+
 		            	$scope.officeName = $scope.data.officeName;
 		            	$scope.userName = $scope.data.timeline.activatedByUsername;
 						
@@ -40,47 +45,10 @@ angular.module('mobileMoneyApp')
 			}, function(error){});
 	}])
 	
-	.controller('processLoanCtrl', ['$rootScope', '$scope', '$http', '$stateParams', 'mobileMoneyFactory',
-		function($rootScope, $scope, $http, $stateParams, mobileMoneyFactory){
-			$rootScope.accountId = $stateParams.accId;
-	}])
-	
-	.controller("processLoansWithSavingsCtrl", ['$rootScope', '$scope', '$http', '$stateParams',
-		function($rootScope, $scope, $http, $stateParams){
-	        // show modal when client submits form
-	        $(document).ready(function(){
-	          	$('.modal-trigger').leanModal();
-	  			$('.collapsible').collapsible();
-	        });
-
-	        $scope.submitted = true;
-
-	        // function to submit the form after all form validation
-	        $scope.submitForm = function(){
-	           // Check to make sure the form is completely valid
-	           if($scope.loanForm.$valid){
-	             $scope.submitted = false;
-	             $scope.loanRequest($rootScope.clientId);
-	           }
-	        };
-
-	        // function to clean up
-	        $scope.cleanUp = function(){
-			  console.log("Now cleaning up modal thingz :-)");
-	          $('#loanRepayModal1').closeModal();
-	          $scope.amount = '';
-	          $scope.phoneNumber = '';
-	        };
-
-	        // function to go back to source page
-	        $scope.goBack = function(){
-	          window.history.back();
-	        };
-	}])
-	
 	.controller("processLoanFinaleCtrl", ['$rootScope', '$scope', '$http', '$stateParams', 'mobileMoneyFactory', 'loanFactory',
 		function($rootScope, $scope, $http, $stateParams, mobileMoneyFactory, loanFactory){
 			$scope.submitted = true;
+			$rootScope.accountId = $stateParams.accId;
 	        // show modal when client submits form
 	        $(document).ready(function(){
 	          	$('.modal-trigger').leanModal();
@@ -98,6 +66,7 @@ angular.module('mobileMoneyApp')
 	        };
 			
 			$scope.loanRepayments = function(clientId){
+				console.info(clientId);
   	          // open the modal
   	          $('#loanRepayModal').openModal({
   	            dismissible: false,
@@ -108,7 +77,7 @@ angular.module('mobileMoneyApp')
 			  $scope.accountId = "4904123";
 			  mobileMoneyFactory.transactions($scope.phoneNumber, $scope.amount, clientId, $scope.accountId, 3)
 			  	.then(function(response){
-			  		loanFactory.loanRepayments($rootScope.accountId, $scope.amount, $rootScope.dateToUse);
+			  		loanFactory.loanRepayments($rootScope.accountId, $scope.amount, $rootScope.todayDate);
 					
 		            // close the modal and clean up 
 		            Materialize.toast('Transaction successful', 6000, 'rounded');
@@ -122,7 +91,6 @@ angular.module('mobileMoneyApp')
 			
 	        // function to clean up
 	        $scope.cleanUp = function(){
-			  console.log("Now cleaning up modal thingz :-)");
 			  $('.lean-overlay').remove();
 	          $('#loanRepayModal').closeModal();
 	          $scope.amount = '';

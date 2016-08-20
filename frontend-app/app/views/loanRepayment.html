@@ -28,7 +28,7 @@
 							<td>{{acc.originalLoan}}</td>
 							<td>{{acc.loanBalance}}</td>
 							<td>{{acc.amountPaid}}</td>
-							<td><a href="#/processLoans" ui-sref="processLoanRepayment({accId: {{acc.id}} })" class="btn" ng-class="acc.status.active && !acc.status.closed && !acc.status.waitingForDisbursal ? 'blue' : 'whiteBtn'">Credit</a></td>
+							<td><a href="#/processLoansFinale" ui-sref="processLoansFinale({accId: {{acc.id}} })" class="btn" ng-class="acc.status.active && !acc.status.closed && !acc.status.waitingForDisbursal ? 'blue' : 'whiteBtn'">Credit</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -43,59 +43,6 @@
 				</div>			
 			  </div>
 		  </div>
-		  
-		  <!-- Partial views -->
-		  <script type="text/ng-template" id="/processLoan.htm">
-			<br><br>
-  			<div class="row" id="loanThingz" ng-controller="processLoanCtrl">
-				<center><span style="font-size: 25px;width: 60%" class="robotoThin">Choose Method</span></center>
-				<center><br><br>
-  				<form class="center-align" style="width: 80%">
-  					<div class="col s6 left">
-  						<a class="btn waves-effect waves-light blue lighten-1" href="#/processLoanWithSavings">Use a Savings Account<i class="material-icons right">payment</i></a>
-  					</div>
-  					<div class="col s6 right">
-  						<a class="btn waves-effect waves-light orange lighten-1" href="#/processLoansFinale">Pay with Cash<i class="material-icons right">receipt</i></a>
-  					</div>
-  				</form>
-				</center>
-  			</div>
-			</script>
-			
-			<!-- View for handling loans with savings -->
-			<script type="text/ng-template" id="/processLoanWithSavings.htm">
-			  <div class="row" ng-controller="processLoansWithSavingsCtrl" style="width: 80%;">
-				  <div class="col s12" style="position: relative; left: 1%; font-size: 14px;">		
-		        	<table class="bordered centered responsive-table" style="font-size: 14px;">
-						<thead style="background-color: rgba(0, 0, 0, 0.2);">
-		                    <th data-field="id">ID</th>
-		                    <th data-field="accountId">Account #</th>
-							<th data-field="name">Account Name</th>
-							<th data-field="balance">Account Balance</th>
-							<th data-field="button">Action<th>
-						</thead>
-						<tbody>
-							<tr dir-paginate="acc in $root.savingsAccounts|itemsPerPage: 5" class="pointer tableHover">
-								<td>{{acc.id}}</td>
-								<td>{{acc.accountNo}}</td>
-								<td>{{acc.productName}}</td>
-								<td ng-model="bal">{{acc.accountBalance}}</td>
-								<td><a class="btn" ng-class="acc.status.active || acc.status.rejected ? 'red' : 'whiteBtn'">Debit</a></td>
-							</tr>
-						</tbody>
-					</table>
-					<div>
-						<center>
-						<dir-pagination-controls
-					    	max-size="10"
-					    	direction-links="true"
-					    	boundary-links="true" >
-						</dir-pagination-controls>
-						</center>
-					</div>			
-				  </div>
-			  </div>
-		  </script>
 		  
 		  <!-- View for handling loans with cash -->
 		  <script type="text/ng-template" id="/processLoansFinale.htm">

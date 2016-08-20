@@ -101,7 +101,7 @@
 	                <div class="input-field" ng-class="{ 'has-error': disburseForm.phone.$invalid && !disburseForm.phone.$pristine }">
 	                  <i class="material-icons prefix">phone</i>
 	                  <input name="phone" type="number" id="phoneNumber" ng-model="phoneNumber" ng-minlength="8" required>
-	                  <label for="icon_prefix">Phone Number</label>
+	                  <label for="phoneNumber">Phone Number</label>
 	                  <p ng-show="disburseForm.phone.$error.minlength && submitted" class="errorMsg">Phone number is too short.</p>
 	                  <p ng-show="(disburseForm.phone.$invalid && !disburseForm.phone.$pristine) && submitted" class="errorMsg">Phone number is required.</p>
 	                </div>

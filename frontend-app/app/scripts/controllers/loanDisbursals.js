@@ -20,6 +20,7 @@ angular.module('mobileMoneyApp')
 			// get client data
 			dataFactory.getClientDetails($scope.clientId)
 				.then(function(response){
+					console.info("Getting client data.");
 		          	$scope.data = response.data;
 		          	$scope.clientName = $scope.data.displayName;
 		          	$rootScope.accountNo = $scope.data.accountNo;
@@ -27,13 +28,19 @@ angular.module('mobileMoneyApp')
 		          	$scope.staffName = $scope.data.staffName;
 		          	$scope.activDate = new Date($scope.data.activationDate);
 					$scope.activationDate = $scope.activDate.toDateString();
-					$rootScope.dateToUse = $scope.activationDate.substring(4);
+
+					// now get the date of today
+					$scope.newDate = new Date();
+					$scope.newDate1 = $scope.newDate.toDateString();
+					$rootScope.todayDate = $scope.newDate1.substring(4);
+
 		          	$scope.officeName = $scope.data.officeName;
 		          	$scope.userName = $scope.data.timeline.activatedByUsername;
 					
 					// get client account Info
 					dataFactory.getClientAccounts($scope.clientId)
 						.then(function(response){
+							console.info("Get client account details.");
 							$scope.loanAccounts = response.data.loanAccounts;
 							$rootScope.savingsAccounts = response.data.savingsAccounts;
 							$scope.loading = false;
@@ -58,7 +65,7 @@ angular.module('mobileMoneyApp')
 	          opacity: '.5'
 	        });
 			
-			loanFactory.disburseToSavingsProcess($rootScope.accountId, $rootScope.dateToUse)
+			loanFactory.disburseToSavingsProcess($rootScope.accountId, $rootScope.todayDate)
 				.then(function(response){
                 	Materialize.toast('Loan successfully disbursed to Savings account', 6000, 'rounded');
 					$('.lean-overlay').remove();
@@ -101,13 +108,13 @@ angular.module('mobileMoneyApp')
 				.then(function(response){
 					// since transaction is successful, 
 					// update the platform of these changes
-					loanFactory.disburseToMoMo($scope.accountId, $scope.amount, $rootScope.dateToUse)
+					loanFactory.disburseToMoMo($rootScope.accountId, $scope.amount, $rootScope.todayDate)
 						.then(function(response){
-		                	Materialize.toast('Loan successfully disbursed to Savings account', 6000, 'rounded');
+		                	Materialize.toast('Transaction success. Loan disbursed to Mobile money account', 6000, 'rounded');
 							$('.lean-overlay').remove();
 		                	$('#loanDisbursalToMoMo').closeModal();
 						}, function(){
-		                	Materialize.toast('Failure to disburse loans to mobile money account', 6000, 'rounded');
+		                	Materialize.toast('Transaction failure. Loan not in disbursal state due to unapproval', 6000, 'rounded');
 							$('.lean-overlay').remove();
 		                	$('#loanDisbursalToMoMo').closeModal();
 						});

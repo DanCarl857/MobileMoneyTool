@@ -71,11 +71,18 @@ angular.module('mobileMoneyApp')
         };
 		
 		$scope.withMoneyRequest = function(clientId){
-			// open modal
-			$('#withModal').openModal({
-				dismissible: false,
-				opacity: '.5'
-			});
+			// decide which modal to open
+			if($state.current.url == "/processTransfer"){
+				$('#sendMoneyModal').openModal({
+					dismissible: false,
+					opacity: '.5'
+				});
+			} else {
+				$('#withModal').openModal({
+					dismissible: false,
+					opacity: '.5'
+				});
+			}
 			
 			mobileMoneyFactory.transactions($scope.phoneNumber, $scope.amount, clientId, $scope.moAccountId, 1)
 				.then(function(response){
@@ -92,10 +99,14 @@ angular.module('mobileMoneyApp')
 			                        .then(function(response){
 			                            // close the modal and clean up 
 			                            Materialize.toast('Transaction successful', 6000, 'rounded');
-			                            $scope.cleanUp();
+			                            $('#sendMoneyModal').closeModal();
+			                            $scope.amount = '';
+			                            $scope.phoneNumber = '';
 			                        }, function(error){
 			                            Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
-			                            $scope.cleanUp();
+			                            $('#sendMoneyModal').closeModal();
+			                            $scope.amount = '';
+			                            $scope.phoneNumber = '';
 			                        });
                 		}, function(error){});
 					} else{
@@ -114,6 +125,11 @@ angular.module('mobileMoneyApp')
 				}, function(error){
 					// close the modal and clean up 
 					$scope.cleanUp();
+					$('#sendMoneyModal').closeModal();
+			        $scope.amount = '';
+			        $scope.phoneNumber = '';
+			        $scope.rec_name = '';
+			  		$scope.rec_phone = '';
 				    Materialize.toast('Transaction unsuccessful', 6000, 'rounded');
 				});
 		};

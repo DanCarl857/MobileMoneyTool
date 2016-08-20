@@ -62,7 +62,7 @@ angular
 	  })
 	  
 	  .state('processLoansFinale', {
-		  url: '/processLoansFinale',
+		  url: '/processLoansFinale/:accId',
 		  templateUrl: '/processLoansFinale.htm', 
 		  // controller: "this controller"
 	  })

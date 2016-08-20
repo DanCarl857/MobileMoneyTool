@@ -97,7 +97,7 @@ angular.module('mobileMoneyApp')
 		utilFactory.withdrawals = function(accountId, amount, dateToUse){
 				var url = "https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts/" + accountId
 					 + "/transactions?command=withdrawal";
-				//https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts/321/transactions?command=withdrawal
+
 		      	return $http({
 		      		method: "POST",
 		      		url: url,
@@ -114,26 +114,28 @@ angular.module('mobileMoneyApp')
 					  "bankNumber": ""
 					}
 		      	});
-			  
-			  // return $http.post(url, data);
 			};
 			
 			utilFactory.savings = function(accountId, amount, dateToUse){
-				var url = "https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts/" + accountId + "/transactions?command=deposit";
-		      	var data = { 
-				  "locale" : "en",
-				  "dateFormat": "dd MMMM yyyy",
-				  "transactionDate": dateToUse,
-				  "transactionAmount": amount,
-				  "paymentTypeId": "",
-				  "accountNumber": "",
-				  "checkNumber": "",
-				  "routingCode": "",
-				  "receiptNumber": "",
-				  "bankNumber": ""
-		      	}
+				var url = "https://demo.openmf.org/fineract-provider/api/v1/savingsaccounts/" + accountId 
+					+ "/transactions?command=deposit";
 
-		      	return $http.post(url, data);
+		      	return $http({
+		      		method: "POST",
+		      		url: url,
+		      		data: { 
+					  "locale" : "en",
+					  "dateFormat": "MMMM dd yyyy",
+					  "transactionDate": dateToUse,
+					  "transactionAmount": amount,
+					  "paymentTypeId": "",
+					  "accountNumber": "",
+					  "checkNumber": "",
+					  "routingCode": "",
+					  "receiptNumber": "",
+					  "bankNumber": ""
+		      		}
+		      	});
 			};
 		
 			return utilFactory;
@@ -161,12 +163,18 @@ angular.module('mobileMoneyApp')
 		loanFactory.disburseToMoMo = function(accountId, amount, disburseDate){
 			var url = baseUrl + "loans/" + accountId + "?command=disburse";
 			var data = {
-				"dateFormat": "MMMM dd yyyy",
-				"locale": "en",
-				"transactionAmount": amount,
-				"fixedEmiAmount": "",
-				"actualDisbursementDate": disburseDate,
-				"note": "Disbursing to mobile money account using Mobile money application"
+			  "dateFormat": "MMMM dd yyyy",
+			  "locale": "en",
+			  "transactionAmount": amount,
+			  "fixedEmiAmount": "",
+			  "actualDisbursementDate": disburseDate,
+			  "paymentTypeId": "",
+			  "note": "",
+			  "accountNumber": "",
+			  "checkNumber": "",
+			  "routingCode": "",
+			  "receiptNumber": "",
+			  "bankNumber": ""
 			};
 			return $http.post(url, data);
 		};
@@ -175,7 +183,7 @@ angular.module('mobileMoneyApp')
 			var url = baseUrl + "loans/" + accountId + "?command=repayment";
 			var data = {
   				"locale" : "en",
-  				"dateFormat": "dd MMMM yyyy",
+  				"dateFormat": "MMMM dd yyyy",
   				"transactionDate": repaymentDate,
   				"transactionAmount": amount,
     			"paymentTypeId": "",

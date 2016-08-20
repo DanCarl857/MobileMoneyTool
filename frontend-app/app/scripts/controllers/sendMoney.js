@@ -23,7 +23,12 @@ angular.module('mobileMoneyApp')
                         $scope.staffName = $scope.data.staffName;
                         $scope.activDate = new Date($scope.data.activationDate);
                         $scope.activationDate = $scope.activDate.toDateString();
-                        $rootScope.dateToUse = $scope.activationDate.substring(4);
+
+                        // now get the date of today
+                        $scope.newDate = new Date();
+                        $scope.newDate1 = $scope.newDate.toDateString();
+                        $rootScope.todayDate = $scope.newDate1.substring(4);
+
                         $scope.officeName = $scope.data.officeName;
                         $scope.userName = $scope.data.timeline.activatedByUsername;
                         
