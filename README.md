@@ -1,5 +1,14 @@
 # Mobile Money Application for the Mifos Platform
 
+## Work done
+* Implemented complete interface for Mobile money interaction with the mifos platform
+* Successfully integrated MTN mobile money
+
+## Work left:
+* Finish generic functionality(currently working on this
+* Add support for SOAP APIs
+* Add unit tests
+
 ## Prerequisites:
 * NodeJs
 * Bower
@@ -18,6 +27,15 @@
 * You can now login to the front end app on the browser using the password you use for the Mifos platform. 
 * Default creds: *Username*: mifos *Password*: password
 
+## Note: Application will only work when database has been setup.
+
+## Setting up the database
+* cd into the MobileMoneyTool directory: `cd MobileMoneyTool`
+* cd into the mobile-money-engine directory: `cd mobile-money-directory`
+* cd into the database directory: `cd database`
+* import the .sql file into your database: *$ mysql -uroot -p < mobile_money_application.sql* 
+* Enter your password and that's it.
+
 ## Front end app
 
 #### How to run the front end app
@@ -25,6 +43,8 @@
 * Change into the front end directory: *cd frontend-app*
 * Run the following: `npm install` && `bower install`
 * Then run: `grunt serve`
+
+## Note: Configuring the application to use your API can be found: *https://mifosforge.jira.com/wiki/display/docs/Mobile+Money+Tool*
 
 ## Mobile Money Engine
 
