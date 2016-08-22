@@ -2,56 +2,81 @@
 /* global $ */
 
 angular.module('mobileMoneyApp')
-  .controller('configCtrl', ['$scope', '$window', function ($scope, $window) {
+  .controller('configCtrl', ['$rootScope', '$scope', '$window', 'mobileMoneyFactory',
+    function ($rootScope, $scope, $window, mobileMoneyFactory) {
     // variables
     $scope.hide = false;
     $scope.withHide = false;
 
-    $scope.savingsParams = [];
-    $scope.withdrawalParams = [];
+    $rootScope.savingsParams = [];
+    $rootScope.withdrawalParams = [];
+    $rootScope.urls = [];
+    $rootScope.params = [];
 
     // function to add a parameter
     $scope.addSavingsParam = function(){
       $scope.hide = true;
-      $scope.savingsParams.push({savingsParamName: $scope.savingsParamName, savingsParamValue: $scope.savingsParamValue});
+      $rootScope.savingsParams.push({savingsParamName: $scope.savingsParamName, savingsParamValue: $scope.savingsParamValue});
       $scope.savingsParamName = '';
       $scope.savingsParamValue = '';
     }
 
     $scope.delSavingsParam = function(index){
-      $scope.savingsParams.splice(index, 1);
+      $rootScope.savingsParams.splice(index, 1);
     }
 
     $scope.addWithParams = function(){
       $scope.withHide = true;
-      $scope.withdrawalParams.push({withParamName: $scope.withParamName, withParamValue: $scope.withParamValue});
+      $rootScope.withdrawalParams.push({withParamName: $scope.withParamName, withParamValue: $scope.withParamValue});
       $scope.withParamName = '';
       $scope.withParamValue = '';
     }
 
     $scope.delWithParams = function(index){
-      $scope.withdrawalParams.splice(index, 1);
+      $rootScope.withdrawalParams.splice(index, 1);
     }
 
-  	// activate collapsibles on UI
-  	 $(document).ready(function(){
-  	 	$('.collapsible').collapsible({
-  	 		accordion: false
-  	 	});
+    $scope.updateSettings = function(){
+      $rootScope.params.push({savingsParams: $rootScope.savingsParams, withdrawParams: $rootScope.withdrawalParams});
+      $rootScope.urls.push({savingsUrl: $scope.savings_url, withdrawUrl: $scope.withdraw_url});
+
+      $rootScope.params = JSON.stringify($rootScope.params);
+      $rootScope.urls = JSON.stringify($rootScope.urls);
+
+      // open modal
+      $('#updateModal').openModal({
+          dismissible: false,
+          opacity: '.8'
+      });
+      mobileMoneyFactory.settings($scope.region, $scope.country, $scope.display_name, $scope.org_phone, $scope.orgAcc_id,$rootScope.urls, $rootScope.params)
+        .then(function(response){
+            // close modal
+            $('.lean-overlay').remove();
+            $('#updateModal').closeModal();
+            Materialize.toast('configurations successful', 6000, 'rounded');
+        }, function(error){
+            $('.lean-overlay').remove();
+            $('#updateModal').closeModal();
+            Materialize.toast('configurations unsuccessful', 6000, 'rounded');
+            console.log("Error with configurations");
+        });
+    }
 
   	 	// activate select form fields on UI
   	 	$(document).ready(function(){
-  	 		$('select').material_select();
         $('.modal-trigger').leanModal({
           dismissible: false,
           opacity: '.8',
           out_duration: 5
         });
-
-        $('.tooltipped').tooltip({delay: 50});
   	 	});
-  	 });  
+
      $scope.goBack = function(){
+        // open modal
+        $('#cancelModal').openModal({
+            dismissible: false,
+            opacity: '.8'
+        });
         window.history.back();
      };
      $scope.deny = function(){

@@ -45,6 +45,22 @@
 				<script type="text/ng-template" id="/settings">
 					<div class="row" style="width: 80%; position: relative; left: 5%;" ng-controller="configCtrl">
 						<center>
+							<br><br>
+							<span style="font-weight: bold; font-size: 30px;">Location</span>
+							<div class="row">
+								<div class="col s6">
+									<div class="input-field">
+										<input id="regionName" type="text" class="validate" ng-model="region">
+										<label for="regionName" data-error="wrong" data-success="right">Region<span style="color: red">*</span>&nbsp;&nbsp;<span style="color: rgba(0,0,0,0.3); font-size: 15px">eg. West Africa</span></label>
+									</div>
+								</div>
+								<div class="col s6">
+									<div class="input-field">
+										<input id="countryName" type="text" class="validate" ng-model="country">
+										<label for="countryName" data-error="wrong" data-success="right">Country<span style="color: red">*</span>&nbsp;&nbsp;<span style="color: rgba(0,0,0,0.3); font-size: 15px">eg. Cameroon</span></label>
+									</div>
+								</div>
+							</div>
 							<div class="row">
 								<br>
 								<span style="font-weight: bold; font-size: 30px;">Configure API</span>
@@ -57,31 +73,31 @@
 								<form>
 									<div class="row">
 										<div class="input-field col s10">
-											<input id="displayName" type="text" class="validate">
+											<input id="displayName" type="text" class="validate" ng-model="display_name">
 											<label for="displayName" data-error="wrong" data-success="right">Display Name<span style="color: red">*</span>&nbsp;&nbsp;<span style="color: rgba(0,0,0,0.3); font-size: 15px">eg. MTN mobile money</span></label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s10">
-											<input id="savingsUrl" type="text" class="validate">
+											<input id="savingsUrl" type="text" class="validate" ng-model="savings_url">
 											<label for="savingsUrl" data-error="wrong" data-success="right">Savings URL<span style="color: red">*</span>&nbsp;&nbsp;<span style="color: rgba(0,0,0,0.3); font-size: 15px">eg. http://api.furthermarket.com/FM/MTN/MoMo/requestpayment</span></label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s10">
-											<input id="withdrawUrl" type="text" class="validate">
+											<input id="withdrawUrl" type="text" class="validate" ng-model="withdraw_url">
 											<label for="withdrawUrl" data-error="wrong" data-success="right">Withdrawals URL<span style="color: red">*</span>&nbsp;&nbsp;<span style="color: rgba(0,0,0,0.3); font-size: 15px">eg. http://api.furthermarket.com/FM/MTN/MoMo/requestpayment</span></label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s10">
-											<input id="orgAccId" type="number" class="validate">
+											<input id="orgAccId" type="number" class="validate" ng-model="orgAcc_id">
 											<label for="orgAccId" data-error="wrong" data-success="right">Org Account Id<span style="color: red">*</span>&nbsp;&nbsp;<span style="color: rgba(0,0,0,0.3); font-size: 15px">3456</span></label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s10">
-											<input id="phoneNumber" type="number" class="validate">
+											<input id="phoneNumber" type="number" class="validate" ng-model="org_phone">
 											<label for="phoneNumber" data-error="wrong" data-success="right">Phone number<span style="color: red">*</span></label>
 										</div>
 									</div>
@@ -198,25 +214,25 @@
 								</div>	
 								<div class="row">
 									 <div class="col s10">
-                  						<a class="btn waves-effect waves-light red darken-1 left" ng-click="$root.goBack()">Cancel<i class="material-icons right">clear</i></a>
-                  						<button class="btn waves-effect waves-light blue darken-1 right">Submit<i class="material-icons right">send</i></button>
+                  						<a class="btn waves-effect waves-light red darken-1 left" ng-click="goBack()">Cancel<i class="material-icons right">clear</i></a>
+                  						<button class="btn waves-effect waves-light blue darken-1 right" ng-click="updateSettings()">Submit<i class="material-icons right">send</i></button>
               						</div>
 								</div>
 							</div>
 	            		</center>
 					</div>
+					<!-- Modal code -->
+	  				<div id="updateModal" class="modal" ng-controller="configCtrl">
+		    			<div class="modal-content">
+                  			<span class="robotoThin" style="font-size: 25px;">Please wait....Processing request</span>
+                		</div>
+                		<div class="modal-footer">
+                  			<div class="progress">
+                    			<div class="indeterminate"></div>
+                  			</div>
+                		</div>
+	  				</div>
 				</script>
-				<!-- Modal code -->
-  				<div id="updateModal" class="modal">
-	    			<div class="modal-content">
-	      				<h4>Confirmation</h4>
-	      				<p>Changing the settings here could cause the application not to work correctly.<br> Are you sure you want to update the settings?</p>
-	    			</div>
-	    			<div class="modal-footer">
-	      				<a ng-click="deny()" class="btn left modal-action modal-close waves-effect waves-light red">Cancel Update</a>
-	      				<a href="#!" class="btn right modal-action modal-close waves-effect waves-light blue">Update</a>
-	    			</div>
-  				</div>
   				<div id="cancelModal" class="modal">
 	    			<div class="modal-content">
 	      				<h4>Confirm cancelation</h4>

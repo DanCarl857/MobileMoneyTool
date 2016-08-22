@@ -75,6 +75,11 @@ angular.module('mobileMoneyApp')
 		mobileMoneyFactory.sendMoney = function(phone, amount, recipient, clientId, accountId){
 			return $http.get(baseUrl + "send/" + phone + "/" + amount + "/" + recipient + "/" + clientId + "/" + accountId);
 		};
+
+		mobileMoneyFactory.settings = function(region, country, apiName, orgPhone, orgAccId, url, params){
+			return $http.get(baseUrl + "configurations?region=" + region + "&country=" + country + "&apiName=" + apiName + 
+								"&org_phone=" + orgPhone + "&orgAccId=" + orgAccId + "&urls=" + url + "&params=" + params);
+		};
 		
 		return mobileMoneyFactory;
 	}])

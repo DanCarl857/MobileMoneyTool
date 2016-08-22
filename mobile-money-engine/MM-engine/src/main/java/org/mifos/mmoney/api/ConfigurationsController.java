@@ -18,21 +18,27 @@ public class ConfigurationsController {
 	
 	@SuppressWarnings("unused")
 	@CrossOrigin
-	@RequestMapping(value="/api/v1/Configurations", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/api/v1/configurations", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public
 	@ResponseBody
 	ResponseEntity<String> initialConfigurations(
-			@RequestParam(value="region", required=true)String region,
+			@RequestParam(value="region", required=false)String region,
 			@RequestParam(value="country", required=false) String country,
-			@RequestParam(value="parameters", required=true)String parameters,
-			@RequestParam(value="domain", required=true)String domain){
+			@RequestParam(value="apiName", required=true)String apiName,
+			@RequestParam(value="org_phone", required=false)int phone,
+			@RequestParam(value="orgAccId", required=true)int orgAccId,
+			@RequestParam(value="urls", required=true)String urls,
+			@RequestParam(value="params", required=true)String params){
 		
 		Configurations config = new Configurations();
 		
 		config.setRegion(region);
 		config.setCountry(country);
-		config.setParameters(parameters);
-		config.setDomain(domain);
+		config.setApiName(apiName);
+		config.setPhone(phone);
+		config.setOrgAccId(orgAccId);
+		config.setUrls(urls);
+		config.setParameters(params);
 		
 		// save configurations to the database
 		try{
@@ -42,15 +48,6 @@ public class ConfigurationsController {
 			return new ResponseEntity<String>("\"Failure in setting configurations\"", HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<String>("\"Configurations successfully set\"", HttpStatus.OK);
-	}
-	
-	@CrossOrigin
-	@RequestMapping(value="/api/v1/update", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
-	public
-	@ResponseBody
-	ResponseEntity<String> updateConfigurations(){
-		// TODO: write code to update the configurations in the database
-		return null;
 	}
 	
 	// Data repository.
