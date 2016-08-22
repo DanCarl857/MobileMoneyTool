@@ -1,10 +1,24 @@
 # Mobile Money Application for the Mifos Platform
 
-## Front end app
-
-**Prerequisites:**
+## Prerequisites:
 * NodeJs
 * Bower
+* Java 1.8 and above
+* MySQL 5.6 and above
+* Gradle 2.x(3 is not recommended as it has a bug when getting dependencies)
+
+## Mobile money engine
+
+#### How to run the engine
+* Clone the application: *git clone https://github.com/DanCarl857/Mobile-Application*
+* cd into the mobile-money-engine directory: `cd mobile-money-directory`
+* cd into MM-engine: `cd MM-engine`
+* Run $ gradle bootRun
+* The above command downloads all the dependencies needed for the project and starts the engine.
+* You can now login to the front end app on the browser using the password you use for the Mifos platform. 
+* Default creds: *Username*: mifos *Password*: password
+
+## Front end app
 
 #### How to run the front end app
 * Clone the application: *git clone https://github.com/DanCarl857/Mobile-Application*
@@ -22,14 +36,16 @@
 
 > This call is used to initiate a withdrawal from the MFI's account into the client's account
 
-* **URL**: `/api/v1/mm_withdrawal/:clientPhone/:amount`
+* **URL**: `/api/v1/withdrawals/:clientPhone/:amount/:accountId/:clientId`
 
 * **Method**: *GET*
 
 * **URL Params**:
   * **Required:**
-  * clientPhone=[integer|bigint]
-  * amount=[integer|bigint]
+  * clientPhone=[integer]
+  * amount=[integer]
+  * clientId=[integer]
+  * accountId=[integer]
  
 * **Data Params**: *None*
 * **Success Response**:
@@ -44,21 +60,23 @@ OR
 
   * **Code**: 401 UNAUTHORIZED
   * **Content**: { error: "You are not authorized to make this request" }
-* Sample Call: `/api/v1/withdrawals?phone=674356789&amount=5000`
+* Sample Call: `/api/v1/withdrawals?phone=674356789&amount=5000&clientId=2345&account=12345`
   
 
 #### Save Money
 
 > This call is used to initiate a savings deposit into a client's MFI account from their Mobile Money account
 
-* **URL**: `/api/v1/mm_savings/:clientPhone/:amount`
+* **URL**: `/api/v1/savings/:clientPhone/:amount/:accountId/:clientId`
 
 * **Method**: *GET*
 
 * **URL Params**:
   * **Required:**
-  * clientPhone=[integer|bigint]
-  * amount=[integer|bigint]
+  * clientPhone=[integer]
+  * amount=[integer]
+  * clientId=[integer]
+  * accountId=[integer]
  
 * **Data Params**: *None*
 * **Success Response**:
@@ -74,22 +92,24 @@ OR
   * **Code**: 401 UNAUTHORIZED
   * **Content**: { error: "You are not authorized to make this request" }
   
-* Sample Call: `/api/v1/withdrawals?phone=674356789&amount=5000`
+* Sample Call: `/api/v1/withdrawals?phone=674356789&amount=5000&clientId=2345&account=12345`
   
 
 #### Send Money
 
 > This call is used to initiate a money transfer transaction from the client's MFI account to the Recipient's Mobile Money account
 
-* **URL**: `/api/v1/mm_savings/:clientPhone/:recipientPhone/:amount`
+* **URL**: `/api/v1/mm_savings/:clientPhone/:recipientPhone/:amount/:accountId/:clientId`
 
 * **Method**: *GET*
 
 * **URL Params**:
   * **Required:**
-  * clientPhone=[integer|bigint]
-  * recipientPhone=[integer|bigint]
-  * amount=[integer|bigint]
+  * clientPhone=[integer]
+  * recipientPhone=[integer]
+  * amount=[integer]
+  * clientId=[integer]
+  * accountId=[integer]
  
 * **Data Params**: *None*
 * **Success Response**:
