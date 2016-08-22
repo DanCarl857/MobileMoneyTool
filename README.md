@@ -5,7 +5,7 @@
 * Successfully integrated MTN mobile money
 
 ## Work left:
-* Finish generic functionality(currently working on this
+* Finish generic functionality(currently working on this)
 * Add support for SOAP APIs
 * Add unit tests
 
@@ -44,7 +44,7 @@
 * Run the following: `npm install` && `bower install`
 * Then run: `grunt serve`
 
-## Note: Configuring the application to use your API can be found: *https://mifosforge.jira.com/wiki/display/docs/Mobile+Money+Tool*
+### Note: Configuring the application to use your API can be found: *https://mifosforge.jira.com/wiki/display/docs/Mobile+Money+Tool*
 
 ## Mobile Money Engine
 
